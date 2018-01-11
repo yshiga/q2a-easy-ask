@@ -24,6 +24,8 @@ define( 'QEA_FOLDER', basename( dirname( __FILE__ ) ) );
 // page
 qa_register_plugin_module('page', 'qa-easy-ask-page.php', 'qa_easy_ask_page', 'Easy Ask Page');
 
+// layer
+qa_register_plugin_layer('qa-easy-ask-layer.php','Easy Ask Layer');
 
 /*
     Omit PHP closing tag to help avoid accidental output
