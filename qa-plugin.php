@@ -18,6 +18,13 @@ if (!defined('QA_VERSION')) { // don't allow this page to be requested directly 
     exit;
 }
 
+define( 'QEA_DIR', dirname( __FILE__ ) );
+define( 'QEA_FOLDER', basename( dirname( __FILE__ ) ) );
+
+// page
+qa_register_plugin_module('page', 'qa-easy-ask-page.php', 'qa_easy_ask_page', 'Easy Ask Page');
+
+
 /*
     Omit PHP closing tag to help avoid accidental output
 */
