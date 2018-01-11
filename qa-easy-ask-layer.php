@@ -77,19 +77,18 @@ EOS;
     {
         if($this->template === 'easy-ask') {
             $form_id = qa_request_part(1);
-            $this->output( $form_id. '<br>'.PHP_EOL);
             $form_template = QEA_DIR.'/html/form_'.$form_id.'.html';
             if (file_exists($form_template)) {
-                $this->output( 'ok!' );
+                $tmpl = file_get_contents($form_template);
+                echo $tmpl;
+                $url = qa_path_to_root().basename( QA_PLUGIN_DIR ).DIRECTORY_SEPARATOR.QEA_FOLDER;
+                $html = strtr($tmpl, array(
+                    '^url' => $url
+                ));
+                $this->output($html);
             } else {
                 $this->output( 'form not found!!!' );
             }
-            // $html = file_get_contents(QEA_DIR.'/html/form_'.$form_id.'.html');
-            // $url = qa_path_to_root().basename( QA_PLUGIN_DIR ).DIRECTORY_SEPARATOR.QEA_FOLDER;
-            // $html = strtr($html, array(
-            //     '^url' => $url
-            // ));
-            // $this->output($html);
         } else {
             qa_html_theme_base::main_parts($content);
         }

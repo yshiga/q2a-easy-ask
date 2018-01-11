@@ -29,7 +29,7 @@ class qa_easy_ask_page {
     {
         $requestparts = qa_request_parts();
 
-        return ($requestparts[0] === 'easy-ask' && !is_null($requestparts[1]));
+        return ($requestparts[0] === 'easy-ask' && isset($requestparts[1]));
     }
 
 
