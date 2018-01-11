@@ -5,39 +5,41 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
     .accentPalette('orange');
 })
 .controller('AppCtrl', function($scope, Upload, $timeout) {
-    $scope.question = {};
+    $scope.question = {
+        'image': []
+    };
     $scope.uploadfiles = null;
     $scope.postQuestion = function() {
         console.log('Post!');
         console.log($scope.question);
     };
-    $scope.uploadFiles = function(file, errFiles) {
+    $scope.uploadFiles = function(file, idx, errFiles) {
         $scope.f = file;
         $scope.errFile = errFiles && errFiles[0];
         $scope.progress = false;
-        $scope.question.image = null;
+        $scope.question.image[idx] = null;
         if (file) {
-        file.upload = Upload.upload({
-            url: 'https://yaimapp.38qa.net/easy-ask-file-upload',
-            data: {file: file}
-        });
-
-        file.upload.then(function (response) {
-            $timeout(function() {
-            file.result = response.data;
-            console.log(response.data.files[0]);
-            $scope.question.image = response.data.files[0].url;
-            $scope.progress = false;
+            file.upload = Upload.upload({
+                url: 'https://yaimapp.38qa.net/easy-ask-file-upload',
+                data: {file: file}
             });
-        }, function (response) {
-            if (response.status > 0) {
-            $scope.errorMsg = response.status + ': ' + response.data;
-            $scope.question.image = null;
-            $scope.progress = false;
-            }
-        }, function (evt) {
-            $scope.progress = true;
-        });
+
+            file.upload.then(function (response) {
+                $timeout(function() {
+                    file.result = response.data;
+                    console.log(response.data.files[0]);
+                    $scope.question.image[idx] = response.data.files[0].url;
+                    $scope.progress = false;
+                });
+            }, function (response) {
+                if (response.status > 0) {
+                    $scope.errorMsg = response.status + ': ' + response.data;
+                    $scope.question.image[idx] = null;
+                    $scope.progress = false;
+                }
+            }, function (evt) {
+                $scope.progress = true;
+            });
         }
     }
 });

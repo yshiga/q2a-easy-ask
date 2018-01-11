@@ -29,13 +29,9 @@
           </div>
         </div>
 
-        <div class="layout-padding wrap-border photo-upload" layout="row" layout-wrap layout-align="center">
-          <div layout="column" layout-align="center center"
-            ng-show="progress">
-            <md-progress-circular class="md-accent" md-mode="indeterminate"></md-progress-circular>
-          </div>
-          <md-button ng-show="!question.image"
-            ngf-select="uploadFiles($file, $invalidFIles)" 
+        <div class="layout-padding wrap-border photo-upload" layout="row" layout-wrap layout-align="center center">
+          <md-button ng-show="!question.image[1]"
+            ngf-select="uploadFiles($file, 1, $invalidFiles)" 
             ngf-max-size="10MB" 
             ngf-pattern="'.gif,.jpg,.ipeg,.png'"
             accept="image/*"
@@ -43,12 +39,46 @@
             class="md-raised md-primary text-size-110">
             <md-icon>file_upload</md-icon> 画像を追加
           </md-button>
-          <div flex-gt-xs="70">
-            <img ng-show="questionForm.file.$valid" ngf-thumbnail="question.image" class="thumb">
+          <div flex-gt-xs="70" class="easy-ask-img">
+            <img ng-show="question.image[1]" ngf-thumbnail="question.image[1]" class="thumb">
           </div>
-          <md-button ng-show="question.image" ng-click="question.image = null" flex="100" class="md-raised text-size-110">
+          <md-button ng-show="question.image[1]" ng-click="question.image[1] = null" flex="100" class="md-raised text-size-110">
               <md-icon>close</md-icon> 画像を削除
           </md-button>
+          <md-button ng-show="question.image[1] && !question.image[2]"
+            ngf-select="uploadFiles($file, 2, $invalidFiles)" 
+            ngf-max-size="10MB" 
+            ngf-pattern="'.gif,.jpg,.ipeg,.png'"
+            accept="image/*"
+            flex="100" 
+            class="md-raised md-primary text-size-110">
+            <md-icon>file_upload</md-icon> 画像を追加
+          </md-button>
+          <div flex-gt-xs="70" class="easy-ask-img">
+            <img ng-show="question.image[2]" ngf-thumbnail="question.image[2]" class="thumb">
+          </div>
+          <md-button ng-show="question.image[2]" ng-click="question.image[2] = null" flex="100" class="md-raised text-size-110">
+              <md-icon>close</md-icon> 画像を削除
+          </md-button>
+          <md-button ng-show="question.image[2] && !question.image[3]"
+            ngf-select="uploadFiles($file, 3, $invalidFiles)" 
+            ngf-max-size="10MB" 
+            ngf-pattern="'.gif,.jpg,.ipeg,.png'"
+            accept="image/*"
+            flex="100" 
+            class="md-raised md-primary text-size-110">
+            <md-icon>file_upload</md-icon> 画像を追加
+          </md-button>
+          <div flex-gt-xs="70" class="easy-ask-img">
+            <img ng-show="question.image[3]" ngf-thumbnail="question.image[3]" class="thumb">
+          </div>
+          <md-button ng-show="question.image[3]" ng-click="question.image[3] = null" flex="100" class="md-raised text-size-110">
+              <md-icon>close</md-icon> 画像を削除
+          </md-button>
+          <div layout="column" layout-align="center center"
+            ng-show="progress" style="width:100%">
+            <md-progress-circular class="md-accent" md-mode="indeterminate"></md-progress-circular>
+          </div>
         </div>
         <div ng-show="true">
             <span ng-show="questionForm.file.$error.required" class="required" md-colors="{color: 'red-700'}">必須項目です。画像を追加してください</span>
@@ -151,7 +181,7 @@
         <textarea class="wrap-border" name="comment" ng-model="question.comment" placeholder="補足コメントを入力してください（任意）" rows="5"></textarea>
       </md-input-container>
       <br>
-      <md-button class="md-raised md-primary text-size-110" ng-disabled="questionForm.$invalid || !question.image" ng-click="postQuestion();">投稿</md-button>
+      <md-button class="md-raised md-primary text-size-110" ng-disabled="questionForm.$invalid || (!question.image[1]&& !question.image[2] && !question.image[3])" ng-click="postQuestion();">投稿</md-button>
     </div>
   </md-content>
   </form>

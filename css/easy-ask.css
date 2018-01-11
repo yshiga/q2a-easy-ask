@@ -53,3 +53,12 @@ md-radio-button .md-container {
     max-height: 76px;
     }
 }
+
+.easy-ask-img {
+    text-align: center;
+    padding: 0;
+}
+
+.easy-ask-img img {
+    max-width: 100%;
+}
