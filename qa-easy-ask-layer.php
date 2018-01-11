@@ -80,7 +80,6 @@ EOS;
             $form_template = QEA_DIR.'/html/form_'.$form_id.'.html';
             if (file_exists($form_template)) {
                 $tmpl = file_get_contents($form_template);
-                echo $tmpl;
                 $url = qa_path_to_root().basename( QA_PLUGIN_DIR ).DIRECTORY_SEPARATOR.QEA_FOLDER;
                 $html = strtr($tmpl, array(
                     '^url' => $url
