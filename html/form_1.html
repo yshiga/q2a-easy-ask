@@ -1,0 +1,221 @@
+<div ng-app="myApp" ng-controller="AppCtrl" ng-cloak>
+    <div class="md-toolbar-tools">
+      <h1 flex md-truncate class="logo" layout="row" layout-wrap layout-align="center center">
+        <span>簡単質問コーナー</span>
+      </h1>
+    </div>
+  <form name="questionForm" novalidate>
+  <md-content class="md-padding" layout layout-align="center">
+    <div md-whiteframe=1 flex-xs flex-gt-xs="80" flex-gt-sm="70" flex-gt-md="60" layout="column" md-colors="{background: 'grey-A100'}"
+      class="layout-padding layout-margin" style="max-height:none">
+
+      <h2 class="md-display-1">待ち箱を置く場所の相談
+        <br class="hide-gt-xs">
+        <small class="md-subhead">この場所はいい場所？</small>
+      </h2>
+      <p>
+        ニホンミツバチの待ち箱を置く場所は色々悩みがあります。簡単に質問ができるように、アンケートフォームに入力していくだけで、質問が投稿できるようにしました。投稿した後は、通常の質問投稿画面から投稿した質問と同じように表示され、編集もできます。
+      </p>
+      <div>
+
+        <div layout-gt-xs="row" layout-align="start">
+          <p class="md-headline" flex-gt-xs="60" style="margin-top:0">巣箱の置き場所の写真
+            <span class="md-title" md-colors="{color: 'red-700'}">(必須)</span>
+            <br>
+            <small class="md-subhead">あまり近づき過ぎず、遠ざかり過ぎず、周りの環境がよくわかるように撮影してください。</small>
+          </p>
+          <div flex-gt-xs="40" style="margin-bottom:24px">
+            <img src="^url/img/sample-01.jpg" alt="参考画像" flex="100">
+          </div>
+        </div>
+
+        <div class="layout-padding wrap-border photo-upload" layout="row" layout-wrap layout-align="center">
+          <div layout="column" layout-align="center center"
+            ng-show="progress">
+            <md-progress-circular class="md-accent" md-mode="indeterminate"></md-progress-circular>
+          </div>
+          <md-button ng-show="!question.image"
+            ngf-select="uploadFiles($file, $invalidFIles)" 
+            ngf-max-size="10MB" 
+            ngf-pattern="'.gif,.jpg,.ipeg,.png'"
+            accept="image/*"
+            flex="100" 
+            class="md-raised md-primary text-size-110">
+            <md-icon>file_upload</md-icon> 画像を追加
+          </md-button>
+          <div flex-gt-xs="70">
+            <img ng-show="questionForm.file.$valid" ngf-thumbnail="question.image" class="thumb">
+          </div>
+          <md-button ng-show="question.image" ng-click="question.image = null" flex="100" class="md-raised text-size-110">
+              <md-icon>close</md-icon> 画像を削除
+          </md-button>
+        </div>
+        <div ng-show="true">
+            <span ng-show="questionForm.file.$error.required" class="required" md-colors="{color: 'red-700'}">必須項目です。画像を追加してください</span>
+        </div>
+      </div>
+      <h3 class="md-headline" flex>場所の概要
+        <span class="md-title" md-colors="{color: 'red-700'}">(必須)</span>
+        <br>
+        <small class="md-subhead">どのような場所ですか？</small>
+      </h3>
+      <md-input-container md-no-float class="md-block ">
+        <input required placeholder="林に囲まれた空き地です。" name="place" ng-model="question.place" ng-class="{error: question.place == null}">
+        <div ng-messages="questionForm.place.$error">
+            <span class="required" ng-message="required" md-colors="{color: 'red-700'}">必須項目です</span>
+        </div>
+      </md-input-container>
+
+      <div>
+        <h3 class="md-headline" flex>自分の土地ですか？
+          <span class="md-title" md-colors="{color: 'red-700'}">(必須)</span>
+          <br>
+          <small class="md-subhead">人の土地でも設置許可がある場合は、「はい」と答えてください</small>
+        </h3>
+        <md-radio-group required layout="row" name="owned" ng-model="question.owned">
+          <md-radio-button value="はい" ng-class="{error: question.owned == null}">はい</md-radio-button>
+          <md-radio-button value="いいえ" ng-class="{error: question.owned == null}"> いいえ </md-radio-button>
+        </md-radio-group>
+        <div ng-messages="questionForm.owned.$error">
+            <span class="required" ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">必須項目です。どちらか選択してください</span>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="md-headline" flex>風が強い場所ですか？
+          <span class="md-title" md-colors="{color: 'red-700'}">(必須)</span>
+          <br>
+          <small class="md-subhead">風が強く吹くような場所であれば、「はい」と答えてください。</small>
+        </h3>
+
+        <md-radio-group required layout="row" name="strong_wind" ng-model="question.strong_wind">
+          <md-radio-button value="はい" ng-class="{error: question.strong_wind == null}">はい</md-radio-button>
+          <md-radio-button value="いいえ" ng-class="{error: question.strong_wind == null}"> いいえ </md-radio-button>
+        </md-radio-group>
+        <div ng-messages="questionForm.strong_wind.$error">
+            <span class="required" ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">必須項目です。どちらか選択してください</span>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="md-headline" flex>直射日光が強く当たる場所ですか？
+          <span class="md-title" md-colors="{color: 'red-700'}">(必須)</span>
+          <br>
+          <small class="md-subhead">巣箱の設置予定場所に直射日光が強く当たる場合は、「はい」と答えてください。</small>
+        </h3>
+        <md-radio-group required layout="row" name="direct_sunlight" ng-model="question.direct_sunlight">
+          <md-radio-button value="はい" ng-class="{error: question.direct_sunlight == null}">はい</md-radio-button>
+          <md-radio-button value="いいえ" ng-class="{error: question.direct_sunlight == null}"> いいえ </md-radio-button>
+        </md-radio-group>
+        <div ng-messages="questionForm.direct_sunlight.$error">
+            <span class="required" ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">必須項目です。どちらか選択してください</span>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="md-headline" flex>農薬の散布がされることがある場所ですか？
+          <span class="md-title" md-colors="{color: 'red-700'}">(必須)</span>
+          <br>
+          <small class="md-subhead">例えば、果樹園の中など、今後、農薬や消毒の可能性がある場合は、「はい」と答えてください。</small>
+        </h3>
+        <md-radio-group required layout="row" name="pesticide" ng-model="question.pesticide">
+          <md-radio-button value="はい" ng-class="{error: question.pesticide == null}">はい</md-radio-button>
+          <md-radio-button value="いいえ" ng-class="{error: question.pesticide == null}"> いいえ </md-radio-button>
+        </md-radio-group>
+        <div ng-messages="questionForm.pesticide.$error">
+            <span class="required" ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">必須項目です。どちらか選択してください</span>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="md-headline" flex>人が近づくような場所ですか？
+          <span class="md-title" md-colors="{color: 'red-700'}">(必須)</span>
+          <br>
+          <small class="md-subhead">他の人が近づくことがあるような場所なら、「はい」と答えてください。</small>
+        </h3>
+        <md-radio-group required layout="row" name="other_people" ng-model="question.other_people">
+          <md-radio-button value="はい" ng-class="{error: question.other_people == null}">はい</md-radio-button>
+          <md-radio-button value="いいえ" ng-class="{error: question.other_people == null}"> いいえ </md-radio-button>
+        </md-radio-group>
+        <div ng-messages="questionForm.other_people.$error">
+            <span class="required" ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">必須項目です。どちらか選択してください</span>
+        </div>
+      </div>
+
+      <h3 class="md-headline" flex>補足コメント (任意)
+        <br>
+        <small class="md-subhead">その他、場所や設置方法など、補足情報を記載してください。</small>
+      </h3>
+
+      <md-input-container>
+        <textarea class="wrap-border" name="comment" ng-model="question.comment" placeholder="補足コメントを入力してください（任意）" rows="5"></textarea>
+      </md-input-container>
+      <br>
+      <md-button class="md-raised md-primary text-size-110" ng-disabled="questionForm.$invalid || !question.image" ng-click="postQuestion();">投稿</md-button>
+    </div>
+  </md-content>
+  </form>
+
+</div>
+
+  <!-- Angular Material requires Angular.js Libraries -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+  <!-- Angular Material Library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+  <script src="^url/js/ng-file-upload-shim.min.js"></script>
+  <script src="^url/js/ng-file-upload.min.js"></script>
+
+  <!-- Your application bootstrap  -->
+  <script type="text/javascript">
+    /**
+     * You must include the dependency on 'ngMaterial' 
+     */
+    angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
+      .config(function ($mdThemingProvider) {
+        $mdThemingProvider.theme('default')
+          .primaryPalette('deep-orange')
+          .accentPalette('orange');
+      })
+      .controller('AppCtrl', function($scope, Upload, $timeout) {
+          $scope.question = {};
+          $scope.uploadfiles = null;
+          $scope.postQuestion = function() {
+            console.log('Post!');
+            console.log($scope.question);
+          };
+          $scope.uploadFiles = function(file, errFiles) {
+            $scope.f = file;
+            $scope.errFile = errFiles && errFiles[0];
+            $scope.progress = false;
+            $scope.question.image = null;
+            if (file) {
+              file.upload = Upload.upload({
+                url: 'https://yaimapp.38qa.net/file-upload',
+                data: {file: file}
+              });
+
+              file.upload.then(function (response) {
+                $timeout(function() {
+                  file.result = response.data;
+                  console.log(response.data.files[0]);
+                  $scope.question.image = response.data.files[0].url;
+                  $scope.progress = false;
+                });
+              }, function (response) {
+                if (response.status > 0) {
+                  $scope.errorMsg = response.status + ': ' + response.data;
+                  $scope.question.image = null;
+                  $scope.progress = false;
+                }
+              }, function (evt) {
+                $scope.progress = true;
+              });
+            }
+          }
+      });
+  </script>
