@@ -30,7 +30,22 @@
         </div>
 
         <div class="layout-padding wrap-border photo-upload" layout="row" layout-wrap layout-align="center center">
-          <md-button ng-show="!question.image[1]"
+          <md-button ng-show="!question.image[0]"
+            ngf-select="uploadFiles($file, 0, $invalidFiles)" 
+            ngf-max-size="10MB" 
+            ngf-pattern="'.gif,.jpg,.ipeg,.png'"
+            accept="image/*"
+            flex="100" 
+            class="md-raised md-primary text-size-110">
+            <md-icon>file_upload</md-icon> 画像を追加
+          </md-button>
+          <div flex-gt-xs="70" class="easy-ask-img">
+            <img ng-show="question.image[0]" ngf-thumbnail="question.image[0]" class="thumb">
+          </div>
+          <md-button ng-show="question.image[0]" ng-click="question.image[0] = null" flex="100" class="md-raised text-size-110 delete-img">
+              <md-icon>close</md-icon> 画像を削除
+          </md-button>
+          <md-button ng-show="question.image[0] && !question.image[1]"
             ngf-select="uploadFiles($file, 1, $invalidFiles)" 
             ngf-max-size="10MB" 
             ngf-pattern="'.gif,.jpg,.ipeg,.png'"
@@ -42,7 +57,7 @@
           <div flex-gt-xs="70" class="easy-ask-img">
             <img ng-show="question.image[1]" ngf-thumbnail="question.image[1]" class="thumb">
           </div>
-          <md-button ng-show="question.image[1]" ng-click="question.image[1] = null" flex="100" class="md-raised text-size-110">
+          <md-button ng-show="question.image[1]" ng-click="question.image[1] = null" flex="100" class="md-raised text-size-110 delete-img">
               <md-icon>close</md-icon> 画像を削除
           </md-button>
           <md-button ng-show="question.image[1] && !question.image[2]"
@@ -57,22 +72,7 @@
           <div flex-gt-xs="70" class="easy-ask-img">
             <img ng-show="question.image[2]" ngf-thumbnail="question.image[2]" class="thumb">
           </div>
-          <md-button ng-show="question.image[2]" ng-click="question.image[2] = null" flex="100" class="md-raised text-size-110">
-              <md-icon>close</md-icon> 画像を削除
-          </md-button>
-          <md-button ng-show="question.image[2] && !question.image[3]"
-            ngf-select="uploadFiles($file, 3, $invalidFiles)" 
-            ngf-max-size="10MB" 
-            ngf-pattern="'.gif,.jpg,.ipeg,.png'"
-            accept="image/*"
-            flex="100" 
-            class="md-raised md-primary text-size-110">
-            <md-icon>file_upload</md-icon> 画像を追加
-          </md-button>
-          <div flex-gt-xs="70" class="easy-ask-img">
-            <img ng-show="question.image[3]" ngf-thumbnail="question.image[3]" class="thumb">
-          </div>
-          <md-button ng-show="question.image[3]" ng-click="question.image[3] = null" flex="100" class="md-raised text-size-110">
+          <md-button ng-show="question.image[2]" ng-click="question.image[2] = null" flex="100" class="md-raised text-size-110 delete-img">
               <md-icon>close</md-icon> 画像を削除
           </md-button>
           <div layout="column" layout-align="center center"
@@ -181,9 +181,32 @@
         <textarea class="wrap-border" name="comment" ng-model="question.comment" placeholder="補足コメントを入力してください（任意）" rows="5"></textarea>
       </md-input-container>
       <br>
-      <md-button class="md-raised md-primary text-size-110" ng-disabled="questionForm.$invalid || (!question.image[1]&& !question.image[2] && !question.image[3])" ng-click="postQuestion();">投稿</md-button>
+      <md-button class="md-raised md-primary text-size-110" ng-disabled="questionForm.$invalid || (!question.image[0]&& !question.image[1] && !question.image[2])" ng-click="postQuestion();">投稿</md-button>
     </div>
   </md-content>
   </form>
-
+  <script type="text/ng-template" id="/content.html">
+    <div class="medium-insert-images" ng-show="question.image[0]">
+      <div class="image-url">[image="{{question.image[0]}}"]</div>
+    </div>
+    <div class="medium-insert-images" ng-show="question.image[1]">
+      <div class="image-url">[image="{{question.image[1]}}"]</div>
+    </div>
+    <div class="medium-insert-images" ng-show="question.image[2]">
+      <div class="image-url">[image="{{question.image[2]}}"]</div>
+    </div>
+    <p>場所の概要: <br>
+    {{ question.place }}
+    </p>
+    <p>自分の土地ですか？: {{ question.owned }}</p>
+    <p>風が強いですか？: {{ question.strong_wind }}</p>
+    <p>直射日光が強く当たる場所ですか？: {{ question.direct_sunlight }}</p>
+    <p>農薬の散布がされる場所ですか？: {{ question.pesticide }}</p>
+    <p>人が近づくような場所ですか？: {{ question.other_people }}</p>
+    <p ng-show="question.comment">
+    コメント:<br>
+    {{ question.comment }}
+    </p>
+    <p>この質問は、簡単質問フォームで投稿されました。</p>
+  </script>
 </div>

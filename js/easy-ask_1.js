@@ -10,8 +10,8 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
     };
     $scope.uploadfiles = null;
     $scope.postQuestion = function() {
-        console.log('Post!');
         console.log($scope.question);
+        var templateUrl = '/content.html';
     };
     $scope.uploadFiles = function(file, idx, errFiles) {
         $scope.f = file;
@@ -27,7 +27,6 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
             file.upload.then(function (response) {
                 $timeout(function() {
                     file.result = response.data;
-                    console.log(response.data.files[0]);
                     $scope.question.image[idx] = response.data.files[0].url;
                     $scope.progress = false;
                 });
