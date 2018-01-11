@@ -27,6 +27,9 @@ qa_register_plugin_module('page', 'qa-easy-ask-page.php', 'qa_easy_ask_page', 'E
 // layer
 qa_register_plugin_layer('qa-easy-ask-layer.php','Easy Ask Layer');
 
+// response page
+qa_register_plugin_module('page','qa-easy-ask-file-upload.php','easy_ask_file_upload','easy ask file upload');
+
 /*
     Omit PHP closing tag to help avoid accidental output
 */
