@@ -5,8 +5,8 @@
       </h1>
     </div>
   <form name="questionForm" novalidate>
-  <md-content class="md-padding" layout layout-align="center">
-    <div md-whiteframe=1 flex-xs flex-gt-xs="80" flex-gt-sm="70" flex-gt-md="60" layout="column" md-colors="{background: 'grey-A100'}"
+  <md-content class="" layout layout-align="center">
+    <div layout="column" md-colors="{background: 'grey-A100'}"
       class="layout-padding layout-margin" style="max-height:none">
 
       <h2 class="md-display-1">待ち箱を置く場所の相談
@@ -185,28 +185,4 @@
     </div>
   </md-content>
   </form>
-  <script type="text/ng-template" id="/content.html">
-    <div class="medium-insert-images" ng-show="question.image[0]">
-      <div class="image-url">[image="{{question.image[0]}}"]</div>
-    </div>
-    <div class="medium-insert-images" ng-show="question.image[1]">
-      <div class="image-url">[image="{{question.image[1]}}"]</div>
-    </div>
-    <div class="medium-insert-images" ng-show="question.image[2]">
-      <div class="image-url">[image="{{question.image[2]}}"]</div>
-    </div>
-    <p>場所の概要: <br>
-    {{ question.place }}
-    </p>
-    <p>自分の土地ですか？: {{ question.owned }}</p>
-    <p>風が強いですか？: {{ question.strong_wind }}</p>
-    <p>直射日光が強く当たる場所ですか？: {{ question.direct_sunlight }}</p>
-    <p>農薬の散布がされる場所ですか？: {{ question.pesticide }}</p>
-    <p>人が近づくような場所ですか？: {{ question.other_people }}</p>
-    <p ng-show="question.comment">
-    コメント:<br>
-    {{ question.comment }}
-    </p>
-    <p>この質問は、簡単質問フォームで投稿されました。</p>
-  </script>
 </div>

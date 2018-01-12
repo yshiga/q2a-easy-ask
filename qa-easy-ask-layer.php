@@ -43,20 +43,32 @@ EOS;
     public function main_parts($content)
     {
         if($this->template === 'easy-ask') {
-            $form_id = qa_request_part(1);
-            $form_template = QEA_DIR.'/html/form_'.$form_id.'.html';
-            if (file_exists($form_template)) {
-                $tmpl = file_get_contents($form_template);
-                $url = QA_HTML_THEME_LAYER_URLTOROOT;
-                $html = strtr($tmpl, array(
-                    '^url' => $url
-                ));
-                $this->output($html);
+            if (!qa_is_logged_in()) {
+                $this->no_login_message();
             } else {
-                $this->output( 'form not found!!!' );
+                $form_id = qa_request_part(1);
+                $form_template = QEA_DIR.'/html/form_'.$form_id.'.html';
+                if (file_exists($form_template)) {
+                    $tmpl = file_get_contents($form_template);
+                    $url = QA_HTML_THEME_LAYER_URLTOROOT;
+                    $html = strtr($tmpl, array(
+                        '^url' => $url
+                    ));
+                    $this->output($html);
+                } else {
+                    $this->output( 'form not found!!!' );
+                }
             }
         } else {
             qa_html_theme_base::main_parts($content);
         }
+    }
+
+    private function no_login_message()
+    {
+        $this->output('<div id="top_ad_container" class="mdl-card mdl-cell mdl-cell--12-col">
+  <div class="mdl-card__supporting-text">');
+        $this->output('<p>このページは会員限定です。<br>すでに会員登録済みですか？ ログインは<a href="/login">こちら</a><br>未登録ですか？会員登録は<a href="/register">こちら</a></p>');
+        $this->output('</div></div>');
     }
 }
