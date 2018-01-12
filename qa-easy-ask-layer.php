@@ -7,7 +7,7 @@ class qa_html_theme_layer extends qa_html_theme_base
         qa_html_theme_base::head_css();
         if ($this->template==='easy-ask') {
             $styles =<<<EOS
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.5/angular-material.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
 EOS;
@@ -30,7 +30,7 @@ EOS;
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
 
     <!-- Angular Material Library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.5/angular-material.min.js"></script>
 
     <script src="{$url}js/ng-file-upload-shim.min.js"></script>
     <script src="{$url}js/ng-file-upload.min.js"></script>
@@ -52,7 +52,8 @@ EOS;
                     $tmpl = file_get_contents($form_template);
                     $url = QA_HTML_THEME_LAYER_URLTOROOT;
                     $html = strtr($tmpl, array(
-                        '^url' => $url
+                        '^url' => $url,
+                        '^code' => $this->content['security_code']
                     ));
                     $this->output($html);
                 } else {

@@ -38,6 +38,7 @@ class qa_easy_ask_page {
         qa_set_template('easy-ask');
         $qa_content = qa_content_prepare();
         $qa_content['title'] = '簡単質問コーナー';
+        $qa_content['security_code'] = qa_get_form_security_code('easy-ask');
         return $qa_content;
     }
 

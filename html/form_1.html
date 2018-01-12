@@ -181,7 +181,8 @@
         <textarea class="wrap-border" name="comment" ng-model="question.comment" placeholder="補足コメントを入力してください（任意）" rows="5"></textarea>
       </md-input-container>
       <br>
-      <md-button class="md-raised md-primary text-size-110" ng-disabled="questionForm.$invalid || (!question.image[0]&& !question.image[1] && !question.image[2])" ng-click="postQuestion();">投稿</md-button>
+      <input type="text" ng-model="question.code" name="code" value="^code" style="display:none">
+      <md-button class="md-raised md-primary text-size-110" ng-disabled="questionForm.$invalid || (!question.image[0]&& !question.image[1] && !question.image[2])" ng-click="postQuestion($event);">投稿</md-button>
     </div>
   </md-content>
   </form>
