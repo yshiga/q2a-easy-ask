@@ -68,7 +68,7 @@ EOS;
     {
         $this->output('<div id="top_ad_container" class="mdl-card mdl-cell mdl-cell--12-col">
   <div class="mdl-card__supporting-text">');
-        $this->output('<p>このページは会員限定です。<br>すでに会員登録済みですか？ ログインは<a href="/login">こちら</a><br>未登録ですか？会員登録は<a href="/register">こちら</a></p>');
+        $this->output(qa_lang('qea_lang/no_login_message'));
         $this->output('</div></div>');
     }
 }

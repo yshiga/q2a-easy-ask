@@ -21,6 +21,9 @@ if (!defined('QA_VERSION')) { // don't allow this page to be requested directly 
 define( 'QEA_DIR', dirname( __FILE__ ) );
 define( 'QEA_FOLDER', basename( dirname( __FILE__ ) ) );
 
+// Phrases
+qa_register_plugin_phrases('qa-easy-ask-lang-*.php', 'qea_lang');
+
 // page
 qa_register_plugin_module('page', 'qa-easy-ask-page.php', 'qa_easy_ask_page', 'Easy Ask Page');
 
