@@ -36,10 +36,13 @@ EOS;
     <script src="{$url}js/ng-file-upload.min.js"></script>
 EOS;
             $this->output($scripts);
+            $js_lang = $this->get_js_lang();
+            $js_lang_json = json_encode( $js_lang );
             $jsvar = <<<EOS2
 <script>
 var easyask = window.easyask = window.easyask ? window.easyask : {};
 easyask.code = '{$this->content["security_code"]}';
+easyask.lang = {$js_lang_json};
 </script>
 EOS2;
             $this->output($jsvar);
@@ -57,10 +60,8 @@ EOS2;
                 $form_template = QEA_DIR.'/html/form_'.$form_id.'.html';
                 if (file_exists($form_template)) {
                     $tmpl = file_get_contents($form_template);
-                    $url = QA_HTML_THEME_LAYER_URLTOROOT;
-                    $html = strtr($tmpl, array(
-                        '^url' => $url,
-                    ));
+                    $params = $this->get_params();
+                    $html = strtr($tmpl, $params);
                     $this->output($html);
                 } else {
                     $this->output( 'form not found!!!' );
@@ -71,11 +72,70 @@ EOS2;
         }
     }
 
+    private function get_params()
+    {
+        $url = QA_HTML_THEME_LAYER_URLTOROOT;
+        return array(
+            '^url'               => $url,
+            '^page_title'        => $this->content['title'],
+            '^form_head'         => qa_lang('qea_lang/q1_form_head'),
+            '^form_subhead'      => qa_lang('qea_lang/q1_form_subhead'),
+            '^form_message' => qa_lang('qea_lang/q1_form_message'),
+            '^required'          => qa_lang('qea_lang/required'),
+            '^optional'   => qa_lang('qea_lang/optional'),
+            '^image'             => qa_lang('qea_lang/q1_image'),
+            '^image_subhead'     => qa_lang('qea_lang/q1_image_subhead'),
+            '^image_alt'         => qa_lang('qea_lang/q1_image_alt'),
+            '^add_image'         => qa_lang('qea_lang/add_image'),
+            '^delete_image'      => qa_lang('qea_lang/delete_image'),
+            '^image_required'    => qa_lang('qea_lang/q1_image_required'),
+            '^place'      => qa_lang('qea_lang/q1_place'),
+            '^place_subhead'     => qa_lang('qea_lang/q1_place_subhead'),
+            '^place_placeholder' => qa_lang('qea_lang/q1_place_placeholder'),
+            '^place_required'    => qa_lang('qea_lang/q1_place_required'),
+            '^owned'             => qa_lang('qea_lang/q1_owned'),
+            '^owned_subhead'     => qa_lang('qea_lang/q1_owned_subhead'),
+            '^wind'              => qa_lang('qea_lang/q1_wind'),
+            '^wind_subhead'      => qa_lang('qea_lang/q1_wind_subhead'),
+            '^sunlight'          => qa_lang('qea_lang/q1_sunlight'),
+            '^sunlight_subhead'  => qa_lang('qea_lang/q1_sunlight_subhead'),
+            '^pesticide'         => qa_lang('qea_lang/q1_pesticide'),
+            '^pesticide_subhead' => qa_lang('qea_lang/q1_pesticide_subhead'),
+            '^others'            => qa_lang('qea_lang/q1_others'),
+            '^others_subhead'    => qa_lang('qea_lang/q1_others_subhead'),
+            '^comment'           => qa_lang('qea_lang/comment'),
+            '^comment_subhead'   => qa_lang('qea_lang/q1_comment_subhead'),
+            '^yes'               => qa_lang('qea_lang/yes'),
+            '^no'                => qa_lang('qea_lang/no'),
+            '^required_select'   => qa_lang('qea_lang/q1_required_select'),
+            '^post'   => qa_lang('qea_lang/post'),
+        );
+    }
+
     private function no_login_message()
     {
         $this->output('<div id="top_ad_container" class="mdl-card mdl-cell mdl-cell--12-col">
   <div class="mdl-card__supporting-text">');
         $this->output(qa_lang('qea_lang/no_login_message'));
         $this->output('</div></div>');
+    }
+
+    private function get_js_lang()
+    {
+        return array(
+            'confirm_title'    => qa_lang('qea_lang/confirm_title'),
+            'confirm_content'  => qa_lang('qea_lang/confirm_content'),
+            'q1_title'         => qa_lang('qea_lang/q1_title'),
+            'q1_place'         => qa_lang('qea_lang/q1_place'),
+            'q1_owned'         => qa_lang('qea_lang/q1_owned'),
+            'q1_wind'          => qa_lang('qea_lang/q1_wind'),
+            'q1_sunlight'      => qa_lang('qea_lang/q1_sunlight'),
+            'q1_pesticide'     => qa_lang('qea_lang/q1_pesticide'),
+            'q1_others'        => qa_lang('qea_lang/q1_others'),
+            'comment'          => qa_lang('qea_lang/comment'),
+            'question_footer'  => qa_lang('qea_lang/question_footer'),
+            'label_post'       => qa_lang('qea_lang/label_post'),
+            'label_cancel'     => qa_lang('qea_lang/label_cancel'),
+        );
     }
 }

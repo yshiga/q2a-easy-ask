@@ -14,18 +14,18 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
         
         var confirm = $mdDialog.confirm()
           .parent(angular.element(document.body))
-          .title('質問を投稿しますか？')
-          .textContent('この内容で質問を投稿しますか？内容を変更する場合は、いいえを押して入力内容を変更してください。投稿した質問は、後から編集することができます。')
+          .title(easyask.lang.confirm_title)
+          .textContent(easyask.lang.confirm_content)
           .ariaLabel('post-question')
           .targetEvent(ev)
-          .ok('投稿する')
-          .cancel('いいえ');
+          .ok(easyask.lang.label_post)
+          .cancel(easyask.lang.label_cancel);
 
         $mdDialog.show(confirm).then(function() {
             var content = getContent($scope.question);
 
             var params = {};
-            params.title = "捕獲用の巣箱はどこにおけばいいですか？"+$scope.question.place.substr(0, 20);
+            params.title = easyask.lang.q1_title+$scope.question.place.substr(0, 20);
             params.content = content;
             params.category_id = 38;
             params.code = easyask.code;
@@ -90,21 +90,21 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
             content += '  <div class="image-url">[image="'+question.image[2]+'"]</div>';
             content += '</div>';
         }
-        content += '<p>場所の概要: <br>';
+        content += '<p>'+easyask.lang.q1_place+': <br>';
         content += question.place;
         content += '</p>';
-        content += '<p>自分の土地ですか？: '+question.owned+'</p>';
-        content += '<p>風が強いですか？: '+question.strong_wind+'</p>';
-        content += '<p>直射日光が強く当たる場所ですか？: '+question.direct_sunlight+'</p>';
-        content += '<p>農薬の散布がされる場所ですか？: '+question.pesticide+'</p>';
-        content += '<p>人が近づくような場所ですか？: '+question.other_people+'</p>';
+        content += '<p>'+easyask.lang.q1_owned+': '+question.owned+'</p>';
+        content += '<p>'+easyask.lang.q1_wind+': '+question.strong_wind+'</p>';
+        content += '<p>'+easyask.lang.q1_sunlight+': '+question.direct_sunlight+'</p>';
+        content += '<p>'+easyask.lang.q1_pesticide+': '+question.pesticide+'</p>';
+        content += '<p>'+easyask.lang.q1_others+': '+question.other_people+'</p>';
         if (question.comment) {
             content += '<p>';
-            content += 'コメント:<br>';
+            content += easyask.lang.comment+':<br>';
             content += question.comment;
             content += '</p>';
         }
-        content += '<p></p><p>この質問は、簡単質問フォームで投稿されました。</p>';
+        content += '<p></p><p>'+easyask.lang.question_footer+'</p>';
         return content;
     }
 });

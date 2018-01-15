@@ -1,7 +1,7 @@
 <div ng-app="myApp" ng-controller="AppCtrl" ng-cloak>
     <div class="md-toolbar-tools">
       <h1 flex md-truncate class="logo" layout="row" layout-wrap layout-align="center center">
-        <span>簡単質問コーナー</span>
+        <span>^page_title</span>
       </h1>
     </div>
   <form name="questionForm" novalidate>
@@ -9,23 +9,23 @@
     <div layout="column" md-colors="{background: 'grey-A100'}"
       class="layout-padding layout-margin" style="max-height:none">
 
-      <h2 class="md-display-1">待ち箱を置く場所の相談
+      <h2 class="md-display-1">^form_head
         <br class="hide-gt-xs">
-        <small class="md-subhead">この場所はいい場所？</small>
+        <small class="md-subhead">^form_subhead</small>
       </h2>
       <p>
-        ニホンミツバチの待ち箱を置く場所は色々悩みがあります。簡単に質問ができるように、アンケートフォームに入力していくだけで、質問が投稿できるようにしました。投稿した後は、通常の質問投稿画面から投稿した質問と同じように表示され、編集もできます。
+        ^form_message
       </p>
       <div>
 
         <div layout-gt-xs="row" layout-align="start">
-          <p class="md-headline" flex-gt-xs="60" style="margin-top:0">巣箱の置き場所の写真
-            <span class="md-title" md-colors="{color: 'red-700'}">(必須)</span>
+          <p class="md-headline" flex-gt-xs="60" style="margin-top:0">^image
+            <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
             <br>
-            <small class="md-subhead">あまり近づき過ぎず、遠ざかり過ぎず、周りの環境がよくわかるように撮影してください。</small>
+            <small class="md-subhead">^image_subhead</small>
           </p>
           <div flex-gt-xs="40" style="margin-bottom:24px">
-            <img src="^urlimg/sample-01.jpg" alt="参考画像" flex="100">
+            <img src="^urlimg/sample-01.jpg" alt="^image_alt" flex="100">
           </div>
         </div>
 
@@ -37,13 +37,13 @@
             accept="image/*"
             flex="100" 
             class="md-raised md-primary text-size-110">
-            <md-icon>file_upload</md-icon> 画像を追加
+            <md-icon>file_upload</md-icon> ^add_image
           </md-button>
           <div flex-gt-xs="70" class="easy-ask-img">
             <img ng-show="question.image[0]" ngf-thumbnail="question.image[0]" class="thumb">
           </div>
           <md-button ng-show="question.image[0]" ng-click="question.image[0] = null" flex="100" class="md-raised text-size-110 delete-img">
-              <md-icon>close</md-icon> 画像を削除
+              <md-icon>close</md-icon> ^delete_image 
           </md-button>
           <md-button ng-show="question.image[0] && !question.image[1]"
             ngf-select="uploadFiles($file, 1, $invalidFiles)" 
@@ -52,13 +52,13 @@
             accept="image/*"
             flex="100" 
             class="md-raised md-primary text-size-110">
-            <md-icon>file_upload</md-icon> 画像を追加
+            <md-icon>file_upload</md-icon> ^add_image
           </md-button>
           <div flex-gt-xs="70" class="easy-ask-img">
             <img ng-show="question.image[1]" ngf-thumbnail="question.image[1]" class="thumb">
           </div>
           <md-button ng-show="question.image[1]" ng-click="question.image[1] = null" flex="100" class="md-raised text-size-110 delete-img">
-              <md-icon>close</md-icon> 画像を削除
+              <md-icon>close</md-icon> ^delete_image
           </md-button>
           <md-button ng-show="question.image[1] && !question.image[2]"
             ngf-select="uploadFiles($file, 2, $invalidFiles)" 
@@ -67,13 +67,13 @@
             accept="image/*"
             flex="100" 
             class="md-raised md-primary text-size-110">
-            <md-icon>file_upload</md-icon> 画像を追加
+            <md-icon>file_upload</md-icon> ^add_image
           </md-button>
           <div flex-gt-xs="70" class="easy-ask-img">
             <img ng-show="question.image[2]" ngf-thumbnail="question.image[2]" class="thumb">
           </div>
           <md-button ng-show="question.image[2]" ng-click="question.image[2] = null" flex="100" class="md-raised text-size-110 delete-img">
-              <md-icon>close</md-icon> 画像を削除
+              <md-icon>close</md-icon> ^delete_image
           </md-button>
           <div layout="column" layout-align="center center"
             ng-show="progress" style="width:100%">
@@ -81,107 +81,107 @@
           </div>
         </div>
         <div ng-show="true">
-            <span ng-show="questionForm.file.$error.required" class="required" md-colors="{color: 'red-700'}">必須項目です。画像を追加してください</span>
+            <span ng-show="questionForm.file.$error.required" class="required" md-colors="{color: 'red-700'}">^image_required</span>
         </div>
       </div>
-      <h3 class="md-headline" flex>場所の概要
-        <span class="md-title" md-colors="{color: 'red-700'}">(必須)</span>
+      <h3 class="md-headline" flex>^place
+        <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
         <br>
-        <small class="md-subhead">どのような場所ですか？</small>
+        <small class="md-subhead">^place_subhead</small>
       </h3>
       <md-input-container md-no-float class="md-block ">
-        <input required placeholder="林に囲まれた空き地です。" name="place" ng-model="question.place" ng-class="{error: question.place == null}">
+        <input required placeholder="^place_placeholder" name="place" ng-model="question.place" ng-class="{error: question.place == null}">
         <div ng-messages="questionForm.place.$error">
-            <span class="required" ng-message="required" md-colors="{color: 'red-700'}">必須項目です</span>
+            <span class="required" ng-message="required" md-colors="{color: 'red-700'}">^place_required</span>
         </div>
       </md-input-container>
 
       <div>
-        <h3 class="md-headline" flex>自分の土地ですか？
-          <span class="md-title" md-colors="{color: 'red-700'}">(必須)</span>
+        <h3 class="md-headline" flex>^owned
+          <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
           <br>
-          <small class="md-subhead">人の土地でも設置許可がある場合は、「はい」と答えてください</small>
+          <small class="md-subhead">^owned_subhead</small>
         </h3>
         <md-radio-group required layout="row" name="owned" ng-model="question.owned">
-          <md-radio-button value="はい" ng-class="{error: question.owned == null}">はい</md-radio-button>
-          <md-radio-button value="いいえ" ng-class="{error: question.owned == null}"> いいえ </md-radio-button>
+          <md-radio-button value="^yes" ng-class="{error: question.owned == null}">^yes</md-radio-button>
+          <md-radio-button value="^no" ng-class="{error: question.owned == null}"> ^no </md-radio-button>
         </md-radio-group>
         <div ng-messages="questionForm.owned.$error">
-            <span class="required" ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">必須項目です。どちらか選択してください</span>
+            <span class="required" ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^required_select</span>
         </div>
       </div>
 
       <div>
-        <h3 class="md-headline" flex>風が強い場所ですか？
-          <span class="md-title" md-colors="{color: 'red-700'}">(必須)</span>
+        <h3 class="md-headline" flex>^wind
+          <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
           <br>
-          <small class="md-subhead">風が強く吹くような場所であれば、「はい」と答えてください。</small>
+          <small class="md-subhead">^wind_subhead</small>
         </h3>
 
         <md-radio-group required layout="row" name="strong_wind" ng-model="question.strong_wind">
-          <md-radio-button value="はい" ng-class="{error: question.strong_wind == null}">はい</md-radio-button>
-          <md-radio-button value="いいえ" ng-class="{error: question.strong_wind == null}"> いいえ </md-radio-button>
+          <md-radio-button value="^yes" ng-class="{error: question.strong_wind == null}">^yes</md-radio-button>
+          <md-radio-button value="^no" ng-class="{error: question.strong_wind == null}"> ^no </md-radio-button>
         </md-radio-group>
         <div ng-messages="questionForm.strong_wind.$error">
-            <span class="required" ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">必須項目です。どちらか選択してください</span>
+            <span class="required" ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^required_select</span>
         </div>
       </div>
 
       <div>
-        <h3 class="md-headline" flex>直射日光が強く当たる場所ですか？
-          <span class="md-title" md-colors="{color: 'red-700'}">(必須)</span>
+        <h3 class="md-headline" flex>^sunlight
+          <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
           <br>
-          <small class="md-subhead">巣箱の設置予定場所に直射日光が強く当たる場合は、「はい」と答えてください。</small>
+          <small class="md-subhead">^sunlight_subhead</small>
         </h3>
         <md-radio-group required layout="row" name="direct_sunlight" ng-model="question.direct_sunlight">
-          <md-radio-button value="はい" ng-class="{error: question.direct_sunlight == null}">はい</md-radio-button>
-          <md-radio-button value="いいえ" ng-class="{error: question.direct_sunlight == null}"> いいえ </md-radio-button>
+          <md-radio-button value="^yes" ng-class="{error: question.direct_sunlight == null}">^yes</md-radio-button>
+          <md-radio-button value="^no" ng-class="{error: question.direct_sunlight == null}"> ^no </md-radio-button>
         </md-radio-group>
         <div ng-messages="questionForm.direct_sunlight.$error">
-            <span class="required" ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">必須項目です。どちらか選択してください</span>
+            <span class="required" ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^required_select</span>
         </div>
       </div>
 
       <div>
-        <h3 class="md-headline" flex>農薬の散布がされることがある場所ですか？
-          <span class="md-title" md-colors="{color: 'red-700'}">(必須)</span>
+        <h3 class="md-headline" flex>^pesticide
+          <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
           <br>
-          <small class="md-subhead">例えば、果樹園の中など、今後、農薬や消毒の可能性がある場合は、「はい」と答えてください。</small>
+          <small class="md-subhead">^pesticide_subhead</small>
         </h3>
         <md-radio-group required layout="row" name="pesticide" ng-model="question.pesticide">
-          <md-radio-button value="はい" ng-class="{error: question.pesticide == null}">はい</md-radio-button>
-          <md-radio-button value="いいえ" ng-class="{error: question.pesticide == null}"> いいえ </md-radio-button>
+          <md-radio-button value="^yes" ng-class="{error: question.pesticide == null}">^yes</md-radio-button>
+          <md-radio-button value="^no" ng-class="{error: question.pesticide == null}"> ^no </md-radio-button>
         </md-radio-group>
         <div ng-messages="questionForm.pesticide.$error">
-            <span class="required" ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">必須項目です。どちらか選択してください</span>
+            <span class="required" ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^required_select</span>
         </div>
       </div>
 
       <div>
-        <h3 class="md-headline" flex>人が近づくような場所ですか？
-          <span class="md-title" md-colors="{color: 'red-700'}">(必須)</span>
+        <h3 class="md-headline" flex>^others
+          <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
           <br>
-          <small class="md-subhead">他の人が近づくことがあるような場所なら、「はい」と答えてください。</small>
+          <small class="md-subhead">^others_subhead</small>
         </h3>
         <md-radio-group required layout="row" name="other_people" ng-model="question.other_people">
-          <md-radio-button value="はい" ng-class="{error: question.other_people == null}">はい</md-radio-button>
-          <md-radio-button value="いいえ" ng-class="{error: question.other_people == null}"> いいえ </md-radio-button>
+          <md-radio-button value="^yes" ng-class="{error: question.other_people == null}">^yes</md-radio-button>
+          <md-radio-button value="^no" ng-class="{error: question.other_people == null}"> ^no </md-radio-button>
         </md-radio-group>
         <div ng-messages="questionForm.other_people.$error">
-            <span class="required" ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">必須項目です。どちらか選択してください</span>
+            <span class="required" ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^required_select</span>
         </div>
       </div>
 
-      <h3 class="md-headline" flex>補足コメント (任意)
+      <h3 class="md-headline" flex>^comment ^optional
         <br>
-        <small class="md-subhead">その他、場所や設置方法など、補足情報を記載してください。</small>
+        <small class="md-subhead">^comment_subhead</small>
       </h3>
 
       <md-input-container>
-        <textarea class="wrap-border" name="comment" ng-model="question.comment" placeholder="補足コメントを入力してください（任意）" rows="5"></textarea>
+        <textarea class="wrap-border" name="comment" ng-model="question.comment" placeholder="^comment_required^optional" rows="5"></textarea>
       </md-input-container>
       <br>
-      <md-button class="md-raised md-primary text-size-110" ng-disabled="questionForm.$invalid || (!question.image[0]&& !question.image[1] && !question.image[2])" ng-click="postQuestion($event);">投稿</md-button>
+      <md-button class="md-raised md-primary text-size-110" ng-disabled="questionForm.$invalid || (!question.image[0]&& !question.image[1] && !question.image[2])" ng-click="postQuestion($event);">^post</md-button>
     </div>
   </md-content>
   </form>

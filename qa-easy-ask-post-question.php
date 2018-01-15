@@ -18,6 +18,10 @@ class easy_ask_post_question
 
             if (!qa_check_form_security_code('easy-ask', $input_params['code'])) {
                 $this->set_errors(401, 'Unauthorized', 'Security Code invalid');
+            } elseif (!qa_is_logged_in()) {
+                $this->set_errors(401, 'Unauthorized', 'Not Logged in');
+            } elseif (!qa_is_logged_in()) {
+
             } else {
                 $this->post_question($input_params);
             }
