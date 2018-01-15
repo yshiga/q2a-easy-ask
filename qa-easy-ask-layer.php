@@ -36,6 +36,13 @@ EOS;
     <script src="{$url}js/ng-file-upload.min.js"></script>
 EOS;
             $this->output($scripts);
+            $jsvar = <<<EOS2
+<script>
+var easyask = window.easyask = window.easyask ? window.easyask : {};
+easyask.code = '{$this->content["security_code"]}';
+</script>
+EOS2;
+            $this->output($jsvar);
             $this->output('<script src="'.$url.'js/easy-ask_'.$form_id.'.js"></script>');
         }
     }
@@ -53,7 +60,6 @@ EOS;
                     $url = QA_HTML_THEME_LAYER_URLTOROOT;
                     $html = strtr($tmpl, array(
                         '^url' => $url,
-                        '^code' => $this->content['security_code']
                     ));
                     $this->output($html);
                 } else {

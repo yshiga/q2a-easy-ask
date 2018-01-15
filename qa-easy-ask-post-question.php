@@ -28,6 +28,9 @@ class easy_ask_post_question
         return $this->response();
     }
 
+    /**
+     * レスポンスを返す
+     */
     private function response()
     {
         header ( 'Content-Type: application/json' );
@@ -35,6 +38,9 @@ class easy_ask_post_question
         echo json_encode($this->output, JSON_PRETTY_PRINT);
     }
 
+    /**
+     * 入力パラメータ取得
+     */
     private function get_input_params($method)
     {
         $input_params = null;
@@ -45,12 +51,18 @@ class easy_ask_post_question
         return $input_params;
     }
     
+    /**
+     * レスポンスのための値をセットする
+     */
     private function set_response($code, $output)
     {
         $this->code = $code;
         $this->output = $output;
     }
     
+    /**
+     * エラーをセットする
+     */
     private function set_errors($code, $message, $detail)
     {
         $this->code = $code;
@@ -63,6 +75,9 @@ class easy_ask_post_question
         );
     }
 
+    /**
+     * 質問投稿
+     */
     private function post_question($input)
     {
         $in = $this->set_create_data($input);
@@ -81,6 +96,9 @@ class easy_ask_post_question
         return true;
     }
 
+    /**
+     * 投稿用のデータを作成する
+     */
     private function set_create_data($input)
     {
         $in = array();
@@ -101,6 +119,9 @@ class easy_ask_post_question
         return $in;
     }
 
+    /**
+     * 本文を整形
+     */
     private function get_post_content(&$incontent, &$intext, $informat)
     {
         require_once QA_INCLUDE_DIR.'util/string.php';
@@ -109,6 +130,9 @@ class easy_ask_post_question
         $intext = qa_remove_utf8mb4(qa_viewer_text($incontent, $informat));
     }
 
+    /**
+     * 投稿データのエラーチェック
+     */
     private function check_errors_for_post_question($in)
     {
         $errors = $this->filter_data($in, 'create');
@@ -120,6 +144,9 @@ class easy_ask_post_question
         return true;
     }
 
+    /**
+     * データのフィルター
+     */
     private function filter_data($in, $type)
     {
         $errors = array();
@@ -133,6 +160,9 @@ class easy_ask_post_question
         return $errors;
     }
 
+    /**
+     * エラーを文字列に変換
+     */
     private function convert_errors($errors)
     {
         $errorstring = "";
@@ -145,6 +175,9 @@ class easy_ask_post_question
         return $errorstring;
     }
 
+    /**
+     * 質問を作成する
+     */
     private function create_question($in)
     {
         $userid = qa_get_logged_in_userid();
