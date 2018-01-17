@@ -4,7 +4,7 @@
         <span>^page_title</span>
       </h1>
     </div>
-  <form name="questionForm" novalidate>
+  <form name="questionForm" novalidate ng-submit="postQuestion($event);">
   <md-content class="" layout layout-align="center">
     <div layout="column" md-colors="{background: 'grey-A100'}"
       class="layout-padding layout-margin" style="max-height:none">
@@ -16,8 +16,8 @@
       <p>
         ^form_message
       </p>
-      <div>
 
+      <div id="images" ng-class="{formerror: question.image.length <= 0 && questionForm.$submitted}">
         <div layout-gt-xs="row" layout-align="start">
           <p class="md-headline" flex-gt-xs="60" style="margin-top:0">^image
             <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
@@ -80,38 +80,33 @@
             <md-progress-circular class="md-accent" md-mode="indeterminate"></md-progress-circular>
           </div>
         </div>
-        <div ng-show="true">
-            <span ng-show="questionForm.file.$error.required" class="required" md-colors="{color: 'red-700'}">^image_required</span>
-        </div>
+        <span ng-show="question.image.length <= 0 && questionForm.$submitted" class="required" md-colors="{color: 'red-700'}">^image_required</span>
       </div>
-      <h3 class="md-headline" flex>^place
-        <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
-        <br>
-        <small class="md-subhead">^place_subhead</small>
-      </h3>
-      <md-input-container md-no-float class="md-block ">
+      <md-input-container id="place" md-no-float class="md-block " ng-class="{formerror: question.place == null && questionForm.$submitted}">
+        <h3 class="md-headline" flex>^place
+          <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
+          <br>
+          <small class="md-subhead">^place_subhead</small>
+        </h3>
         <input required placeholder="^place_placeholder" name="place" ng-model="question.place" ng-class="{error: question.place == null}">
         <div ng-messages="questionForm.place.$error">
             <span class="required" ng-message="required" md-colors="{color: 'red-700'}">^place_required</span>
         </div>
       </md-input-container>
-
-      <div>
+      <div id="owned" ng-class="{formerror: question.owned == null && questionForm.$submitted}">
         <h3 class="md-headline" flex>^owned
           <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
           <br>
           <small class="md-subhead">^owned_subhead</small>
         </h3>
         <md-radio-group required layout="row" name="owned" ng-model="question.owned">
-          <md-radio-button value="^yes" ng-class="{error: question.owned == null}">^yes</md-radio-button>
-          <md-radio-button value="^no" ng-class="{error: question.owned == null}"> ^no </md-radio-button>
+          <md-radio-button value="^yes" ng-class="{error: question.owned == null && questionForm.$submitted}">^yes</md-radio-button>
+          <md-radio-button value="^no" ng-class="{error: question.owned == null && questionForm.$submitted}"> ^no </md-radio-button>
         </md-radio-group>
-        <div ng-messages="questionForm.owned.$error">
-            <span class="required" ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^required_select</span>
-        </div>
+        <span class="required" ng-show="question.owned == null && questionForm.$submitted" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^required_select</span>
       </div>
 
-      <div>
+      <div id="strong_wind" ng-class="{formerror: question.strong_wind == null && questionForm.$submitted}">
         <h3 class="md-headline" flex>^wind
           <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
           <br>
@@ -119,57 +114,49 @@
         </h3>
 
         <md-radio-group required layout="row" name="strong_wind" ng-model="question.strong_wind">
-          <md-radio-button value="^yes" ng-class="{error: question.strong_wind == null}">^yes</md-radio-button>
-          <md-radio-button value="^no" ng-class="{error: question.strong_wind == null}"> ^no </md-radio-button>
+          <md-radio-button value="^yes" ng-class="{error: question.strong_wind == null && questionForm.$submitted}">^yes</md-radio-button>
+          <md-radio-button value="^no" ng-class="{error: question.strong_wind == null && questionForm.$submitted}"> ^no </md-radio-button>
         </md-radio-group>
-        <div ng-messages="questionForm.strong_wind.$error">
-            <span class="required" ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^required_select</span>
-        </div>
+        <span class="required" ng-show="question.strong_wind == null && questionForm.$submitted" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^required_select</span>
       </div>
 
-      <div>
+      <div id="direct_sunlight" ng-class="{formerror: question.direct_sunlight == null && questionForm.$submitted}">
         <h3 class="md-headline" flex>^sunlight
           <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
           <br>
           <small class="md-subhead">^sunlight_subhead</small>
         </h3>
         <md-radio-group required layout="row" name="direct_sunlight" ng-model="question.direct_sunlight">
-          <md-radio-button value="^yes" ng-class="{error: question.direct_sunlight == null}">^yes</md-radio-button>
-          <md-radio-button value="^no" ng-class="{error: question.direct_sunlight == null}"> ^no </md-radio-button>
+          <md-radio-button value="^yes" ng-class="{error: question.direct_sunlight == null && questionForm.$submitted}">^yes</md-radio-button>
+          <md-radio-button value="^no" ng-class="{error: question.direct_sunlight == null && questionForm.$submitted}"> ^no </md-radio-button>
         </md-radio-group>
-        <div ng-messages="questionForm.direct_sunlight.$error">
-            <span class="required" ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^required_select</span>
-        </div>
+        <span class="required" ng-show="question.direct_sunlight == null && questionForm.$submitted" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^required_select</span>
       </div>
 
-      <div>
+      <div id="pesticide" ng-class="{formerror: question.pesticide == null && questionForm.$submitted}">
         <h3 class="md-headline" flex>^pesticide
           <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
           <br>
           <small class="md-subhead">^pesticide_subhead</small>
         </h3>
         <md-radio-group required layout="row" name="pesticide" ng-model="question.pesticide">
-          <md-radio-button value="^yes" ng-class="{error: question.pesticide == null}">^yes</md-radio-button>
-          <md-radio-button value="^no" ng-class="{error: question.pesticide == null}"> ^no </md-radio-button>
+          <md-radio-button value="^yes" ng-class="{error: question.pesticide == null && questionForm.$submitted}">^yes</md-radio-button>
+          <md-radio-button value="^no" ng-class="{error: question.pesticide == null && questionForm.$submitted}"> ^no </md-radio-button>
         </md-radio-group>
-        <div ng-messages="questionForm.pesticide.$error">
-            <span class="required" ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^required_select</span>
-        </div>
+        <span class="required" ng-show="question.pesticide == null && questionForm.$submitted" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^required_select</span>
       </div>
 
-      <div>
+      <div id="other_people" ng-class="{formerror: question.other_people == null && questionForm.$submitted}">
         <h3 class="md-headline" flex>^others
           <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
           <br>
           <small class="md-subhead">^others_subhead</small>
         </h3>
         <md-radio-group required layout="row" name="other_people" ng-model="question.other_people">
-          <md-radio-button value="^yes" ng-class="{error: question.other_people == null}">^yes</md-radio-button>
-          <md-radio-button value="^no" ng-class="{error: question.other_people == null}"> ^no </md-radio-button>
+          <md-radio-button value="^yes" ng-class="{error: question.other_people == null && questionForm.$submitted}">^yes</md-radio-button>
+          <md-radio-button value="^no" ng-class="{error: question.other_people == null && questionForm.$submitted}"> ^no </md-radio-button>
         </md-radio-group>
-        <div ng-messages="questionForm.other_people.$error">
-            <span class="required" ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^required_select</span>
-        </div>
+        <span class="required" ng-show="question.other_people == null && questionForm.$submitted" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^required_select</span>
       </div>
 
       <h3 class="md-headline" flex>^comment ^optional
@@ -181,7 +168,7 @@
         <textarea class="wrap-border" name="comment" ng-model="question.comment" placeholder="^comment_required^optional" rows="5"></textarea>
       </md-input-container>
       <br>
-      <md-button class="md-raised md-primary text-size-110" ng-disabled="questionForm.$invalid || (!question.image[0]&& !question.image[1] && !question.image[2])" ng-click="postQuestion($event);">^post</md-button>
+      <button type="submit" class="md-button md-raised md-primary text-size-110" ng-click="">^post</button>
     </div>
   </md-content>
   </form>

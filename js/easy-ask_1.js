@@ -4,45 +4,82 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
     .primaryPalette('deep-orange')
     .accentPalette('orange');
 })
-.controller('AppCtrl', function($scope, Upload, $timeout, $http, $mdDialog) {
+.controller('AppCtrl', function($scope, Upload, $timeout, $http, $mdDialog, $anchorScroll) {
     $scope.question = {
         'image': []
     };
     $scope.uploadfiles = null;
+    $scope.scrollToAnchor = function (anchor) {
+        if (anchor !== null) {
+            $anchorScroll(anchor);
+        }
+    }
+     
     $scope.postQuestion = function(ev) {
         console.log($scope.question);
-        
-        var confirm = $mdDialog.confirm()
-          .parent(angular.element(document.body))
-          .title(easyask.lang.confirm_title)
-          .textContent(easyask.lang.confirm_content)
-          .ariaLabel('post-question')
-          .targetEvent(ev)
-          .ok(easyask.lang.label_post)
-          .cancel(easyask.lang.label_cancel);
 
-        $mdDialog.show(confirm).then(function() {
-            var content = getContent($scope.question);
+        if ($scope.questionForm.$valid && $scope.question.image.length > 0) {
+            var confirm = $mdDialog.confirm()
+            .parent(angular.element(document.body))
+            .title(easyask.lang.confirm_title)
+            .textContent(easyask.lang.confirm_content)
+            .ariaLabel('post-question')
+            .targetEvent(ev)
+            .ok(easyask.lang.label_post)
+            .cancel(easyask.lang.label_cancel);
 
-            var params = {};
-            params.title = easyask.lang.q1_title+$scope.question.place.substr(0, 20);
-            params.content = content;
-            params.category_id = 38;
-            params.code = easyask.code;
-            $http({
-                method: 'POST',
-                url: '/easy-ask-post-question',
-                data: params
-            }).success(function(data, status, headers, config) {
-                console.log('success');
-                console.log(data);
-                console.log(status);
-            }).error(function(data, status, headers, config) {
-                console.log('error');
-                console.log(data);
-                console.log(status);
+            $mdDialog.show(confirm).then(function() {
+                var content = getContent($scope.question);
+
+                var params = {};
+                params.title = easyask.lang.q1_title+$scope.question.place.substr(0, 20);
+                params.content = content;
+                params.category_id = 38;
+                params.code = easyask.code;
+                $http({
+                    method: 'POST',
+                    url: '/easy-ask-post-question',
+                    data: params
+                }).success(function(data, status, headers, config) {
+                    console.log('success');
+                    console.log(data);
+                    console.log(status);
+                }).error(function(data, status, headers, config) {
+                    console.log('error');
+                    console.log(data);
+                    console.log(status);
+                });
             });
-        });
+        } else {
+            if ($scope.question.image.length <=0 ) {
+                $scope.scrollToAnchor('images');
+                return;
+            }
+            if ($scope.questionForm.place.$error.required) {
+                $scope.scrollToAnchor('place');
+                return;
+            }
+            if ($scope.questionForm.owned.$error.required) {
+                $scope.scrollToAnchor('owned');
+                return;
+            }
+            if ($scope.questionForm.strong_wind.$error.required) {
+                $scope.scrollToAnchor('strong_wind');
+                return;
+            }
+            if ($scope.questionForm.direct_sunlight.$error.required) {
+                $scope.scrollToAnchor('direct_sunlight');
+                return;
+            }
+            if ($scope.questionForm.pesticide.$error.required) {
+                $scope.scrollToAnchor('pesticide');
+                return;
+            }
+            if ($scope.questionForm.other_people.$error.required) {
+                $scope.scrollToAnchor('other_people');
+                return;
+            }
+        }
     };
     $scope.uploadFiles = function(file, idx, errFiles) {
         $scope.f = file;

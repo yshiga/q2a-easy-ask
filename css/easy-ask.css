@@ -66,3 +66,7 @@ md-radio-button .md-container {
 .delete-img {
     margin-bottom: 20px;
 }
+
+.formerror {
+    background-color: #ffebee;
+}
