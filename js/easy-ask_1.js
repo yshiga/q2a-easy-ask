@@ -25,8 +25,13 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
     };
 
     $scope.postQuestion = function(ev) {
-
-        if ($scope.questionForm.$valid && $scope.question.image.length > 0) {
+        console.log($scope.question);
+        if ($scope.questionForm.$valid 
+            && ($scope.question.image[0]
+            ||  $scope.question.image[1]
+            ||  $scope.question.image[2])) {
+            console.log('ok');
+            return false;
             var confirm = $mdDialog.confirm()
             .parent(angular.element(document.body))
             .title(easyask.lang.confirm_title)
@@ -40,7 +45,10 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
                 var content = getContent($scope.question);
 
                 var params = {};
-                params.title = easyask.lang.q1_title+$scope.question.place.substr(0, 20);
+                var place = $scope.question.place.replace(/\r?\n/g,"");
+                var comment = $scope.question.place.comment.replace(/\r?\n/g,"");
+                var title = easyask.lang.q1_title+place+' '+comment;
+                params.title = title.substr(0, 50);
                 params.content = content;
                 params.category_id = 38;
                 params.code = easyask.code;
@@ -66,7 +74,7 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
                 });
             });
         } else {
-            if ($scope.question.image.length <=0 ) {
+            if (!$scope.question.image[0] && !$scope.question.image[1] && !$scope.question.image[2] ) {
                 $scope.scrollToAnchor('images');
                 return;
             }

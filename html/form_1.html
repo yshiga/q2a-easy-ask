@@ -17,7 +17,7 @@
         ^form_message
       </p>
 
-      <div id="images" ng-class="{formerror: question.image.length <= 0 && questionForm.$submitted}">
+      <div id="images" ng-class="{formerror: !question.image[0] && !question.image[1] && !question.image[2] && questionForm.$submitted}">
         <div layout-gt-xs="row" layout-align="start">
           <p class="md-headline" flex-gt-xs="60" style="margin-top:0">^image
             <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
@@ -80,7 +80,7 @@
             <md-progress-circular class="md-accent" md-mode="indeterminate"></md-progress-circular>
           </div>
         </div>
-        <span ng-show="question.image.length <= 0 && questionForm.$submitted" class="required" md-colors="{color: 'red-700'}">^image_required</span>
+        <span ng-show="!question.image[0] && !question.image[1] && !question.image[2] && questionForm.$submitted" class="required" md-colors="{color: 'red-700'}">^image_required</span>
       </div>
       <md-input-container id="place" md-no-float class="md-block " ng-class="{formerror: question.place == null && questionForm.$submitted}">
         <h3 class="md-headline" flex>^place
