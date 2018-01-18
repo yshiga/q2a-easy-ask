@@ -25,13 +25,10 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
     };
 
     $scope.postQuestion = function(ev) {
-        console.log($scope.question);
         if ($scope.questionForm.$valid 
             && ($scope.question.image[0]
             ||  $scope.question.image[1]
             ||  $scope.question.image[2])) {
-            console.log('ok');
-            return false;
             var confirm = $mdDialog.confirm()
             .parent(angular.element(document.body))
             .title(easyask.lang.confirm_title)
@@ -46,7 +43,7 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
 
                 var params = {};
                 var place = $scope.question.place.replace(/\r?\n/g,"");
-                var comment = $scope.question.place.comment.replace(/\r?\n/g,"");
+                var comment = $scope.question.comment.replace(/\r?\n/g,"");
                 var title = easyask.lang.q1_title+place+' '+comment;
                 params.title = title.substr(0, 50);
                 params.content = content;

@@ -88,10 +88,10 @@
           <br>
           <small class="md-subhead">^place_subhead</small>
         </h3>
-        <input required placeholder="^place_placeholder" name="place" ng-model="question.place" ng-class="{error: question.place == null}">
-        <div ng-messages="questionForm.place.$error">
-            <span class="required" ng-message="required" md-colors="{color: 'red-700'}">^place_required</span>
-        </div>
+        <textarea class="wrap-border" name="place" ng-model="question.place"
+         ng-class="{error: question.place == null}"
+         placeholder="^place_placeholder" rows="5" ></textarea>
+        <span class="required" ng-show="question.place == null && questionForm.$submitted" md-colors="{color: 'red-700'}">^place_required</span>
       </md-input-container>
       <div id="owned" ng-class="{formerror: question.owned == null && questionForm.$submitted}">
         <h3 class="md-headline" flex>^owned

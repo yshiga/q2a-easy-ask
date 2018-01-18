@@ -36,7 +36,7 @@ EOS;
     <script src="{$url}js/ng-file-upload.min.js"></script>
 EOS;
             $this->output($scripts);
-            $js_lang = $this->get_js_lang();
+            $js_lang = $this->get_js_lang($form_id);
             $js_lang_json = json_encode( $js_lang );
             $jsvar = <<<EOS2
 <script>
@@ -124,8 +124,9 @@ EOS2;
         $this->output('</div></div>');
     }
 
-    private function get_js_lang()
+    private function get_js_lang($form_id)
     {
+        $url = '/easy-ask/' . $form_id;
         return array(
             'confirm_title'    => qa_lang('qea_lang/confirm_title'),
             'confirm_content'  => qa_lang('qea_lang/confirm_content'),
@@ -137,7 +138,7 @@ EOS2;
             'q1_pesticide'     => qa_lang('qea_lang/q1_pesticide'),
             'q1_others'        => qa_lang('qea_lang/q1_others'),
             'comment'          => qa_lang('qea_lang/comment'),
-            'question_footer'  => qa_lang('qea_lang/question_footer'),
+            'question_footer'  => qa_lang_sub('qea_lang/question_footer', $url),
             'label_post'       => qa_lang('qea_lang/label_post'),
             'label_cancel'     => qa_lang('qea_lang/label_cancel'),
             'label_close'      => qa_lang('qea_lang/label_close'),

@@ -51,7 +51,7 @@ return array(
 
     // 共通
     'comment'             => '補足コメント',
-    'question_footer'     => 'この質問は、簡単質問フォームで投稿されました。',
+    'question_footer'     => 'この質問は、<a href="^" target="_blank"> 簡単質問フォーム</a> で投稿されました。',
     'required'            => '(必須)',
     'optional'            => '(任意)',
     'add_image'           => '画像を追加',
