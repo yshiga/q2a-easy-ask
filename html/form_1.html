@@ -1,10 +1,10 @@
 <div ng-app="myApp" ng-controller="AppCtrl" ng-cloak>
-    <div class="md-toolbar-tools">
-      <h1 flex md-truncate class="logo" layout="row" layout-wrap layout-align="center center">
-        <span>^page_title</span>
-      </h1>
-    </div>
-  <form name="questionForm" novalidate ng-submit="postQuestion($event);">
+  <div class="md-toolbar-tools">
+    <h1 flex md-truncate class="logo" layout="row" layout-wrap layout-align="center center">
+      <span>^page_title</span>
+    </h1>
+  </div>
+  <form id="question-form" name="questionForm" novalidate ng-submit="postQuestion($event);" ng-show="showForm">
   <md-content class="" layout layout-align="center">
     <div layout="column" md-colors="{background: 'grey-A100'}"
       class="layout-padding layout-margin" style="max-height:none">
@@ -172,4 +172,16 @@
     </div>
   </md-content>
   </form>
+
+  <md-content layout layout-align="center" id="post-success" ng-show="postDone">
+    <div layout="column" md-colors="{background: 'grey-A100'}" class="layout-padding layout-margin" style="max-height:none">
+      <h2 class="md-display-1">
+        ^post_complete
+      </h2>
+      <p>
+        ^post_comp_msg
+      </p>
+      <md-button class="md-raised md-primary text-size-110" ng-click="openQuestion()">^check_button_label</md-button>
+    </div>
+  </md-content>
 </div>

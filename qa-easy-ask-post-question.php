@@ -20,8 +20,6 @@ class easy_ask_post_question
                 $this->set_errors(401, 'Unauthorized', 'Security Code invalid');
             } elseif (!qa_is_logged_in()) {
                 $this->set_errors(401, 'Unauthorized', 'Not Logged in');
-            } elseif (!qa_is_logged_in()) {
-
             } else {
                 $this->post_question($input_params);
             }
@@ -198,7 +196,7 @@ class easy_ask_post_question
 
         if(isset($questionid)) {
             $output = array(
-                'posted!'
+                'postid' => $questionid
             );
         } else {
             $errorstring = 'Failed db post question';

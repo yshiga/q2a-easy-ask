@@ -9,14 +9,22 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
         'image': []
     };
     $scope.uploadfiles = null;
+    $scope.showForm = true;
+    $scope.postDone = false;
+    $scope.postID = null;
     $scope.scrollToAnchor = function (anchor) {
         if (anchor !== null) {
             $anchorScroll(anchor);
         }
-    }
+    };
      
+    $scope.openQuestion = function () {
+        if ($scope.postID) {
+            location.href = '/'+$scope.postID;
+        }
+    };
+
     $scope.postQuestion = function(ev) {
-        console.log($scope.question);
 
         if ($scope.questionForm.$valid && $scope.question.image.length > 0) {
             var confirm = $mdDialog.confirm()
@@ -41,13 +49,20 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
                     url: '/easy-ask-post-question',
                     data: params
                 }).success(function(data, status, headers, config) {
-                    console.log('success');
-                    console.log(data);
-                    console.log(status);
+                    $scope.postID = data.postid;
+                    $scope.showForm = false;
+                    $scope.postDone = true;
                 }).error(function(data, status, headers, config) {
                     console.log('error');
                     console.log(data);
-                    console.log(status);
+                    var errorDialog = $mdDialog.alert()
+                    .parent(angular.element(document.body))
+                    .clickOutsideToClose(true)
+                    .title(easyask.lang.error_title)
+                    .textContent(easyask.lang.error_msg)
+                    .ariaLabel('Error Happend')
+                    .ok(easyask.lang.label_close);
+                    $mdDialog.show(errorDialog);
                 });
             });
         } else {

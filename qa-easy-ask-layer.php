@@ -109,7 +109,10 @@ EOS2;
             '^yes'               => qa_lang('qea_lang/yes'),
             '^no'                => qa_lang('qea_lang/no'),
             '^required_select'   => qa_lang('qea_lang/q1_required_select'),
-            '^post'   => qa_lang('qea_lang/post'),
+            '^post_complete'     => qa_lang('qea_lang/post_complete'),
+            '^post_comp_msg'     => qa_lang('qea_lang/post_comp_msg'),
+            '^check_button_label' => qa_lang('qea_lang/check_button_label'),
+            '^post'              => qa_lang('qea_lang/post'),
         );
     }
 
@@ -137,6 +140,9 @@ EOS2;
             'question_footer'  => qa_lang('qea_lang/question_footer'),
             'label_post'       => qa_lang('qea_lang/label_post'),
             'label_cancel'     => qa_lang('qea_lang/label_cancel'),
+            'label_close'      => qa_lang('qea_lang/label_close'),
+            'error_title'      => qa_lang('qea_lang/error_title'),
+            'error_msg'        => qa_lang('qea_lang/error_msg'),
         );
     }
 }
