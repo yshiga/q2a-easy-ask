@@ -52,10 +52,18 @@ EOS2;
 
     public function main_parts($content)
     {
+        require_once QA_THEME_DIR . qa_opt('site_theme') . '/qa-theme-utils.php';
+
         if($this->template === 'easy-ask') {
             if (!qa_is_logged_in()) {
                 $this->no_login_message();
             } else {
+                $userid = qa_get_logged_in_userid();
+                $prev_question = qa_theme_utils::get_prev_question($userid);
+                if (!empty($prev_question)) {
+                    $this->output_prev_question($prev_question);
+                    return;
+                }
                 $form_id = qa_request_part(1);
                 $form_template = QEA_DIR.'/html/form_'.$form_id.'.html';
                 if (file_exists($form_template)) {
@@ -118,7 +126,7 @@ EOS2;
 
     private function no_login_message()
     {
-        $this->output('<div id="top_ad_container" class="mdl-card mdl-cell mdl-cell--12-col">
+        $this->output('<div class="mdl-card mdl-cell mdl-cell--12-col">
   <div class="mdl-card__supporting-text">');
         $this->output(qa_lang('qea_lang/no_login_message'));
         $this->output('</div></div>');
@@ -145,5 +153,11 @@ EOS2;
             'error_title'      => qa_lang('qea_lang/error_title'),
             'error_msg'        => qa_lang('qea_lang/error_msg'),
         );
+    }
+
+    private function output_prev_question($question)
+    {
+        $path = QEA_DIR.'/html/prev_question.html';
+        include $path;
     }
 }
