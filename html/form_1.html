@@ -82,7 +82,7 @@
         </div>
         <span ng-show="!question.image[0] && !question.image[1] && !question.image[2] && questionForm.$submitted" class="required" md-colors="{color: 'red-700'}">^image_required</span>
       </div>
-      <md-input-container id="place" md-no-float class="md-block " ng-class="{formerror: placeLength < 50 && questionForm.$submitted}">
+      <md-input-container id="place" md-no-float class="md-block " ng-class="{formerror: (questionForm.place.$error.required || questionForm.place.$error.minlength) && questionForm.$submitted}">
         <h3 class="md-headline" flex>^place
           <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
           <br>
@@ -90,9 +90,13 @@
         </h3>
         <textarea class="wrap-border" name="place" ng-model="question.place"
          ng-class="{error: question.place == null}"
-         ng-minlength="50"
+         required
+         minlength="50"
          placeholder="^place_placeholder" rows="5" ></textarea>
-        <span class="required" ng-show="placeLength < 50 && questionForm.$submitted" md-colors="{color: 'red-700'}">^place_required</span>
+         <div ng-messages="questionForm.place.$error" ng-show="questionForm.$submitted">
+           <span ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^place_required</span>
+           <span ng-message="minlength" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^place_minlength</span>
+         </div>
       </md-input-container>
       <div id="owned" ng-class="{formerror: question.owned == null && questionForm.$submitted}">
         <h3 class="md-headline" flex>^owned

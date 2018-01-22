@@ -28,7 +28,8 @@ return array(
     'q1_place'            => '場所の概要',
     'q1_place_subhead'    => 'どのような場所ですか？',
     'q1_place_placeholder' => '林に囲まれた空き地です。',
-    'q1_place_required'   => '必須項目です。最低50文字以上入力して下さい',
+    'q1_place_required'   => '必須項目です。',
+    'q1_place_minlength'  => '50字以上入力して下さい。',
     
     'q1_owned'            => '自分の土地ですか？',
     'q1_owned_subhead'    => '人の土地でも設置許可がある場合は、「はい」と答えてください',

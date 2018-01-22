@@ -12,7 +12,6 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
     $scope.showForm = true;
     $scope.postDone = false;
     $scope.postID = null;
-    $scope.placeLength = 0;
     $scope.scrollToAnchor = function (anchor) {
         if (anchor !== null) {
             $anchorScroll(anchor);
@@ -26,9 +25,7 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
     };
 
     $scope.postQuestion = function(ev) {
-        $scope.placeLength = $scope.question.place ? $scope.question.place.replace(/\r?\n/g, "").length : 0;
         if ($scope.questionForm.$valid 
-            && $scope.placeLength >= 50
             && ($scope.question.image[0]
             ||  $scope.question.image[1]
             ||  $scope.question.image[2])) {
@@ -78,7 +75,8 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
                 $scope.scrollToAnchor('images');
                 return;
             }
-            if ($scope.questionForm.place.$error.required || $scope.placeLength < 50) {
+            if ($scope.questionForm.place.$error.required
+             || $scope.questionForm.place.$error.minlength) {
                 $scope.scrollToAnchor('place');
                 return;
             }
@@ -169,10 +167,4 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
         content += '<p></p><p>'+easyask.lang.question_footer+'</p>';
         return content;
     }
-
-    $('textarea[name="place"]').on('keypress', function() {
-        var text = $('textarea[name="place"').val();
-        $scope.placeLength = text.replace(/\r?\n/g, "").length;
-        console.log($scope.placeLength);
-    });
 });
