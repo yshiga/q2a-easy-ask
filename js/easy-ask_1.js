@@ -43,7 +43,10 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
 
                 var params = {};
                 var place = $scope.question.place.replace(/\r?\n/g,"");
-                var comment = $scope.question.comment.replace(/\r?\n/g,"");
+                var comment = $scope.question.comment;
+                if (comment) {
+                    comment = comment.replace(/\r?\n/g,"");
+                }
                 var title = easyask.lang.q1_title+place+' '+comment;
                 params.title = title.substr(0, 50);
                 params.content = content;
@@ -150,7 +153,7 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
             content += '  <div class="image-url">[image="'+question.image[2]+'"]</div>';
             content += '</div>';
         }
-        content += '<p>'+easyask.lang.q1_place+': <br>';
+        content += '<p style="word-wrap: break-word">'+easyask.lang.q1_place+': <br>';
         content += question.place;
         content += '</p>';
         content += '<p>'+easyask.lang.q1_owned+': '+question.owned+'</p>';

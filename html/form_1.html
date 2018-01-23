@@ -82,7 +82,7 @@
         </div>
         <span ng-show="!question.image[0] && !question.image[1] && !question.image[2] && questionForm.$submitted" class="required" md-colors="{color: 'red-700'}">^image_required</span>
       </div>
-      <md-input-container id="place" md-no-float class="md-block " ng-class="{formerror: (questionForm.place.$error.required || questionForm.place.$error.minlength) && questionForm.$submitted}">
+      <md-input-container id="place" md-no-float class="md-block " ng-class="{formerror: (questionForm.place.$error.required || questionForm.place.$error.minlength || questionForm.place.$error['md-maxlength']) && questionForm.$submitted}">
         <h3 class="md-headline" flex>^place
           <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
           <br>
@@ -92,10 +92,12 @@
          ng-class="{error: question.place == null}"
          required
          minlength="50"
+         md-maxlength="600"
          placeholder="^place_placeholder" rows="5" ></textarea>
          <div ng-messages="questionForm.place.$error" ng-show="questionForm.$submitted">
            <span ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^place_required</span>
            <span ng-message="minlength" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^place_minlength</span>
+           <span ng-message="md-maxlength" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">600字以内です。</span>
          </div>
       </md-input-container>
       <div id="owned" ng-class="{formerror: question.owned == null && questionForm.$submitted}">
