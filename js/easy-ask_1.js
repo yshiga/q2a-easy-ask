@@ -114,8 +114,6 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
         $scope.errFile = errFiles && errFiles[0];
         $scope.progress = false;
         $scope.question.image[idx] = null;
-        console.log($scope.errFile);
-        $scope.warnOnLeave = true;
         if (file) {
             file.upload = Upload.upload({
                 url: '/easy-ask-file-upload',
@@ -129,6 +127,7 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
                         $scope.uploadError = res.error;
                     } else {
                         $scope.question.image[idx] = res.url;
+                        $scope.warnOnLeave = true;
                     }
                     $scope.progress = false;
                 });
