@@ -1,0 +1,72 @@
+.file-input {
+    display: none;
+}
+
+.md-button label {
+    display: inline-block;
+    width: 100%;
+    cursor: pointer;
+}
+
+.wrap-border {
+    border: 1px solid #ddd;
+}
+
+.logo img {
+    width: 150px;
+}
+
+.text-size-110 {
+    font-size: 110%;
+}
+
+.photo-upload.error {
+    border-width: 2px;
+    border-color: rgb(211, 47, 47);
+}
+
+md-radio-button {
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    padding: 8px;
+    min-width: 120px;
+}
+
+md-radio-button.error {
+    background: rgb(183, 28, 28);
+    border-color: rgb(183, 28, 28);
+}
+
+md-radio-button:hover,
+md-radio-button.md-checked {
+    border-color: rgba(255, 171, 64, 0.87);
+    background: rgba(255, 171, 64, 0.2);
+}
+
+md-radio-button .md-container {
+    left: 8px;
+}
+
+@media (max-width: 374px) and (min-width: 0) and (orientation: portrait) {
+    .md-toolbar-tools {
+    height: 76px;
+    max-height: 76px;
+    }
+}
+
+.easy-ask-img {
+    text-align: center;
+    padding: 0;
+}
+
+.easy-ask-img img {
+    max-width: 100%;
+}
+
+.delete-img {
+    margin-bottom: 20px;
+}
+
+.formerror {
+    background-color: #ffebee;
+}

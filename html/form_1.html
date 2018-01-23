@@ -1,0 +1,207 @@
+<div ng-app="myApp" ng-controller="AppCtrl" ng-cloak>
+  <div class="md-toolbar-tools">
+    <h1 flex md-truncate class="logo" layout="row" layout-wrap layout-align="center center">
+      <span>^page_title</span>
+    </h1>
+  </div>
+  <form id="question-form" name="questionForm" novalidate ng-submit="postQuestion($event);" ng-show="showForm">
+  <md-content class="" layout layout-align="center">
+    <div layout="column" md-colors="{background: 'grey-A100'}"
+      class="layout-padding layout-margin" style="max-height:none">
+
+      <h2 class="md-display-1">^form_head
+        <br class="hide-gt-xs">
+        <small class="md-subhead">^form_subhead</small>
+      </h2>
+      <p>
+        ^form_message
+      </p>
+
+      <div id="images" ng-class="{formerror: !question.image[0] && !question.image[1] && !question.image[2] && questionForm.$submitted}">
+        <div layout-gt-xs="row" layout-align="start">
+          <p class="md-headline" flex-gt-xs="60" style="margin-top:0">^image
+            <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
+            <br>
+            <small class="md-subhead">^image_subhead</small>
+          </p>
+          <div flex-gt-xs="40" style="margin-bottom:24px">
+            <img src="^urlimg/sample-01.jpg" alt="^image_alt" flex="100">
+          </div>
+        </div>
+
+        <div class="layout-padding wrap-border photo-upload" layout="row" layout-wrap layout-align="center center">
+          <md-button ng-show="!question.image[0]"
+            ngf-select="uploadFiles($file, 0, $invalidFiles)" 
+            ngf-max-size="^file_max_size" 
+            ngf-pattern="'.gif,.jpg,.ipeg,.png'"
+            accept="image/*"
+            flex="100" 
+            class="md-raised md-primary text-size-110">
+            <md-icon>file_upload</md-icon> ^add_image
+          </md-button>
+          <div flex-gt-xs="70" class="easy-ask-img">
+            <img ng-show="question.image[0]" ngf-thumbnail="question.image[0]" class="thumb">
+          </div>
+          <md-button ng-show="question.image[0]" ng-click="question.image[0] = null" flex="100" class="md-raised text-size-110 delete-img">
+              <md-icon>close</md-icon> ^delete_image 
+          </md-button>
+          <md-button ng-show="question.image[0] && !question.image[1]"
+            ngf-select="uploadFiles($file, 1, $invalidFiles)" 
+            ngf-max-size="^file_max_size" 
+            ngf-pattern="'.gif,.jpg,.ipeg,.png'"
+            accept="image/*"
+            flex="100" 
+            class="md-raised md-primary text-size-110">
+            <md-icon>file_upload</md-icon> ^add_image
+          </md-button>
+          <div flex-gt-xs="70" class="easy-ask-img">
+            <img ng-show="question.image[1]" ngf-thumbnail="question.image[1]" class="thumb">
+          </div>
+          <md-button ng-show="question.image[1]" ng-click="question.image[1] = null" flex="100" class="md-raised text-size-110 delete-img">
+              <md-icon>close</md-icon> ^delete_image
+          </md-button>
+          <md-button ng-show="question.image[1] && !question.image[2]"
+            ngf-select="uploadFiles($file, 2, $invalidFiles)" 
+            ngf-max-size="^file_max_size" 
+            ngf-pattern="'.gif,.jpg,.ipeg,.png'"
+            accept="image/*"
+            flex="100" 
+            class="md-raised md-primary text-size-110">
+            <md-icon>file_upload</md-icon> ^add_image
+          </md-button>
+          <div flex-gt-xs="70" class="easy-ask-img">
+            <img ng-show="question.image[2]" ngf-thumbnail="question.image[2]" class="thumb">
+          </div>
+          <md-button ng-show="question.image[2]" ng-click="question.image[2] = null" flex="100" class="md-raised text-size-110 delete-img">
+              <md-icon>close</md-icon> ^delete_image
+          </md-button>
+          <div layout="column" layout-align="center center"
+            ng-show="progress" style="width:100%">
+            <md-progress-circular class="md-accent" md-mode="indeterminate"></md-progress-circular>
+          </div>
+        </div>
+        <div ng-messages="errFile.$errorMessages">
+          <span ng-message="maxSize" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">
+            ^file_max_size_error
+          </span>
+          <span ng-message="pattern" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">
+            ^file_type_error
+          </span>
+        </div>
+        <div ng-show="uploadError">
+          <span md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">
+            {{ uploadError }}
+          </span>
+        </div>
+        <span ng-show="!question.image[0] && !question.image[1] && !question.image[2] && questionForm.$submitted" class="required" md-colors="{color: 'red-700'}">^image_required</span>
+      </div>
+      <md-input-container id="place" md-no-float class="md-block " ng-class="{formerror: (questionForm.place.$error.required || questionForm.place.$error.minlength || questionForm.place.$error['md-maxlength']) && questionForm.$submitted}">
+        <h3 class="md-headline" flex>^place
+          <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
+          <br>
+          <small class="md-subhead">^place_subhead</small>
+        </h3>
+        <textarea class="wrap-border" name="place" ng-model="question.place"
+         ng-class="{error: question.place == null}"
+         required
+         minlength="50"
+         md-maxlength="600"
+         placeholder="^place_placeholder" rows="5" ></textarea>
+         <div ng-messages="questionForm.place.$error" ng-show="questionForm.$submitted">
+           <span ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^place_required</span>
+           <span ng-message="minlength" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^place_minlength</span>
+           <span ng-message="md-maxlength" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">600字以内です。</span>
+         </div>
+      </md-input-container>
+      <div id="owned" ng-class="{formerror: question.owned == null && questionForm.$submitted}">
+        <h3 class="md-headline" flex>^owned
+          <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
+          <br>
+          <small class="md-subhead">^owned_subhead</small>
+        </h3>
+        <md-radio-group required layout="row" name="owned" ng-model="question.owned">
+          <md-radio-button value="^yes" ng-class="{error: question.owned == null && questionForm.$submitted}">^yes</md-radio-button>
+          <md-radio-button value="^no" ng-class="{error: question.owned == null && questionForm.$submitted}"> ^no </md-radio-button>
+        </md-radio-group>
+        <span class="required" ng-show="question.owned == null && questionForm.$submitted" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^required_select</span>
+      </div>
+
+      <div id="strong_wind" ng-class="{formerror: question.strong_wind == null && questionForm.$submitted}">
+        <h3 class="md-headline" flex>^wind
+          <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
+          <br>
+          <small class="md-subhead">^wind_subhead</small>
+        </h3>
+
+        <md-radio-group required layout="row" name="strong_wind" ng-model="question.strong_wind">
+          <md-radio-button value="^yes" ng-class="{error: question.strong_wind == null && questionForm.$submitted}">^yes</md-radio-button>
+          <md-radio-button value="^no" ng-class="{error: question.strong_wind == null && questionForm.$submitted}"> ^no </md-radio-button>
+        </md-radio-group>
+        <span class="required" ng-show="question.strong_wind == null && questionForm.$submitted" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^required_select</span>
+      </div>
+
+      <div id="direct_sunlight" ng-class="{formerror: question.direct_sunlight == null && questionForm.$submitted}">
+        <h3 class="md-headline" flex>^sunlight
+          <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
+          <br>
+          <small class="md-subhead">^sunlight_subhead</small>
+        </h3>
+        <md-radio-group required layout="row" name="direct_sunlight" ng-model="question.direct_sunlight">
+          <md-radio-button value="^yes" ng-class="{error: question.direct_sunlight == null && questionForm.$submitted}">^yes</md-radio-button>
+          <md-radio-button value="^no" ng-class="{error: question.direct_sunlight == null && questionForm.$submitted}"> ^no </md-radio-button>
+        </md-radio-group>
+        <span class="required" ng-show="question.direct_sunlight == null && questionForm.$submitted" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^required_select</span>
+      </div>
+
+      <div id="pesticide" ng-class="{formerror: question.pesticide == null && questionForm.$submitted}">
+        <h3 class="md-headline" flex>^pesticide
+          <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
+          <br>
+          <small class="md-subhead">^pesticide_subhead</small>
+        </h3>
+        <md-radio-group required layout="row" name="pesticide" ng-model="question.pesticide">
+          <md-radio-button value="^yes" ng-class="{error: question.pesticide == null && questionForm.$submitted}">^yes</md-radio-button>
+          <md-radio-button value="^no" ng-class="{error: question.pesticide == null && questionForm.$submitted}"> ^no </md-radio-button>
+        </md-radio-group>
+        <span class="required" ng-show="question.pesticide == null && questionForm.$submitted" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^required_select</span>
+      </div>
+
+      <div id="other_people" ng-class="{formerror: question.other_people == null && questionForm.$submitted}">
+        <h3 class="md-headline" flex>^others
+          <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
+          <br>
+          <small class="md-subhead">^others_subhead</small>
+        </h3>
+        <md-radio-group required layout="row" name="other_people" ng-model="question.other_people">
+          <md-radio-button value="^yes" ng-class="{error: question.other_people == null && questionForm.$submitted}">^yes</md-radio-button>
+          <md-radio-button value="^no" ng-class="{error: question.other_people == null && questionForm.$submitted}"> ^no </md-radio-button>
+        </md-radio-group>
+        <span class="required" ng-show="question.other_people == null && questionForm.$submitted" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^required_select</span>
+      </div>
+
+      <h3 class="md-headline" flex>^comment ^optional
+        <br>
+        <small class="md-subhead">^comment_subhead</small>
+      </h3>
+
+      <md-input-container>
+        <textarea class="wrap-border" name="comment" ng-model="question.comment" placeholder="^comment_required^optional" rows="5"></textarea>
+      </md-input-container>
+      <br>
+      <button type="submit" class="md-button md-raised md-primary text-size-110" ng-click="">^post</button>
+    </div>
+  </md-content>
+  </form>
+
+  <md-content layout layout-align="center" id="post-success" ng-show="postDone">
+    <div layout="column" md-colors="{background: 'grey-A100'}" class="layout-padding layout-margin" style="max-height:none">
+      <h2 class="md-display-1">
+        ^post_complete
+      </h2>
+      <p>
+        ^post_comp_msg
+      </p>
+      <md-button class="md-raised md-primary text-size-110" ng-click="openQuestion()">^check_button_label</md-button>
+    </div>
+  </md-content>
+</div>
