@@ -88,6 +88,11 @@
             ^file_type_error
           </span>
         </div>
+        <div ng-show="uploadError">
+          <span md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">
+            {{ uploadError }}
+          </span>
+        </div>
         <span ng-show="!question.image[0] && !question.image[1] && !question.image[2] && questionForm.$submitted" class="required" md-colors="{color: 'red-700'}">^image_required</span>
       </div>
       <md-input-container id="place" md-no-float class="md-block " ng-class="{formerror: (questionForm.place.$error.required || questionForm.place.$error.minlength || questionForm.place.$error['md-maxlength']) && questionForm.$submitted}">

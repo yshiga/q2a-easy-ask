@@ -51,7 +51,7 @@ class easy_ask_file_upload {
 			}
 			if(!empty($errormessage)) {
 				$files[] = array(
-					'name' => $filename,
+					'name' => 'error',
 					'error' => $errormessage
 				);
 			} else {
@@ -65,7 +65,7 @@ class easy_ask_file_upload {
 			error_log($e->getMessage());
 			$files[] = array(
 				'name' => 'error',
-				'error' => 'error happend!'
+				'error' => $e->getMessage() 
 			);
 		}
 		$response['files'] = $files;

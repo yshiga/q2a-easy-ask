@@ -13,7 +13,7 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
     $scope.postDone = false;
     $scope.postID = null;
     $scope.warnOnLeave = false;
-    $scope.uploadError = false;
+    $scope.uploadError = null;
 
     $scope.scrollToAnchor = function (anchor) {
         if (anchor !== null) {
@@ -66,7 +66,6 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
                     $scope.postDone = true;
                 }).error(function(data, status, headers, config) {
                     console.log('error');
-                    console.log(data);
                     var errorDialog = $mdDialog.alert()
                     .parent(angular.element(document.body))
                     .clickOutsideToClose(true)
@@ -125,17 +124,20 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
 
             file.upload.then(function (response) {
                 $timeout(function() {
-                    file.result = response.data;
-                    $scope.question.image[idx] = response.data.files[0].url;
+                    var res = response.data.files[0];
+                    if (res.name == 'error') {
+                        $scope.uploadError = res.error;
+                    } else {
+                        $scope.question.image[idx] = res.url;
+                    }
                     $scope.progress = false;
                 });
             }, function (response) {
                 if (response.status > 0) {
-                    $scope.errorMsg = response.status + ': ' + response.data;
+                    $scope.uploadError = response.status + ': ' + response.data.files[0].error;
                     $scope.question.image[idx] = null;
-                    $scope.progress = false;
-                    $scope.uploadError = true;
                 }
+                $scope.progress = false;
             }, function (evt) {
                 $scope.progress = true;
             });
