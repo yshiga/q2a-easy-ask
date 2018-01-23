@@ -12,6 +12,7 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
     $scope.showForm = true;
     $scope.postDone = false;
     $scope.postID = null;
+    $scope.warnOnLeave = false;
     $scope.scrollToAnchor = function (anchor) {
         if (anchor !== null) {
             $anchorScroll(anchor);
@@ -39,6 +40,7 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
             .cancel(easyask.lang.label_cancel);
 
             $mdDialog.show(confirm).then(function() {
+                $scope.warnOnLeave = false;
                 var content = getContent($scope.question);
 
                 var params = {};
@@ -107,6 +109,7 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
     };
 
     $scope.uploadFiles = function(file, idx, errFiles) {
+        $scope.warnOnLeave = true;
         $scope.f = file;
         $scope.errFile = errFiles && errFiles[0];
         $scope.progress = false;
@@ -170,4 +173,21 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
         content += '<p></p><p>'+easyask.lang.question_footer+'</p>';
         return content;
     }
+
+    $('textarea[name="place"]').keypress(function() {
+        $scope.warnOnLeave = true;
+    });
+    $('md-radio-button').click(function() {
+        $scope.warnOnLeave = true;
+    });
+    $('textarea[name="comment"]').keypress(function() {
+        $scope.warnOnLeave = true;
+    });
+    // 画面遷移時のイベント
+    var onBeforeunloadHandler = function(e) {
+        if($scope.warnOnLeave) {
+            return '本当に移動しますか？'; 
+        }
+    };
+    $(window).on('beforeunload', onBeforeunloadHandler);
 });
