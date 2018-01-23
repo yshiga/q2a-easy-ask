@@ -83,6 +83,7 @@ EOS2;
     private function get_params()
     {
         $url = QA_HTML_THEME_LAYER_URLTOROOT;
+        $file_max_size_mb = number_format(qa_opt('medium_editor_upload_max_size') / 1048576, 0) . 'MB';
         return array(
             '^url'               => $url,
             '^page_title'        => $this->content['title'],
@@ -122,6 +123,9 @@ EOS2;
             '^post_comp_msg'     => qa_lang('qea_lang/post_comp_msg'),
             '^check_button_label' => qa_lang('qea_lang/check_button_label'),
             '^post'              => qa_lang('qea_lang/post'),
+            '^file_max_size'      => $file_max_size_mb,
+            '^file_max_size_error' => qa_lang_sub('qea_lang/file_max_size_error', $file_max_size_mb),
+            '^file_type_error'   => qa_lang('qea_lang/file_type_error'),
         );
     }
 

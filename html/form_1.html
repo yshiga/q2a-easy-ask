@@ -32,7 +32,7 @@
         <div class="layout-padding wrap-border photo-upload" layout="row" layout-wrap layout-align="center center">
           <md-button ng-show="!question.image[0]"
             ngf-select="uploadFiles($file, 0, $invalidFiles)" 
-            ngf-max-size="10MB" 
+            ngf-max-size="^file_max_size" 
             ngf-pattern="'.gif,.jpg,.ipeg,.png'"
             accept="image/*"
             flex="100" 
@@ -47,7 +47,7 @@
           </md-button>
           <md-button ng-show="question.image[0] && !question.image[1]"
             ngf-select="uploadFiles($file, 1, $invalidFiles)" 
-            ngf-max-size="10MB" 
+            ngf-max-size="^file_max_size" 
             ngf-pattern="'.gif,.jpg,.ipeg,.png'"
             accept="image/*"
             flex="100" 
@@ -62,7 +62,7 @@
           </md-button>
           <md-button ng-show="question.image[1] && !question.image[2]"
             ngf-select="uploadFiles($file, 2, $invalidFiles)" 
-            ngf-max-size="10MB" 
+            ngf-max-size="^file_max_size" 
             ngf-pattern="'.gif,.jpg,.ipeg,.png'"
             accept="image/*"
             flex="100" 
@@ -79,6 +79,14 @@
             ng-show="progress" style="width:100%">
             <md-progress-circular class="md-accent" md-mode="indeterminate"></md-progress-circular>
           </div>
+        </div>
+        <div ng-messages="errFile.$errorMessages">
+          <span ng-message="maxSize" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">
+            ^file_max_size_error
+          </span>
+          <span ng-message="pattern" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">
+            ^file_type_error
+          </span>
         </div>
         <span ng-show="!question.image[0] && !question.image[1] && !question.image[2] && questionForm.$submitted" class="required" md-colors="{color: 'red-700'}">^image_required</span>
       </div>

@@ -13,6 +13,8 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
     $scope.postDone = false;
     $scope.postID = null;
     $scope.warnOnLeave = false;
+    $scope.uploadError = false;
+
     $scope.scrollToAnchor = function (anchor) {
         if (anchor !== null) {
             $anchorScroll(anchor);
@@ -109,11 +111,12 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
     };
 
     $scope.uploadFiles = function(file, idx, errFiles) {
-        $scope.warnOnLeave = true;
         $scope.f = file;
         $scope.errFile = errFiles && errFiles[0];
         $scope.progress = false;
         $scope.question.image[idx] = null;
+        console.log($scope.errFile);
+        $scope.warnOnLeave = true;
         if (file) {
             file.upload = Upload.upload({
                 url: '/easy-ask-file-upload',
@@ -131,6 +134,7 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
                     $scope.errorMsg = response.status + ': ' + response.data;
                     $scope.question.image[idx] = null;
                     $scope.progress = false;
+                    $scope.uploadError = true;
                 }
             }, function (evt) {
                 $scope.progress = true;
