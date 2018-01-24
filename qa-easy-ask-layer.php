@@ -87,9 +87,10 @@ EOS2;
         $common_params = array(
             '^url'                 => $url,
             '^page_title'          => $this->content['title'],
+            '^comment_required'    => qa_lang('qea_lang/comment_required'),
+            '^comment'             => qa_lang('qea_lang/comment'),
             '^required'            => qa_lang('qea_lang/required'),
             '^optional'            => qa_lang('qea_lang/optional'),
-            '^comment'             => qa_lang('qea_lang/comment'),
             '^yes'                 => qa_lang('qea_lang/yes'),
             '^no'                  => qa_lang('qea_lang/no'),
             '^post_complete'       => qa_lang('qea_lang/post_complete'),
@@ -101,9 +102,11 @@ EOS2;
             '^file_max_size'       => $file_max_size_mb,
             '^file_max_size_error' => qa_lang_sub('qea_lang/file_max_size_error', $file_max_size_mb),
             '^file_type_error'     => qa_lang('qea_lang/file_type_error'),
-            '^comment_subhead'     => qa_lang('qea_lang/q1_comment_subhead'),
-            '^comment_required'    => qa_lang('qea_lang/q1_comment_required'),
             '^required_select'     => qa_lang('qea_lang/q1_required_select'),
+            '^error_required'      => qa_lang('qea_lang/required_msg'),
+            '^error_minlength'     => qa_lang_sub('qea_lang/minlength_msg', 50),
+            '^error_maxlength'     => qa_lang_sub('qea_lang/maxlength_msg', 600),
+            '^option_required'     => qa_lang('qea_lang/option_required'),
     );
         switch ($form_id) {
             case '1':
@@ -117,8 +120,6 @@ EOS2;
                     '^image_required'    => qa_lang('qea_lang/q1_image_required'),
                     '^place_subhead'     => qa_lang('qea_lang/q1_place_subhead'),
                     '^place_placeholder' => qa_lang('qea_lang/q1_place_placeholder'),
-                    '^place_required'    => qa_lang('qea_lang/q1_place_required'),
-                    '^place_minlength'   => qa_lang('qea_lang/q1_place_minlength'),
                     '^place'             => qa_lang('qea_lang/q1_place'),
                     '^owned'             => qa_lang('qea_lang/q1_owned'),
                     '^owned_subhead'     => qa_lang('qea_lang/q1_owned_subhead'),
@@ -130,10 +131,42 @@ EOS2;
                     '^pesticide_subhead' => qa_lang('qea_lang/q1_pesticide_subhead'),
                     '^others'            => qa_lang('qea_lang/q1_others'),
                     '^others_subhead'    => qa_lang('qea_lang/q1_others_subhead'),
+                    '^comment_subhead'   => qa_lang('qea_lang/q1_comment_subhead'),
                 );
                 break;
             case 2:
-                $form_params = array();
+                $form_params = array(
+                    '^head'              => qa_lang('qea_lang/q2_form_head'),
+                    '^message'           => qa_lang('qea_lang/q2_form_message'),
+                    '^experience'        => qa_lang('qea_lang/q2_experience'),
+                    '^hive_type'         => qa_lang('qea_lang/q2_hive_type'),
+                    '^label_hive_type'   => qa_lang('qea_lang/q2_hive_type_label'),
+                    '^hive_num'          => qa_lang('qea_lang/q2_hive_num'),
+                    '^label_hive_num'    => qa_lang('qea_lang/q2_hive_num_label'),
+                    '^hive_place_subhead' => qa_lang('qea_lang/q2_hive_place_subhead'),
+                    '^hive_place'        => qa_lang('qea_lang/q2_hive_place'),
+                    '^label_hive_place'  => qa_lang('qea_lang/q2_hive_place_label'),
+                    '^beeswax'           => qa_lang('qea_lang/q2_beeswax'),
+                    '^use_lure'          => qa_lang('qea_lang/q2_use_lure'),
+                    '^label_use_lure'    => qa_lang('qea_lang/q2_use_lure_label'),
+                    '^kinryohen'         => qa_lang('qea_lang/q2_kinryohen'),
+                    '^label_kinryohen'   => qa_lang('qea_lang/q2_kinryohen_label'),
+                    '^comment_subhead'   => qa_lang('qea_lang/q2_comment_subhead'),
+                    '^image_subhead'     => qa_lang('qea_lang/q2_image_subhead'),
+                    '^image'             => qa_lang('qea_lang/q2_image'),
+                    '^hive_type_1'       => qa_lang('qea_lang/q2_hive_type_1'),
+                    '^hive_type_2'       => qa_lang('qea_lang/q2_hive_type_2'),
+                    '^hive_type_3'       => qa_lang('qea_lang/q2_hive_type_3'),
+                    '^hive_type_4'       => qa_lang('qea_lang/q2_hive_type_4'),
+                    '^hive_type_5'       => qa_lang('qea_lang/q2_hive_type_5'),
+                    '^option_0'          => qa_lang('qea_lang/q2_option_0'),
+                    '^option_1'          => qa_lang('qea_lang/q2_option_1'),
+                    '^option_2'          => qa_lang('qea_lang/q2_option_2'),
+                    '^option_3'          => qa_lang('qea_lang/q2_option_3'),
+                    '^option_4'          => qa_lang('qea_lang/q2_option_4'),
+                    '^option_5'          => qa_lang('qea_lang/q2_option_5'),
+                    '^option_6'          => qa_lang('qea_lang/q2_option_6'),
+                );
                 break;
             default:
                 $form_params = array();

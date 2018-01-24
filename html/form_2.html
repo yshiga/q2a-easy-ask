@@ -9,14 +9,14 @@
     <div layout="column" md-colors="{background: 'grey-A100'}"
       class="layout-padding layout-margin" style="max-height:none">
 
-      <h2 class="md-display-1">ニホンミツバチ捕獲診断
+      <h2 class="md-display-1">^head
       </h2>
       <p>
-          ニホンミツバチの捕獲の準備についてアドバイスをもらいましょう
+          ^message
       </p>
 
       <div id="experience" ng-class="{formerror: question.experience == null && questionForm.$submitted}">
-        <h3 class="md-headline" flex>これまでに捕獲した経験はありますか？
+        <h3 class="md-headline" flex>^experience
           <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
         </h3>
         <md-radio-group required layout="row" name="experience" ng-model="question.experience">
@@ -34,40 +34,39 @@
       </div>
 
       <div id="hive_type" ng-class="{formerror: question.hive_type == null && questionForm.$submitted}">
-        <h3 class="md-headline" flex>主にどの巣箱を捕獲に利用する予定ですか？
+        <h3 class="md-headline" flex>^hive_type
           <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
         </h3>
         <md-input-container flex="80" class="md-block">
-          <label>巣箱の種類</label>
+          <label>^label_hive_type</label>
           <md-select name="hive_type" ng-model="question.hive_type" required>
-            <md-option value="重箱式巣箱">重箱式巣箱</md-option>
-            <md-option value="ハイブリッド巣箱">ハイブリッド巣箱</md-option>
-            <md-option value="巣枠式巣箱">巣枠式巣箱</md-option>
-            <md-option value="丸洞式巣箱">丸洞式巣箱</md-option>
-            <md-option value="角洞式巣箱">角洞式巣箱</md-option>
-            <md-option value="その他・未定">その他・未定</md-option>
+            <md-option value="^hive_type_1">^hive_type_1</md-option>
+            <md-option value="^hive_type_2">^hive_type_2</md-option>
+            <md-option value="^hive_type_3">^hive_type_3</md-option>
+            <md-option value="^hive_type_4">^hive_type_4</md-option>
+            <md-option value="^hive_type_5">^hive_type_5</md-option>
           </md-select>
         </md-input-container>
         <div class="required" ng-messages="questionForm.hive_type.$error" ng-show="questionForm.$submitted" multiple md-auto-hide="false">
           <div ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">
-            必須項目です。選択して下さい
+            ^option_required
           </div>
         </div>
       </div>
 
       <div id="hive_num" ng-class="{formerror: question.hive_num == null && questionForm.$submitted}">
-        <h3 class="md-headline" flex>巣箱は何個設置する予定ですか？
+        <h3 class="md-headline" flex>^hive_num
           <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
         </h3>
         <md-input-container  flex="80" class="md-block">
-          <label>巣箱の数</label>
+          <label>^label_hive_num</label>
           <md-select name="hive_num" ng-model="question.hive_num" required>
-            <md-option value="１">１</md-option>
-            <md-option value="２から３">２から３</md-option>
-            <md-option value="４から５">４から５</md-option>
-            <md-option value="６から１０">６から１０</md-option>
-            <md-option value="１１以上">１１以上</md-option>
-            <md-option value="未定">未定</md-option>
+            <md-option value="^option_1">^option_1</md-option>
+            <md-option value="^option_2">^option_2</md-option>
+            <md-option value="^option_3">^option_3</md-option>
+            <md-option value="^option_4">^option_4</md-option>
+            <md-option value="^option_5">^option_5</md-option>
+            <md-option value="^option_6">^option_6</md-option>
           </md-select>
         </md-input-container>
         <div class="required" 
@@ -75,27 +74,27 @@
           ng-show="questionForm.$submitted"
           multiple md-auto-hide="false">
             <div ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">
-              必須項目です。選択して下さい
+              ^option_required
             </div>
         </div>
       </div>
 
       <div id="hive_place" ng-class="{formerror: question.hive_place == null && questionForm.$submitted}">
-        <h3 class="md-headline" flex>巣箱の設置場所は何箇所の予定ですか？
+        <h3 class="md-headline" flex>^hive_place
           <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
           <br>
-          <small class="md-subhead">自宅の庭先に２つ設置する場合など、ごく近い場所に設置する場合は、１箇所と数えてください。
+          <small class="md-subhead">^hive_place_subhead
           </small>
         </h3>
         <md-input-container flex="80" class="md-block">
-          <label>設置場所の数</label>
+          <label>^label_hive_place</label>
           <md-select name="hive_place" ng-model="question.hive_place" required>
-            <md-option value="１">１</md-option>
-            <md-option value="２から３">２から３</md-option>
-            <md-option value="４から５">４から５</md-option>
-            <md-option value="６から１０">６から１０</md-option>
-            <md-option value="１１以上">１１以上</md-option>
-            <md-option value="未定">未定</md-option>
+            <md-option value="^option_1">^option_1</md-option>
+            <md-option value="^option_2">^option_2</md-option>
+            <md-option value="^option_3">^option_3</md-option>
+            <md-option value="^option_4">^option_4</md-option>
+            <md-option value="^option_5">^option_5</md-option>
+            <md-option value="^option_6">^option_6</md-option>
           </md-select>
         </md-input-container>
         <div class="required" 
@@ -103,13 +102,13 @@
           ng-show="questionForm.$submitted"
           multiple md-auto-hide="false">
             <div ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">
-              必須項目です。選択して下さい
+              ^option_required
             </div>
         </div>
       </div>
 
       <div id="beeswax" ng-class="{formerror: question.beeswax == null && questionForm.$submitted}">
-        <h3 class="md-headline" flex>巣箱には蜜蝋を塗りますか？
+        <h3 class="md-headline" flex>^beeswax
           <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
         </h3>
         <md-radio-group required layout="row" name="beeswax" ng-model="question.beeswax">
@@ -127,19 +126,19 @@
       </div>
 
       <div id="use_lure" ng-class="{formerror: question.use_lure == null && questionForm.$submitted}">
-        <h3 class="md-headline" flex>待ち箱ルアーは使いますか？
+        <h3 class="md-headline" flex>^use_lure
           <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
         </h3>
         <md-input-container flex="80" class="md-block">
-          <label>待ち箱ルアーの数</label>
+          <label>^label_use_lure</label>
           <md-select name="use_lure" ng-model="question.use_lure" required>
-            <md-option value="使わない">使わない</md-option>
-            <md-option value="１">１</md-option>
-            <md-option value="２から３">２から３</md-option>
-            <md-option value="４から５">４から５</md-option>
-            <md-option value="６から１０">６から１０</md-option>
-            <md-option value="１１以上">１１以上</md-option>
-            <md-option value="未定">未定</md-option>
+            <md-option value="^option_0">^option_0</md-option>
+            <md-option value="^option_1">^option_1</md-option>
+            <md-option value="^option_2">^option_2</md-option>
+            <md-option value="^option_3">^option_3</md-option>
+            <md-option value="^option_4">^option_4</md-option>
+            <md-option value="^option_5">^option_5</md-option>
+            <md-option value="^option_6">^option_6</md-option>
           </md-select>
         </md-input-container>
         <div class="required" 
@@ -147,25 +146,25 @@
           ng-show="questionForm.$submitted"
           multiple md-auto-hide="false">
             <div ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">
-              必須項目です。選択して下さい
+              ^option_required
             </div>
         </div>
       </div>
 
       <div id="kinryohen" ng-class="{formerror: question.kinryohen == null && questionForm.$submitted}">
-        <h3 class="md-headline" flex>キンリョウヘンは使いますか？
+        <h3 class="md-headline" flex>^kinryohen
           <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
         </h3>
         <md-input-container flex="80" class="md-block">
-          <label>キンリョウヘンの数</label>
+          <label>^label_kinryohen</label>
           <md-select name="kinryohen" ng-model="question.kinryohen" required>
-            <md-option value="使わない">使わない</md-option>
-            <md-option value="１">１</md-option>
-            <md-option value="２から３">２から３</md-option>
-            <md-option value="４から５">４から５</md-option>
-            <md-option value="６から１０">６から１０</md-option>
-            <md-option value="１１以上">１１以上</md-option>
-            <md-option value="未定">未定</md-option>
+            <md-option value="^option_0">^option_0</md-option>
+            <md-option value="^option_1">^option_1</md-option>
+            <md-option value="^option_2">^option_2</md-option>
+            <md-option value="^option_3">^option_3</md-option>
+            <md-option value="^option_4">^option_4</md-option>
+            <md-option value="^option_5">^option_5</md-option>
+            <md-option value="^option_6">^option_6</md-option>
           </md-select>
         </md-input-container>
         <div class="required" 
@@ -173,17 +172,17 @@
           ng-show="questionForm.$submitted"
           multiple md-auto-hide="false">
             <div ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">
-              必須項目です。選択して下さい
+              ^option_required
             </div>
         </div>
       </div>
 
       <div id="comment" md-no-float
-        ng-class="{formerror: (questionForm.comment.$error.required || questionForm.comment.$error.minlength || questionForm.place.$error['md-malength']) && questionForm.$submitted}">
-        <h3 class="md-headline" flex>補足のコメント
+        ng-class="{formerror: (questionForm.comment.$error.required || questionForm.comment.$error.minlength || questionForm.comment.$error['md-maxlength']) && questionForm.$submitted}">
+        <h3 class="md-headline" flex>^comment
           <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
           <br>
-          <small class="md-subhead">補足のコメントや、捕獲で困っていることがあれば記入して下さい。</small>
+          <small class="md-subhead">^comment_subhead</small>
         </h3>
 
         <md-input-container class="md-block">
@@ -196,9 +195,9 @@
             placeholder="^comment_required" rows="5">
           </textarea>
           <div ng-messages="questionForm.comment.$error" ng-show="questionForm.$submitted">
-            <span ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^required</span>
-            <span ng-message="minlength" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^minlength</span>
-            <span ng-message="md-maxlength" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^maxlength</span>
+            <span ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^error_required</span>
+            <span ng-message="minlength" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^error_minlength</span>
+            <span ng-message="md-maxlength" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^error_maxlength</span>
           </div>
         </md-input-container>
       </div>
@@ -206,9 +205,9 @@
       <div id="images">
         <div layout-gt-xs="row" layout-align="start">
           <h3 class="md-headline" flex-gt-xs="60" style="margin-top:0">
-            参考画像 ^optional
+            ^image ^optional
           <br>
-          <small class="md-subhead">何か参考の画像があれば追加してください。</small>
+          <small class="md-subhead">^image_subhead</small>
           </h3>
         </div>
         <div class="layout-padding wrap-border photo-upload" layout="row" layout-wrap layout-align="center center">

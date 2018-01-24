@@ -47,12 +47,11 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
                 var content = getContent($scope.question);
 
                 var params = {};
-                var place = $scope.question.place.replace(/\r?\n/g,"");
                 var comment = $scope.question.comment;
                 if (comment) {
                     comment = comment.replace(/\r?\n/g,"");
                 }
-                var title = easyask.lang.q1_title+place+' '+comment;
+                var title = easyask.lang.handle+easyask.lang.title+' '+comment;
                 params.title = title.substr(0, 50);
                 params.content = content;
                 params.category_id = 38;
