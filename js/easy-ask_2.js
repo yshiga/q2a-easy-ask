@@ -31,7 +31,6 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
         if ($scope.questionForm.$valid) {
 
             console.log($scope.question);
-            return;
 
             var confirm = $mdDialog.confirm()
             .parent(angular.element(document.body))
@@ -46,16 +45,19 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
                 $scope.warnOnLeave = false;
                 var content = getContent($scope.question);
 
+                console.log(content);
                 var params = {};
                 var comment = $scope.question.comment;
                 if (comment) {
                     comment = comment.replace(/\r?\n/g,"");
                 }
-                var title = easyask.lang.handle+easyask.lang.title+' '+comment;
+                var title = easyask.lang.title+' '+comment;
                 params.title = title.substr(0, 50);
                 params.content = content;
                 params.category_id = 38;
                 params.code = easyask.code;
+                console.log(params);
+                return;
                 $http({
                     method: 'POST',
                     url: '/easy-ask-post-question',
@@ -151,6 +153,20 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
     var getContent = function(question) {
 
         var content = '';
+        content += '<p>'+easyask.lang.content_head+'</p>'
+        content += '<p>'+easyask.lang.experience+': '+question.experience+'</p>';
+        content += '<p>'+easyask.lang.hive_type+': '+question.hive_type+'</p>';
+        content += '<p>'+easyask.lang.hive_num+': '+question.hive_num+'</p>';
+        content += '<p>'+easyask.lang.hive_place+': '+question.hive_place+'</p>';
+        content += '<p>'+easyask.lang.beeswax+': '+question.beeswax+'</p>';
+        content += '<p>'+easyask.lang.use_lure+': '+question.use_lure+'</p>';
+        content += '<p>'+easyask.lang.kinryohen+': '+question.kinryohen+'</p>';
+        if (question.comment) {
+            content += '<p style="word-wrap: break-word">';
+            content += easyask.lang.comment+':<br>';
+            content += question.comment;
+            content += '</p>';
+        }
         if (question.image[0]) {
             content += '<div class="medium-insert-images">';
             content += '<div class="image-url">[image="'+question.image[0]+'"]</div>';
@@ -165,20 +181,6 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
             content += '<div class="medium-insert-images">';
             content += '  <div class="image-url">[image="'+question.image[2]+'"]</div>';
             content += '</div>';
-        }
-        content += '<p style="word-wrap: break-word">'+easyask.lang.q1_place+': <br>';
-        content += question.place;
-        content += '</p>';
-        content += '<p>'+easyask.lang.q1_owned+': '+question.owned+'</p>';
-        content += '<p>'+easyask.lang.q1_wind+': '+question.strong_wind+'</p>';
-        content += '<p>'+easyask.lang.q1_sunlight+': '+question.direct_sunlight+'</p>';
-        content += '<p>'+easyask.lang.q1_pesticide+': '+question.pesticide+'</p>';
-        content += '<p>'+easyask.lang.q1_others+': '+question.other_people+'</p>';
-        if (question.comment) {
-            content += '<p>';
-            content += easyask.lang.comment+':<br>';
-            content += question.comment;
-            content += '</p>';
         }
         content += '<p></p><p>'+easyask.lang.question_footer+'</p>';
         return content;

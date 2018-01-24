@@ -196,6 +196,8 @@ EOS2;
             'label_close'      => qa_lang('qea_lang/label_close'),
             'error_title'      => qa_lang('qea_lang/error_title'),
             'error_msg'        => qa_lang('qea_lang/error_msg'),
+            'comment'          => qa_lang('qea_lang/comment'),
+            'question_footer'  => qa_lang_sub('qea_lang/question_footer', $url),
         );
         $form_lang = array();
         
@@ -209,11 +211,28 @@ EOS2;
                     'q1_sunlight'      => qa_lang('qea_lang/q1_sunlight'),
                     'q1_pesticide'     => qa_lang('qea_lang/q1_pesticide'),
                     'q1_others'        => qa_lang('qea_lang/q1_others'),
-                    'comment'          => qa_lang('qea_lang/comment'),
-                    'question_footer'  => qa_lang_sub('qea_lang/question_footer', $url),
                 );
                 break;
             case '2':
+                $today = date(qa_lang('qea_lang/q2_format'));
+                $handle = qa_get_logged_in_handle();
+                $param = array(
+                    '^1' => $handle,
+                    '^2' => $today
+                );
+                $title_tmpl = qa_lang('qea_lang/q2_title');
+                $form_lang = array(
+                    'title' => strtr($title_tmpl, $param),
+                    'content_head' => qa_lang_sub('qea_lang/q2_content_head', $handle),
+                    'experience' => qa_lang('qea_lang/q2_experience'),
+                    'hive_type' => qa_lang('qea_lang/q2_hive_type'),
+                    'hive_num' => qa_lang('qea_lang/q2_hive_num'),
+                    'hive_place' => qa_lang('qea_lang/q2_hive_place'),
+                    'beeswax' => qa_lang('qea_lang/q2_beeswax'),
+                    'use_lure' => qa_lang('qea_lang/q2_use_lure'),
+                    'kinryohen' => qa_lang('qea_lang/q2_kinryohen'),
+                );
+                break;
             default:
                 $form_lang = array();
         }
