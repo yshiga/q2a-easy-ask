@@ -53,7 +53,7 @@ return array(
     
     'q2_experience'       => 'これまでに捕獲した経験はありますか？',
     
-    'q2_hive_type'        => 'おもにどの巣箱を捕獲に利用する予定ですか？',
+    'q2_hive_type'        => '主にどの巣箱を捕獲に利用する予定ですか？',
     'q2_hive_type_label'  => '巣箱の種類',
 
     'q2_hive_type_1'      => '重箱式巣箱',

@@ -30,8 +30,6 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
     $scope.postQuestion = function(ev) {
         if ($scope.questionForm.$valid) {
 
-            console.log($scope.question);
-
             var confirm = $mdDialog.confirm()
             .parent(angular.element(document.body))
             .title(easyask.lang.confirm_title)
@@ -45,7 +43,6 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
                 $scope.warnOnLeave = false;
                 var content = getContent($scope.question);
 
-                console.log(content);
                 var params = {};
                 var comment = $scope.question.comment;
                 if (comment) {
@@ -56,8 +53,6 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
                 params.content = content;
                 params.category_id = 38;
                 params.code = easyask.code;
-                console.log(params);
-                return;
                 $http({
                     method: 'POST',
                     url: '/easy-ask-post-question',
@@ -154,13 +149,13 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
 
         var content = '';
         content += '<p>'+easyask.lang.content_head+'</p>'
-        content += '<p>'+easyask.lang.experience+': '+question.experience+'</p>';
-        content += '<p>'+easyask.lang.hive_type+': '+question.hive_type+'</p>';
-        content += '<p>'+easyask.lang.hive_num+': '+question.hive_num+'</p>';
-        content += '<p>'+easyask.lang.hive_place+': '+question.hive_place+'</p>';
-        content += '<p>'+easyask.lang.beeswax+': '+question.beeswax+'</p>';
-        content += '<p>'+easyask.lang.use_lure+': '+question.use_lure+'</p>';
-        content += '<p>'+easyask.lang.kinryohen+': '+question.kinryohen+'</p>';
+        content += '<p> &#8226; '+easyask.lang.experience+': '+question.experience+'</p>';
+        content += '<p> &#8226; '+easyask.lang.hive_type+': '+question.hive_type+'</p>';
+        content += '<p> &#8226; '+easyask.lang.hive_num+': '+question.hive_num+'</p>';
+        content += '<p> &#8226; '+easyask.lang.hive_place+': '+question.hive_place+'</p>';
+        content += '<p> &#8226; '+easyask.lang.beeswax+': '+question.beeswax+'</p>';
+        content += '<p> &#8226; '+easyask.lang.use_lure+': '+question.use_lure+'</p>';
+        content += '<p> &#8226; '+easyask.lang.kinryohen+': '+question.kinryohen+'</p>';
         if (question.comment) {
             content += '<p style="word-wrap: break-word">';
             content += easyask.lang.comment+':<br>';
