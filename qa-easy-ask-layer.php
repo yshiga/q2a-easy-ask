@@ -68,7 +68,7 @@ EOS2;
                 $form_template = QEA_DIR.'/html/form_'.$form_id.'.html';
                 if (file_exists($form_template)) {
                     $tmpl = file_get_contents($form_template);
-                    $params = $this->get_params();
+                    $params = $this->get_params($form_id);
                     $html = strtr($tmpl, $params);
                     $this->output($html);
                 } else {
@@ -80,53 +80,100 @@ EOS2;
         }
     }
 
-    private function get_params()
+    private function get_params($form_id)
     {
         $url = QA_HTML_THEME_LAYER_URLTOROOT;
         $file_max_size_mb = number_format(qa_opt('medium_editor_upload_max_size') / 1048576, 0) . 'MB';
-        return array(
-            '^url'               => $url,
-            '^page_title'        => $this->content['title'],
-            '^form_head'         => qa_lang('qea_lang/q1_form_head'),
-            '^form_subhead'      => qa_lang('qea_lang/q1_form_subhead'),
-            '^form_message'      => qa_lang('qea_lang/q1_form_message'),
-            '^required'          => qa_lang('qea_lang/required'),
-            '^optional'          => qa_lang('qea_lang/optional'),
-            '^image'             => qa_lang('qea_lang/q1_image'),
-            '^image_subhead'     => qa_lang('qea_lang/q1_image_subhead'),
-            '^image_alt'         => qa_lang('qea_lang/q1_image_alt'),
-            '^add_image'         => qa_lang('qea_lang/add_image'),
-            '^delete_image'      => qa_lang('qea_lang/delete_image'),
-            '^image_required'    => qa_lang('qea_lang/q1_image_required'),
-            '^place_subhead'     => qa_lang('qea_lang/q1_place_subhead'),
-            '^place_placeholder' => qa_lang('qea_lang/q1_place_placeholder'),
-            '^place_required'    => qa_lang('qea_lang/q1_place_required'),
-            '^place_minlength'   => qa_lang('qea_lang/q1_place_minlength'),
-            '^place'             => qa_lang('qea_lang/q1_place'),
-            '^owned'             => qa_lang('qea_lang/q1_owned'),
-            '^owned_subhead'     => qa_lang('qea_lang/q1_owned_subhead'),
-            '^wind'              => qa_lang('qea_lang/q1_wind'),
-            '^wind_subhead'      => qa_lang('qea_lang/q1_wind_subhead'),
-            '^sunlight'          => qa_lang('qea_lang/q1_sunlight'),
-            '^sunlight_subhead'  => qa_lang('qea_lang/q1_sunlight_subhead'),
-            '^pesticide'         => qa_lang('qea_lang/q1_pesticide'),
-            '^pesticide_subhead' => qa_lang('qea_lang/q1_pesticide_subhead'),
-            '^others'            => qa_lang('qea_lang/q1_others'),
-            '^others_subhead'    => qa_lang('qea_lang/q1_others_subhead'),
-            '^comment_subhead'   => qa_lang('qea_lang/q1_comment_subhead'),
-            '^comment_required'  => qa_lang('qea_lang/q1_comment_required'),
-            '^comment'           => qa_lang('qea_lang/comment'),
-            '^yes'               => qa_lang('qea_lang/yes'),
-            '^no'                => qa_lang('qea_lang/no'),
-            '^required_select'   => qa_lang('qea_lang/q1_required_select'),
-            '^post_complete'     => qa_lang('qea_lang/post_complete'),
-            '^post_comp_msg'     => qa_lang('qea_lang/post_comp_msg'),
-            '^check_button_label' => qa_lang('qea_lang/check_button_label'),
-            '^post'              => qa_lang('qea_lang/post'),
-            '^file_max_size'      => $file_max_size_mb,
+        $common_params = array(
+            '^url'                 => $url,
+            '^page_title'          => $this->content['title'],
+            '^comment_required'    => qa_lang('qea_lang/comment_required'),
+            '^comment'             => qa_lang('qea_lang/comment'),
+            '^required'            => qa_lang('qea_lang/required'),
+            '^optional'            => qa_lang('qea_lang/optional'),
+            '^yes'                 => qa_lang('qea_lang/yes'),
+            '^no'                  => qa_lang('qea_lang/no'),
+            '^post_complete'       => qa_lang('qea_lang/post_complete'),
+            '^post_comp_msg'       => qa_lang('qea_lang/post_comp_msg'),
+            '^check_button_label'  => qa_lang('qea_lang/check_button_label'),
+            '^post'                => qa_lang('qea_lang/post'),
+            '^add_image'           => qa_lang('qea_lang/add_image'),
+            '^delete_image'        => qa_lang('qea_lang/delete_image'),
+            '^file_max_size'       => $file_max_size_mb,
             '^file_max_size_error' => qa_lang_sub('qea_lang/file_max_size_error', $file_max_size_mb),
-            '^file_type_error'   => qa_lang('qea_lang/file_type_error'),
-        );
+            '^file_type_error'     => qa_lang('qea_lang/file_type_error'),
+            '^required_select'     => qa_lang('qea_lang/q1_required_select'),
+            '^error_required'      => qa_lang('qea_lang/required_msg'),
+            '^error_minlength'     => qa_lang_sub('qea_lang/minlength_msg', 50),
+            '^error_maxlength'     => qa_lang_sub('qea_lang/maxlength_msg', 600),
+            '^option_required'     => qa_lang('qea_lang/option_required'),
+    );
+        switch ($form_id) {
+            case '1':
+                $form_params = array(
+                    '^form_head'         => qa_lang('qea_lang/q1_form_head'),
+                    '^form_subhead'      => qa_lang('qea_lang/q1_form_subhead'),
+                    '^form_message'      => qa_lang('qea_lang/q1_form_message'),
+                    '^image'             => qa_lang('qea_lang/q1_image'),
+                    '^image_subhead'     => qa_lang('qea_lang/q1_image_subhead'),
+                    '^image_alt'         => qa_lang('qea_lang/q1_image_alt'),
+                    '^image_required'    => qa_lang('qea_lang/q1_image_required'),
+                    '^place_subhead'     => qa_lang('qea_lang/q1_place_subhead'),
+                    '^place_placeholder' => qa_lang('qea_lang/q1_place_placeholder'),
+                    '^place'             => qa_lang('qea_lang/q1_place'),
+                    '^owned'             => qa_lang('qea_lang/q1_owned'),
+                    '^owned_subhead'     => qa_lang('qea_lang/q1_owned_subhead'),
+                    '^wind'              => qa_lang('qea_lang/q1_wind'),
+                    '^wind_subhead'      => qa_lang('qea_lang/q1_wind_subhead'),
+                    '^sunlight'          => qa_lang('qea_lang/q1_sunlight'),
+                    '^sunlight_subhead'  => qa_lang('qea_lang/q1_sunlight_subhead'),
+                    '^pesticide'         => qa_lang('qea_lang/q1_pesticide'),
+                    '^pesticide_subhead' => qa_lang('qea_lang/q1_pesticide_subhead'),
+                    '^others'            => qa_lang('qea_lang/q1_others'),
+                    '^others_subhead'    => qa_lang('qea_lang/q1_others_subhead'),
+                    '^comment_subhead'   => qa_lang('qea_lang/q1_comment_subhead'),
+                );
+                break;
+            case 2:
+                $form_params = array(
+                    '^head'              => qa_lang('qea_lang/q2_form_head'),
+                    '^message'           => qa_lang('qea_lang/q2_form_message'),
+                    '^experience'        => qa_lang('qea_lang/q2_experience'),
+                    '^hive_type'         => qa_lang('qea_lang/q2_hive_type'),
+                    '^label_hive_type'   => qa_lang('qea_lang/q2_hive_type_label'),
+                    '^hive_num'          => qa_lang('qea_lang/q2_hive_num'),
+                    '^label_hive_num'    => qa_lang('qea_lang/q2_hive_num_label'),
+                    '^hive_place_subhead' => qa_lang('qea_lang/q2_hive_place_subhead'),
+                    '^hive_place'        => qa_lang('qea_lang/q2_hive_place'),
+                    '^label_hive_place'  => qa_lang('qea_lang/q2_hive_place_label'),
+                    '^beeswax'           => qa_lang('qea_lang/q2_beeswax'),
+                    '^use_lure'          => qa_lang('qea_lang/q2_use_lure'),
+                    '^label_use_lure'    => qa_lang('qea_lang/q2_use_lure_label'),
+                    '^kinryohen'         => qa_lang('qea_lang/q2_kinryohen'),
+                    '^label_kinryohen'   => qa_lang('qea_lang/q2_kinryohen_label'),
+                    '^comment_subhead'   => qa_lang('qea_lang/q2_comment_subhead'),
+                    '^image_subhead'     => qa_lang('qea_lang/q2_image_subhead'),
+                    '^image'             => qa_lang('qea_lang/q2_image'),
+                    '^hive_type_1'       => qa_lang('qea_lang/q2_hive_type_1'),
+                    '^hive_type_2'       => qa_lang('qea_lang/q2_hive_type_2'),
+                    '^hive_type_3'       => qa_lang('qea_lang/q2_hive_type_3'),
+                    '^hive_type_4'       => qa_lang('qea_lang/q2_hive_type_4'),
+                    '^hive_type_5'       => qa_lang('qea_lang/q2_hive_type_5'),
+                    '^option_0'          => qa_lang('qea_lang/q2_option_0'),
+                    '^option_1'          => qa_lang('qea_lang/q2_option_1'),
+                    '^option_2'          => qa_lang('qea_lang/q2_option_2'),
+                    '^option_3'          => qa_lang('qea_lang/q2_option_3'),
+                    '^option_4'          => qa_lang('qea_lang/q2_option_4'),
+                    '^option_5'          => qa_lang('qea_lang/q2_option_5'),
+                    '^option_6'          => qa_lang('qea_lang/q2_option_6'),
+                );
+                break;
+            default:
+                $form_params = array();
+        }
+        $params = array_merge($common_params, $form_params);
+
+        return $params;
     }
 
     private function no_login_message()
@@ -140,24 +187,58 @@ EOS2;
     private function get_js_lang($form_id)
     {
         $url = '/easy-ask/' . $form_id;
-        return array(
+
+        $common_lang = array(
             'confirm_title'    => qa_lang('qea_lang/confirm_title'),
             'confirm_content'  => qa_lang('qea_lang/confirm_content'),
-            'q1_title'         => qa_lang('qea_lang/q1_title'),
-            'q1_place'         => qa_lang('qea_lang/q1_place'),
-            'q1_owned'         => qa_lang('qea_lang/q1_owned'),
-            'q1_wind'          => qa_lang('qea_lang/q1_wind'),
-            'q1_sunlight'      => qa_lang('qea_lang/q1_sunlight'),
-            'q1_pesticide'     => qa_lang('qea_lang/q1_pesticide'),
-            'q1_others'        => qa_lang('qea_lang/q1_others'),
-            'comment'          => qa_lang('qea_lang/comment'),
-            'question_footer'  => qa_lang_sub('qea_lang/question_footer', $url),
             'label_post'       => qa_lang('qea_lang/label_post'),
             'label_cancel'     => qa_lang('qea_lang/label_cancel'),
             'label_close'      => qa_lang('qea_lang/label_close'),
             'error_title'      => qa_lang('qea_lang/error_title'),
             'error_msg'        => qa_lang('qea_lang/error_msg'),
+            'comment'          => qa_lang('qea_lang/comment'),
+            'question_footer'  => qa_lang_sub('qea_lang/question_footer', $url),
         );
+        $form_lang = array();
+        
+        switch ($form_id) {
+            case '1':
+                $form_lang = array(
+                    'q1_title'         => qa_lang('qea_lang/q1_title'),
+                    'q1_place'         => qa_lang('qea_lang/q1_place'),
+                    'q1_owned'         => qa_lang('qea_lang/q1_owned'),
+                    'q1_wind'          => qa_lang('qea_lang/q1_wind'),
+                    'q1_sunlight'      => qa_lang('qea_lang/q1_sunlight'),
+                    'q1_pesticide'     => qa_lang('qea_lang/q1_pesticide'),
+                    'q1_others'        => qa_lang('qea_lang/q1_others'),
+                );
+                break;
+            case '2':
+                $today = date(qa_lang('qea_lang/q2_format'));
+                $handle = qa_get_logged_in_handle();
+                $param = array(
+                    '^1' => $handle,
+                    '^2' => $today
+                );
+                $title_tmpl = qa_lang('qea_lang/q2_title');
+                $form_lang = array(
+                    'title' => strtr($title_tmpl, $param),
+                    'content_head' => qa_lang_sub('qea_lang/q2_content_head', $handle),
+                    'experience' => qa_lang('qea_lang/q2_experience'),
+                    'hive_type' => qa_lang('qea_lang/q2_hive_type'),
+                    'hive_num' => qa_lang('qea_lang/q2_hive_num'),
+                    'hive_place' => qa_lang('qea_lang/q2_hive_place'),
+                    'beeswax' => qa_lang('qea_lang/q2_beeswax'),
+                    'use_lure' => qa_lang('qea_lang/q2_use_lure'),
+                    'kinryohen' => qa_lang('qea_lang/q2_kinryohen'),
+                );
+                break;
+            default:
+                $form_lang = array();
+        }
+
+        $jslang = array_merge($common_lang, $form_lang);
+        return $jslang;
     }
 
     private function output_prev_question($question)

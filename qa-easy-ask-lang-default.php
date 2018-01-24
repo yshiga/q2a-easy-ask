@@ -28,8 +28,6 @@ return array(
     'q1_place'            => '場所の概要',
     'q1_place_subhead'    => 'どのような場所ですか？',
     'q1_place_placeholder' => '林に囲まれた空き地です。',
-    'q1_place_required'   => '必須項目です。',
-    'q1_place_minlength'  => '50字以上入力して下さい。',
     
     'q1_owned'            => '自分の土地ですか？',
     'q1_owned_subhead'    => '人の土地でも設置許可がある場合は、「はい」と答えてください',
@@ -48,10 +46,58 @@ return array(
     'q1_others_subhead'   => '他の人が近づくことがあるような場所なら、「はい」と答えてください。',
 
     'q1_comment_subhead'  => 'その他、場所や設置方法など、補足情報を記載してください。',
-    'q1_comment_required' => '補足コメントを入力してください',
+
+    // 質問フォーム２
+    'q2_form_head'        => 'ニホンミツバチ捕獲診断',
+    'q2_form_message'     => 'ニホンミツバチの捕獲の準備についてアドバイスをもらいましょう',
+    
+    'q2_experience'       => 'これまでに捕獲した経験はありますか？',
+    
+    'q2_hive_type'        => '主にどの巣箱を捕獲に利用する予定ですか？',
+    'q2_hive_type_label'  => '巣箱の種類',
+
+    'q2_hive_type_1'      => '重箱式巣箱',
+    'q2_hive_type_2'      => 'ハイブリッド巣箱',
+    'q2_hive_type_3'      => '巣枠式巣箱',
+    'q2_hive_type_4'      => '丸洞式巣箱',
+    'q2_hive_type_5'      => '角洞式巣箱',
+    'q2_hive_type_6'      => 'その他・未定',
+
+    'q2_hive_num'         => '巣箱は何個設置する予定ですか？',
+    'q2_hive_num_label'   => '巣箱の数',
+
+    'q2_hive_place'       => '巣箱の設置場所は何箇所の予定ですか？',
+    'q2_hive_place_subhead' => '自宅の庭先に２つ設置する場合など、ごく近い場所に設置する場合は、１箇所と数えてください。',
+    'q2_hive_place_label' => '設置場所の数',
+
+    'q2_beeswax'          => '巣箱には蜜蝋を塗りますか？',
+
+    'q2_use_lure'         => '待ち箱ルアーは使いますか？',
+    'q2_use_lure_label'   => '待ち箱ルアーの数',
+
+    'q2_kinryohen'        => 'キンリョウヘンは使いますか？',
+    'q2_kinryohen_label'  => 'キンリョウヘンの数',
+
+    'q2_comment_subhead'  => '補足のコメントや、捕獲で困っていることがあれば記入して下さい。',
+
+    'q2_image'            => '参考画像',
+    'q2_image_subhead'    => '何か参考の画像があれば追加して下さい。',
+
+    'q2_title'            => '^1さんのニホンミツバチ捕獲診断 ^2',
+    'q2_content_head'     => '^さんは次のように準備を進めておられます。捕獲の準備についてアドバイスを回答で教えてあげましょう。',
+    'q2_format'           => 'n月d日',
+
+    'q2_option_0'         => '使わない',
+    'q2_option_1'         => '1',
+    'q2_option_2'         => '2から3',
+    'q2_option_3'         => '4から5',
+    'q2_option_4'         => '6から10',
+    'q2_option_5'         => '11以上',
+    'q2_option_6'         => '未定',
 
     // 共通
     'comment'             => '補足コメント',
+    'comment_required'    => '補足コメントを入力してください',
     'question_footer'     => 'この質問は、<a href="^" target="_blank"> 簡単質問フォーム</a> で投稿されました。',
     'required'            => '(必須)',
     'optional'            => '(任意)',
@@ -65,4 +111,8 @@ return array(
     'check_button_label'  => '投稿した質問を確認',
     'file_max_size_error' => 'ファイルサイズが大きすぎます、^ 以下にして下さい。',
     'file_type_error'     => 'サポートしていないフォーマットです',
+    'required_msg'        => '必須項目です。',
+    'minlength_msg'       => '^字以上入力して下さい。',
+    'maxlength_msg'       => '^字以内で入力して下さい。',
+    'option_required'     => '必須項目です。選択して下さい。',
 );

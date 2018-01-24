@@ -108,9 +108,9 @@
          md-maxlength="600"
          placeholder="^place_placeholder" rows="5" ></textarea>
          <div ng-messages="questionForm.place.$error" ng-show="questionForm.$submitted">
-           <span ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^place_required</span>
-           <span ng-message="minlength" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^place_minlength</span>
-           <span ng-message="md-maxlength" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">600字以内です。</span>
+           <span ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^error_required</span>
+           <span ng-message="minlength" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^error_minlength</span>
+           <span ng-message="md-maxlength" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^error_maxlength</span>
          </div>
       </md-input-container>
       <div id="owned" ng-class="{formerror: question.owned == null && questionForm.$submitted}">
