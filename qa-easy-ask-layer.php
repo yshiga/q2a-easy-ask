@@ -28,7 +28,7 @@ EOS;
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
-
+    <script src="https://code.angularjs.org/1.5.5/i18n/angular-locale_ja-jp.js"></script>
     <!-- Angular Material Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.5/angular-material.min.js"></script>
 
@@ -166,6 +166,17 @@ EOS2;
                     '^option_4'          => qa_lang('qea_lang/q2_option_4'),
                     '^option_5'          => qa_lang('qea_lang/q2_option_5'),
                     '^option_6'          => qa_lang('qea_lang/q2_option_6'),
+                );
+                break;
+            case 3:
+                $form_params = array(
+                    '^head'              => qa_lang('qea_lang/q3_form_head'),
+                    '^message'           => qa_lang('qea_lang/q3_form_message'),
+                    '^inspect_date'      => qa_lang('qea_lang/q3_inspect_date'),
+                    '^inspect_time'      => qa_lang('qea_lang/q3_inspect_time'),
+                    '^label_inspect_time' => qa_lang('qea_lang/q3_label_inspect_time'),
+                    '^temp_weather'      => qa_lang('qea_lang/q3_temp_weather'),
+                    '^sub_comment'   => qa_lang('qea_lang/q3_comment_subhead'),
                 );
                 break;
             default:
