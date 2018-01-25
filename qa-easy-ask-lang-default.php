@@ -114,6 +114,18 @@ return array(
 
     'q3_pollen'           => '働き蜂は花粉を持って入ってきていましたか？',
 
+    'q3_hive_size'        => '重箱１段の内側の大きさ(内寸)を教えてください。',
+    'q3_label_hive_size'  => '内寸を記入',
+    'q3_ph_hive_size'     => '例)22cm x 22cm x 15cm',
+
+    'q3_growing'          => '巣はどこまで伸びていますか？',
+    'q3_label_growing'    => 'どこまで伸びているか記入',
+    'q3_ph_growing'       => '例)3段目の途中',
+
+    'q3_scrap'            => '巣箱の底板の上に巣屑が溜まっていますか？',
+    'q3_sumushi'          => '巣箱の底にスムシはいましたか？',
+    'q3_discard'          => '幼児捨てはありましたか？',
+
     // 共通
     'comment'             => '補足コメント',
     'comment_required'    => '補足コメントを入力してください',

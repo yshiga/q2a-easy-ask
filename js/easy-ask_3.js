@@ -92,9 +92,35 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
                 $scope.scrollToAnchor('inspect_time');
                 return;
             }
+            if ($scope.questionForm.temp_weather.$error.required) {
+                $scope.scrollToAnchor('temp_weather');
+                return;
+            }
+            if ($scope.questionForm.when_breed.$error.required
+             || $scope.questionForm.when_breed.$error.minlength
+             || $scope.questionForm.when_breed.$error['md-maxlength']) {
+                $scope.scrollToAnchor('when_breed');
+                return;
+            }
+            if ($scope.questionForm.enter_exit.$error.required) {
+                $scope.scrollToAnchor('enter_exit');
+                return;
+            }
+            if ($scope.questionForm.pollen.$error.required) {
+                $scope.scrollToAnchor('pollen');
+                return;
+            }
+            if ($scope.questionForm.hive_size.$error.required) {
+                $scope.scrollToAnchor('hive_size');
+                return;
+            }
+            if ($scope.questionForm.growing.$error.required) {
+                $scope.scrollToAnchor('growing');
+                return;
+            }
             if ($scope.questionForm.comment.$error.required
              || $scope.questionForm.comment.$error.minlength
-             || $scope.questionForm.comment['md-maxlength']) {
+             || $scope.questionForm.comment.$error['md-maxlength']) {
                 $scope.scrollToAnchor('comment');
                 return;
             }

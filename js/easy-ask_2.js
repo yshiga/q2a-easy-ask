@@ -104,7 +104,7 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
             }
             if ($scope.questionForm.comment.$error.required
              || $scope.questionForm.comment.$error.minlength
-             || $scope.questionForm.comment['md-maxlength']) {
+             || $scope.questionForm.comment.$error['md-maxlength']) {
                 $scope.scrollToAnchor('comment');
                 return;
             }
