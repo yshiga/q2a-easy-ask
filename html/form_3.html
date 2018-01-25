@@ -21,8 +21,11 @@
           ^inspect_date
           <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
         </h3>
+        <md-input-container>
+        <label>内検日</label>
         <md-datepicker ng-model="question.inspect_date" 
         required></md-datepicker>
+        </md-input-container>
       </div>
 
       <div id="inspect_time" md-no-float
@@ -53,6 +56,78 @@
             <span ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^error_required</span>
           </div>
         </md-input-container>
+      </div>
+
+      <div id="when_breed" md-no-float
+        ng-class="{formerror: (questionForm.when_breed.$error.required || questionForm.when_breed.$error.minlength || questionForm.when_breed.$error['md-maxlength']) && questionForm.$submitted}">
+        <h3 class="md-headline" flex>^when_breed
+          <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
+        </h3>
+
+        <md-input-container class="md-block">
+          <label>
+            ^label_when_breed
+          </label>
+          <textarea class="wrap-border" name="when_breed"
+            ng-class="{error: questionForm.when_breed.$error}"
+            ng-model="question.when_breed"
+            required
+            minlength="50"
+            md-maxlength="600"
+            placeholder="^ph_when_breed" rows="5">
+          </textarea>
+          <div ng-messages="questionForm.when_breed.$error" ng-show="questionForm.$submitted">
+            <span ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^error_required</span>
+            <span ng-message="minlength" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^error_minlength</span>
+            <span ng-message="md-maxlength" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^error_maxlength</span>
+          </div>
+        </md-input-container>
+      </div>
+
+      <div id="enter_exit" ng-class="{formerror: questionForm.enter_exit.$error && questionForm.$submitted}">
+        <h3 class="md-headline" flex>^enter_exit
+          <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
+        </h3>
+        <md-input-container flex="80" class="md-block">
+          <label>^label_select</label>
+          <md-select name="enter_exit" ng-model="question.enter_exit" required>
+            <md-option value="^yes">^yes</md-option>
+            <md-option value="^no">^no</md-option>
+            <md-option value="^unkown">^unknown</md-option>
+            <md-option value="^other">^other</md-option>
+          </md-select>
+        </md-input-container>
+        <div class="required"
+        ng-messages="questionForm.enter_exit.$error"
+        ng-show="questionForm.$submitted" multiple
+        md-auto-hide="false">
+          <div ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">
+            ^option_required
+          </div>
+        </div>
+      </div>
+
+      <div id="pollen" ng-class="{formerror: questionForm.pollen.$error && questionForm.$submitted}">
+        <h3 class="md-headline" flex>^pollen
+          <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
+        </h3>
+        <md-input-container flex="80" class="md-block">
+          <label>^label_select</label>
+          <md-select name="pollen" ng-model="question.pollen" required>
+            <md-option value="^yes">^yes</md-option>
+            <md-option value="^no">^no</md-option>
+            <md-option value="^unkown">^unknown</md-option>
+            <md-option value="^other">^other</md-option>
+          </md-select>
+        </md-input-container>
+        <div class="required"
+        ng-messages="questionForm.pollen.$error"
+        ng-show="questionForm.$submitted" multiple
+        md-auto-hide="false">
+          <div ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">
+            ^option_required
+          </div>
+        </div>
       </div>
 
       <div id="comment" md-no-float

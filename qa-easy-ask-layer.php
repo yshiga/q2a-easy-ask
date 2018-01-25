@@ -176,7 +176,16 @@ EOS2;
                     '^inspect_time'      => qa_lang('qea_lang/q3_inspect_time'),
                     '^label_inspect_time' => qa_lang('qea_lang/q3_label_inspect_time'),
                     '^temp_weather'      => qa_lang('qea_lang/q3_temp_weather'),
-                    '^sub_comment'   => qa_lang('qea_lang/q3_comment_subhead'),
+                    '^label_temp_weather' => qa_lang('qea_lang/q3_label_temp_weather'),
+                    '^when_breed' => qa_lang('qea_lang/q3_when_breed'),
+                    '^label_when_breed' => qa_lang('qea_lang/q3_label_when_breed'),
+                    '^ph_when_breed' => qa_lang('qea_lang/q3_ph_when_breed'),
+                    '^enter_exit'       => qa_lang('qea_lang/q3_enter_exit'),
+                    '^pollen'       => qa_lang('qea_lang/q3_pollen'),
+                    '^label_select'       => qa_lang('qea_lang/label_select'),
+                    '^sub_comment'       => qa_lang('qea_lang/q3_comment_subhead'),
+                    '^unknown'       => qa_lang('qea_lang/unknown'),
+                    '^other'       => qa_lang('qea_lang/other'),
                 );
                 break;
             default:

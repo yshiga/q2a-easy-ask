@@ -101,10 +101,18 @@ return array(
     'q3_inspect_date'     => '何日に内検しましたか？',
 
     'q3_inspect_time'     => '何時頃に内検しましたか？',
-    'q3_label_inspect_time' => '内検時刻を入力',
+    'q3_label_inspect_time' => '内検時刻を記入',
 
     'q3_temp_weather'     => '内検時の天気と気温はどうでしたか？',
+    'q3_label_temp_weather' => '天気と気温を記入',
 
+    'q3_when_breed'       => 'この群れはいつから飼育していますか？',
+    'q3_label_when_breed' => 'いつから飼育しているか記入',
+    'q3_ph_when_breed'    => '例1)今年の4月に捕獲した群れです。 例2)昨年の9月から飼育しています。数が減っていましたがなんとか越冬しました。',
+
+    'q3_enter_exit'       => '働き蜂は活発に出入りしていましたか？',
+
+    'q3_pollen'           => '働き蜂は花粉を持って入ってきていましたか？',
 
     // 共通
     'comment'             => '補足コメント',
@@ -116,6 +124,8 @@ return array(
     'delete_image'        => '画像を削除',
     'yes'                 => 'はい',
     'no'                  => 'いいえ',
+    'unknown'             => '分からない',
+    'other'               => 'その他',
     'post'                => '投稿',
     'post_complete'       => '投稿が完了しました',
     'post_comp_msg'       => '投稿が完了しました。簡単質問フォームで投稿した質問は、通常の質問と同じように編集できます。回答が投稿されると、メールで通知が届きます。回答が投稿されるのを今しばらくお待ち下さい。',
@@ -126,4 +136,5 @@ return array(
     'minlength_msg'       => '^字以上入力して下さい。',
     'maxlength_msg'       => '^字以内で入力して下さい。',
     'option_required'     => '必須項目です。選択して下さい。',
+    'label_select'        => '選択して下さい。',
 );
