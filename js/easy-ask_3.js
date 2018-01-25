@@ -14,6 +14,7 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
 
 .controller('AppCtrl', function($scope, Upload, $timeout, $http, $mdDialog, $anchorScroll) {
     $scope.question = {
+        'inner_image': null,
         'image': [],
         'inspect_date': new Date()
     };
@@ -118,6 +119,38 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
                 $scope.scrollToAnchor('growing');
                 return;
             }
+            if ($scope.questionForm.scrap.$error.required) {
+                $scope.scrollToAnchor('scrap');
+                return;
+            }
+            if ($scope.questionForm.sumushi.$error.required) {
+                $scope.scrollToAnchor('sumushi');
+                return;
+            }
+            if ($scope.questionForm.discard.$error.required) {
+                $scope.scrollToAnchor('discard');
+                return;
+            }
+            if ($scope.questionForm.drone.$error.required) {
+                $scope.scrollToAnchor('drone');
+                return;
+            }
+            if ($scope.questionForm.overflow.$error.required) {
+                $scope.scrollToAnchor('overflow');
+                return;
+            }
+            if ($scope.questionForm.wander.$error.required) {
+                $scope.scrollToAnchor('wander');
+                return;
+            }
+            if ($scope.questionForm.menthol.$error.required) {
+                $scope.scrollToAnchor('menthol');
+                return;
+            }
+            if ($scope.questionForm.collect.$error.required) {
+                $scope.scrollToAnchor('collect');
+                return;
+            }
             if ($scope.questionForm.comment.$error.required
              || $scope.questionForm.comment.$error.minlength
              || $scope.questionForm.comment.$error['md-maxlength']) {
@@ -126,6 +159,40 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
             }
         }
     };
+
+    $scope.uploadInnerFile = function(file, errFiles) {
+        $scope.f = file;
+        $scope.errInnerFile = errFiles && errFiles[0];
+        $scope.progressInner = false;
+        $scope.question.inner_image = null;
+        if (file) {
+            file.upload = Upload.upload({
+                url: '/easy-ask-file-upload',
+                data: {file: file}
+            });
+
+            file.upload.then(function (response) {
+                $timeout(function() {
+                    var res = response.data.files[0];
+                    if (res.name == 'error') {
+                        $scope.uploadInnerError = res.error;
+                    } else {
+                        $scope.question.inner_image = res.url;
+                        $scope.warnOnLeave = true;
+                    }
+                    $scope.progressInner = false;
+                });
+            }, function (response) {
+                if (response.status > 0) {
+                    $scope.uploadInnerError = response.status + ': ' + response.data.files[0].error;
+                    $scope.question.inner_image = null;
+                }
+                $scope.progressInner = false;
+            }, function (evt) {
+                $scope.progressInner = true;
+            });
+        }
+    }
 
     $scope.uploadFiles = function(file, idx, errFiles) {
         $scope.f = file;

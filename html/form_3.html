@@ -84,7 +84,7 @@
         </md-input-container>
       </div>
 
-      <div id="enter_exit" ng-class="{formerror: questionForm.enter_exit.$error && questionForm.$submitted}">
+      <div id="enter_exit" ng-class="{formerror: questionForm.enter_exit.$error.required && questionForm.$submitted}">
         <h3 class="md-headline" flex>^enter_exit
           <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
         </h3>
@@ -93,7 +93,7 @@
           <md-select name="enter_exit" ng-model="question.enter_exit" required>
             <md-option value="^yes">^yes</md-option>
             <md-option value="^no">^no</md-option>
-            <md-option value="^unkown">^unknown</md-option>
+            <md-option value="^unknown">^unknown</md-option>
             <md-option value="^other">^other</md-option>
           </md-select>
         </md-input-container>
@@ -107,7 +107,7 @@
         </div>
       </div>
 
-      <div id="pollen" ng-class="{formerror: questionForm.pollen.$error && questionForm.$submitted}">
+      <div id="pollen" ng-class="{formerror: questionForm.pollen.$error.required && questionForm.$submitted}">
         <h3 class="md-headline" flex>^pollen
           <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
         </h3>
@@ -116,7 +116,7 @@
           <md-select name="pollen" ng-model="question.pollen" required>
             <md-option value="^yes">^yes</md-option>
             <md-option value="^no">^no</md-option>
-            <md-option value="^unkown">^unknown</md-option>
+            <md-option value="^unknown">^unknown</md-option>
             <md-option value="^other">^other</md-option>
           </md-select>
         </md-input-container>
@@ -162,7 +162,7 @@
         </md-input-container>
       </div>
 
-      <div id="scrap" ng-class="{formerror: questionForm.scrap.$error && questionForm.$submitted}">
+      <div id="scrap" ng-class="{formerror: questionForm.scrap.$error.required && questionForm.$submitted}">
         <h3 class="md-headline" flex>^scrap
           <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
         </h3>
@@ -171,7 +171,7 @@
           <md-select name="scrap" ng-model="question.scrap" required>
             <md-option value="^yes">^yes</md-option>
             <md-option value="^no">^no</md-option>
-            <md-option value="^unkown">^unknown</md-option>
+            <md-option value="^unknown">^unknown</md-option>
             <md-option value="^other">^other</md-option>
           </md-select>
         </md-input-container>
@@ -185,7 +185,7 @@
         </div>
       </div>
 
-      <div id="sumushi" ng-class="{formerror: questionForm.sumushi.$error && questionForm.$submitted}">
+      <div id="sumushi" ng-class="{formerror: questionForm.sumushi.$error.required && questionForm.$submitted}">
         <h3 class="md-headline" flex>^sumushi
           <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
         </h3>
@@ -194,7 +194,7 @@
           <md-select name="sumushi" ng-model="question.sumushi" required>
             <md-option value="^yes">^yes</md-option>
             <md-option value="^no">^no</md-option>
-            <md-option value="^unkown">^unknown</md-option>
+            <md-option value="^unknown">^unknown</md-option>
             <md-option value="^other">^other</md-option>
           </md-select>
         </md-input-container>
@@ -208,7 +208,7 @@
         </div>
       </div>
 
-      <div id="discard" ng-class="{formerror: questionForm.discard.$error && questionForm.$submitted}">
+      <div id="discard" ng-class="{formerror: questionForm.discard.$error.required && questionForm.$submitted}">
         <h3 class="md-headline" flex>^discard
           <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
         </h3>
@@ -217,7 +217,7 @@
           <md-select name="discard" ng-model="question.discard" required>
             <md-option value="^yes">^yes</md-option>
             <md-option value="^no">^no</md-option>
-            <md-option value="^unkown">^unknown</md-option>
+            <md-option value="^unknown">^unknown</md-option>
             <md-option value="^other">^other</md-option>
           </md-select>
         </md-input-container>
@@ -231,12 +231,115 @@
         </div>
       </div>
 
+      <div id="drone" ng-class="{formerror: questionForm.drone.$error.required && questionForm.$submitted}">
+        <h3 class="md-headline" flex>^drone
+          <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
+        </h3>
+        <md-input-container flex="80" class="md-block">
+          <label>^label_select</label>
+          <md-select name="drone" ng-model="question.drone" required>
+            <md-option value="^yes">^yes</md-option>
+            <md-option value="^no">^no</md-option>
+            <md-option value="^unknown">^unknown</md-option>
+            <md-option value="^other">^other</md-option>
+          </md-select>
+        </md-input-container>
+        <div class="required"
+        ng-messages="questionForm.drone.$error"
+        ng-show="questionForm.$submitted" multiple
+        md-auto-hide="false">
+          <div ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">
+            ^option_required
+          </div>
+        </div>
+      </div>
+
+      <div id="overflow" ng-class="{formerror: questionForm.overflow.$error.required && questionForm.$submitted}">
+        <h3 class="md-headline" flex>^overflow
+          <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
+        </h3>
+        <md-input-container flex="80" class="md-block">
+          <label>^label_select</label>
+          <md-select name="overflow" ng-model="question.overflow" required>
+            <md-option value="^yes">^yes</md-option>
+            <md-option value="^no">^no</md-option>
+            <md-option value="^unknown">^unknown</md-option>
+            <md-option value="^other">^other</md-option>
+          </md-select>
+        </md-input-container>
+        <div class="required"
+        ng-messages="questionForm.overflow.$error"
+        ng-show="questionForm.$submitted" multiple
+        md-auto-hide="false">
+          <div ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">
+            ^option_required
+          </div>
+        </div>
+      </div>
+
+      <div id="wander" ng-class="{formerror: questionForm.wander.$error.required && questionForm.$submitted}">
+        <h3 class="md-headline" flex>^wander
+          <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
+        </h3>
+        <md-input-container flex="80" class="md-block">
+          <label>^label_select</label>
+          <md-select name="wander" ng-model="question.wander" required>
+            <md-option value="^yes">^yes</md-option>
+            <md-option value="^no">^no</md-option>
+            <md-option value="^unknown">^unknown</md-option>
+            <md-option value="^other">^other</md-option>
+          </md-select>
+        </md-input-container>
+        <div class="required"
+        ng-messages="questionForm.wander.$error"
+        ng-show="questionForm.$submitted" multiple
+        md-auto-hide="false">
+          <div ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">
+            ^option_required
+          </div>
+        </div>
+      </div>
+
+      <div id="menthol" ng-class="{formerror: questionForm.menthol.$error.required && questionForm.$submitted}">
+        <h3 class="md-headline" flex>^menthol
+          <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
+        </h3>
+        <md-radio-group required layout="row" name="menthol" ng-model="question.menthol">
+          <md-radio-button value="^yes" ng-class="{error: question.menthol == null && questionForm.$submitted}">^yes</md-radio-button>
+          <md-radio-button value="^no" ng-class="{error: question.menthol == null && questionForm.$submitted}"> ^no </md-radio-button>
+        </md-radio-group>
+        <div class="required" 
+          ng-messages="questionForm.menthol.$error"
+          ng-show="questionForm.$submitted"
+          multiple md-auto-hide="false">
+            <div ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">
+              ^required_select
+            </div>
+        </div>
+      </div>
+
+      <div id="collect" ng-class="{formerror: questionForm.collect.$error.required && questionForm.$submitted}">
+        <h3 class="md-headline" flex>^collect
+          <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
+        </h3>
+        <md-radio-group required layout="row" name="collect" ng-model="question.collect">
+          <md-radio-button value="^yes" ng-class="{error: questionForm.collect.$error.required && questionForm.$submitted}">^yes</md-radio-button>
+          <md-radio-button value="^no" ng-class="{error: question.collect == null && questionForm.$submitted}"> ^no </md-radio-button>
+        </md-radio-group>
+        <div class="required" 
+          ng-messages="questionForm.collect.$error"
+          ng-show="questionForm.$submitted"
+          multiple md-auto-hide="false">
+            <div ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">
+              ^required_select
+            </div>
+        </div>
+      </div>
+
       <div id="comment" md-no-float
         ng-class="{formerror: (questionForm.comment.$error.required || questionForm.comment.$error.minlength || questionForm.comment.$error['md-maxlength']) && questionForm.$submitted}">
         <h3 class="md-headline" flex>^comment
           <span class="md-title" md-colors="{color: 'red-700'}">^required</span>
-          <br>
-          <small class="md-subhead">^sub_comment</small>
         </h3>
 
         <md-input-container class="md-block">
@@ -246,7 +349,7 @@
             required
             minlength="50"
             md-maxlength="600"
-            placeholder="^comment_required" rows="5">
+            placeholder="^ph_comment" rows="5">
           </textarea>
           <div ng-messages="questionForm.comment.$error" ng-show="questionForm.$submitted">
             <span ng-message="required" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">^error_required</span>
@@ -256,12 +359,54 @@
         </md-input-container>
       </div>
 
+      <div id="inner_image">
+        <div layout-gt-xs="row" layout-align="start">
+          <h3 class="md-headline" flex style="margin-top:0">
+            ^inner_image ^optional
+        </div>
+        <div class="layout-padding wrap-border photo-upload" layout="row" layout-wrap layout-align="center center">
+          <md-button ng-show="!question.inner_image"
+            ngf-select="uploadInnerFile($file, $invalidFiles)" 
+            ngf-max-size="^file_max_size" 
+            ngf-pattern="'.gif,.jpg,.ipeg,.png'"
+            accept="image/*"
+            flex="100" 
+            class="md-raised md-primary text-size-110">
+            <md-icon>file_upload</md-icon> ^add_image
+          </md-button>
+          <div flex-gt-xs="70" class="easy-ask-img">
+            <img ng-show="question.inner_image" ngf-thumbnail="question.inner_image" class="thumb">
+          </div>
+          <md-button ng-show="question.inner_image" ng-click="question.inner_image = null" flex="100" class="md-raised text-size-110 delete-img">
+              <md-icon>close</md-icon> ^delete_image 
+          </md-button>
+          <div layout="column" layout-align="center center"
+            ng-show="progressInner" style="width:100%">
+            <md-progress-circular class="md-accent" md-mode="indeterminate"></md-progress-circular>
+          </div>
+        </div>
+        <div ng-messages="errInnerFile.$errorMessages">
+          <span ng-message="maxSize" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">
+            ^file_max_size_error
+          </span>
+          <span ng-message="pattern" md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">
+            ^file_type_error
+          </span>
+        </div>
+        <div ng-show="uploadInnerError">
+          <span md-colors="{color: 'red-700'}" style="color: rgb(211, 47, 47);">
+            {{ uploadInnerError }}
+          </span>
+        </div>
+      </div>
+
+
       <div id="images">
         <div layout-gt-xs="row" layout-align="start">
-          <h3 class="md-headline" flex-gt-xs="60" style="margin-top:0">
+          <h3 class="md-headline" flex style="margin-top:0">
             ^image ^optional
           <br>
-          <small class="md-subhead">^image_subhead</small>
+          <small class="md-subhead">^sub_image</small>
           </h3>
         </div>
         <div class="layout-padding wrap-border photo-upload" layout="row" layout-wrap layout-align="center center">
@@ -293,21 +438,6 @@
             <img ng-show="question.image[1]" ngf-thumbnail="question.image[1]" class="thumb">
           </div>
           <md-button ng-show="question.image[1]" ng-click="question.image[1] = null" flex="100" class="md-raised text-size-110 delete-img">
-              <md-icon>close</md-icon> ^delete_image
-          </md-button>
-          <md-button ng-show="question.image[1] && !question.image[2]"
-            ngf-select="uploadFiles($file, 2, $invalidFiles)" 
-            ngf-max-size="^file_max_size" 
-            ngf-pattern="'.gif,.jpg,.ipeg,.png'"
-            accept="image/*"
-            flex="100" 
-            class="md-raised md-primary text-size-110">
-            <md-icon>file_upload</md-icon> ^add_image
-          </md-button>
-          <div flex-gt-xs="70" class="easy-ask-img">
-            <img ng-show="question.image[2]" ngf-thumbnail="question.image[2]" class="thumb">
-          </div>
-          <md-button ng-show="question.image[2]" ng-click="question.image[2] = null" flex="100" class="md-raised text-size-110 delete-img">
               <md-icon>close</md-icon> ^delete_image
           </md-button>
           <div layout="column" layout-align="center center"
