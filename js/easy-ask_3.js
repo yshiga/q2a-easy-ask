@@ -273,7 +273,28 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
         return content;
     }
 
-    $('textarea[name="place"]').keypress(function() {
+    $('md-datepicker').click(function() {
+        $scope.warnOnLeave = true;
+    });
+    $('input[name="inspect_time"]').keypress(function() {
+        $scope.warnOnLeave = true;
+    });
+    $('input[name="temp_weather"]').keypress(function() {
+        $scope.warnOnLeave = true;
+    });
+    $('textarea[name="when_breed"]').keypress(function() {
+        $scope.warnOnLeave = true;
+    });
+    $('input[name="hive_size"]').keypress(function() {
+        $scope.warnOnLeave = true;
+    });
+    $('input[name="growing"]').keypress(function() {
+        $scope.warnOnLeave = true;
+    });
+    $('input[name="growing"]').keypress(function() {
+        $scope.warnOnLeave = true;
+    });
+    $('md-select').click(function() {
         $scope.warnOnLeave = true;
     });
     $('md-radio-button').click(function() {
