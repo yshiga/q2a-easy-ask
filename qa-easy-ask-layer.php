@@ -237,6 +237,7 @@ EOS2;
             'question_footer'  => qa_lang_sub('qea_lang/question_footer', $url),
         );
         $form_lang = array();
+        $handle = qa_get_logged_in_handle();
         
         switch ($form_id) {
             case '1':
@@ -251,8 +252,7 @@ EOS2;
                 );
                 break;
             case '2':
-                $today = date(qa_lang('qea_lang/q2_format'));
-                $handle = qa_get_logged_in_handle();
+                $today = date(qa_lang('qea_lang/q2_date_format'));
                 $param = array(
                     '^1' => $handle,
                     '^2' => $today
@@ -268,6 +268,31 @@ EOS2;
                     'beeswax' => qa_lang('qea_lang/q2_beeswax'),
                     'use_lure' => qa_lang('qea_lang/q2_use_lure'),
                     'kinryohen' => qa_lang('qea_lang/q2_kinryohen'),
+                );
+                break;
+            case '3':
+                $form_lang = array(
+                    'title' => qa_lang('qea_lang/q3_title'),
+                    'content_head' => qa_lang_sub('qea_lang/q3_content_head', $handl),
+                    'inspect_date' => qa_lang('qea_lang/q3_inspect_date'),
+                    'inspect_time' => qa_lang('qea_lang/q3_inspect_time'),
+                    'temp_weather' => qa_lang('qea_lang/q3_temp_weather'),
+                    'when_breed'   => qa_lang('qea_lang/q3_when_breed'),
+                    'enter_exit'   => qa_lang('qea_lang/q3_enter_exit'),
+                    'pollen'       => qa_lang('qea_lang/q3_pollen'),
+                    'hive_size'    => qa_lang('qea_lang/q3_hive_size'),
+                    'growing'      => qa_lang('qea_lang/q3_growing'),
+                    'scrap'        => qa_lang('qea_lang/q3_scrap'),
+                    'sumushi'      => qa_lang('qea_lang/q3_sumushi'),
+                    'discard'      => qa_lang('qea_lang/q3_discard'),
+                    'drone'        => qa_lang('qea_lang/q3_drone'),
+                    'overflow'     => qa_lang('qea_lang/q3_overflow'),
+                    'wander'       => qa_lang('qea_lang/q3_wander'),
+                    'menthol'      => qa_lang('qea_lang/q3_menthol'),
+                    'collect'      => qa_lang('qea_lang/q3_collect'),
+                    'inner_image'  => qa_lang('qea_lang/q3_inner_image_caption'),
+                    'image'        => qa_lang('qea_lang/q3_image'),
+                    'date_format'  => qa_lang('qea_lang/date_format'),
                 );
                 break;
             default:

@@ -4,11 +4,7 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
     .primaryPalette('deep-orange')
     .accentPalette('orange');
     $mdDateLocaleProvider.formatDate = function(date) {
-        if (date) { 
-          var mm = date.getMonth() + 1;
-          var dd = date.getDate();
-          return  mm + '月' + dd + '日';
-        }
+        return formatDate(date, easyask.lang.date_format);
     };
 })
 
@@ -39,8 +35,6 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
 
     $scope.postQuestion = function(ev) {
         if ($scope.questionForm.$valid) {
-            console.log($scope.question);
-            return;
             var confirm = $mdDialog.confirm()
             .parent(angular.element(document.body))
             .title(easyask.lang.confirm_title)
@@ -59,7 +53,8 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
                 if (comment) {
                     comment = comment.replace(/\r?\n/g,"");
                 }
-                var title = easyask.lang.title+' '+comment;
+                var inspect_date = formatDate($scope.question.inspect_date, easyask.lang.date_format);
+                var title = easyask.lang.title+' '+inspect_date+' '+comment;
                 params.title = title.substr(0, 50);
                 params.content = content;
                 params.category_id = 38;
@@ -231,19 +226,38 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
     var getContent = function(question) {
 
         var content = '';
+        var inspect_date = formatDate($scope.question.inspect_date, 'M月d日');
         content += '<p>'+easyask.lang.content_head+'</p>'
-        content += '<p> &#8226; '+easyask.lang.experience+': '+question.experience+'</p>';
-        content += '<p> &#8226; '+easyask.lang.hive_type+': '+question.hive_type+'</p>';
-        content += '<p> &#8226; '+easyask.lang.hive_num+': '+question.hive_num+'</p>';
-        content += '<p> &#8226; '+easyask.lang.hive_place+': '+question.hive_place+'</p>';
-        content += '<p> &#8226; '+easyask.lang.beeswax+': '+question.beeswax+'</p>';
-        content += '<p> &#8226; '+easyask.lang.use_lure+': '+question.use_lure+'</p>';
-        content += '<p> &#8226; '+easyask.lang.kinryohen+': '+question.kinryohen+'</p>';
+        content += '<p> &#8226; '+easyask.lang.inspect_date+': '+inspect_date+'</p>';
+        content += '<p> &#8226; '+easyask.lang.inspect_time+': '+question.inspect_time+'</p>';
+        content += '<p> &#8226; '+easyask.lang.temp_weather+': '+question.temp_weather+'</p>';
+        content += '<p> &#8226; '+easyask.lang.when_breed+': '+question.when_breed+'</p>';
+        content += '<p> &#8226; '+easyask.lang.enter_exit+': '+question.enter_exit+'</p>';
+        content += '<p> &#8226; '+easyask.lang.pollen+': '+question.pollen+'</p>';
+        content += '<p> &#8226; '+easyask.lang.hive_size+': '+question.hive_size+'</p>';
+        content += '<p> &#8226; '+easyask.lang.growing+': '+question.growing+'</p>';
+        content += '<p> &#8226; '+easyask.lang.scrap+': '+question.scrap+'</p>';
+        content += '<p> &#8226; '+easyask.lang.sumushi+': '+question.sumushi+'</p>';
+        content += '<p> &#8226; '+easyask.lang.discard+': '+question.discard+'</p>';
+        content += '<p> &#8226; '+easyask.lang.drone+': '+question.drone+'</p>';
+        content += '<p> &#8226; '+easyask.lang.overflow+': '+question.overflow+'</p>';
+        content += '<p> &#8226; '+easyask.lang.wander+': '+question.wander+'</p>';
+        content += '<p> &#8226; '+easyask.lang.menthol+': '+question.menthol+'</p>';
+        content += '<p> &#8226; '+easyask.lang.collect+': '+question.collect+'</p>';
         if (question.comment) {
             content += '<p style="word-wrap: break-word">';
             content += easyask.lang.comment+':<br>';
             content += question.comment;
             content += '</p>';
+        }
+        if (question.inner_image) {
+            content += '<p>'+easyask.lang.inner_image+'</p>';
+            content += '<div class="medium-insert-images">';
+            content += '<div class="image-url">[image="'+question.inner_image+'"]</div>';
+            content += '</div>';
+        }
+        if (question.image[0] || question.image[1]) {
+            content += '<p>'+easyask.lang.image+'</p>';
         }
         if (question.image[0]) {
             content += '<div class="medium-insert-images">';
@@ -253,11 +267,6 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
         if (question.image[1]) {
             content += '<div class="medium-insert-images">';
             content += '  <div class="image-url">[image="'+question.image[1]+'"]</div>';
-            content += '</div>';
-        }
-        if (question.image[2]) {
-            content += '<div class="medium-insert-images">';
-            content += '  <div class="image-url">[image="'+question.image[2]+'"]</div>';
             content += '</div>';
         }
         content += '<p></p><p>'+easyask.lang.question_footer+'</p>';
@@ -281,3 +290,10 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
     };
     $(window).on('beforeunload', onBeforeunloadHandler);
 });
+
+var formatDate = function(date, format) {
+    format = format.replace(/yyyy/g, date.getFullYear());
+    format = format.replace(/M/g, (date.getMonth() + 1));
+    format = format.replace(/d/g, (date.getDate()));
+    return format;
+};
