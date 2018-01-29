@@ -114,6 +114,8 @@ EOS2;
             '^error_minlength'     => qa_lang_sub('qea_lang/minlength_msg', 50),
             '^error_maxlength'     => qa_lang_sub('qea_lang/maxlength_msg', 600),
             '^option_required'     => qa_lang('qea_lang/option_required'),
+            '^label_select'       => qa_lang('qea_lang/label_select'),
+            '^unknown'            => qa_lang('qea_lang/unknown'),
     );
         switch ($form_id) {
             case '1':
@@ -195,7 +197,6 @@ EOS2;
                     '^growing'       => qa_lang('qea_lang/q3_growing'),
                     '^label_growing'       => qa_lang('qea_lang/q3_label_growing'),
                     '^ph_growing'       => qa_lang('qea_lang/q3_ph_growing'),
-                    '^label_select'       => qa_lang('qea_lang/label_select'),
                     '^scrap'       => qa_lang('qea_lang/q3_scrap'),
                     '^sumushi'       => qa_lang('qea_lang/q3_sumushi'),
                     '^discard'       => qa_lang('qea_lang/q3_discard'),
@@ -208,8 +209,44 @@ EOS2;
                     '^inner_image'       => qa_lang('qea_lang/q3_inner_image'),
                     '^image'       => qa_lang('qea_lang/q3_image'),
                     '^sub_image'       => qa_lang('qea_lang/q3_sub_image'),
-                    '^unknown'       => qa_lang('qea_lang/unknown'),
                     '^other'       => qa_lang('qea_lang/other'),
+                );
+                break;
+            case 4:
+                $form_params = array(
+                    '^head'              => qa_lang('qea_lang/q4_form_head'),
+                    '^message'           => qa_lang('qea_lang/q4_form_message'),
+                    '^place'             => qa_lang('qea_lang/q4_place'),
+                    '^label_place'       => qa_lang('qea_lang/q4_label_place'),
+                    '^ph_place'          => qa_lang('qea_lang/q4_ph_place'),
+                    '^petals'            => qa_lang('qea_lang/q4_petals'),
+                    '^where_putting'     => qa_lang('qea_lang/q4_where_putting'),
+                    '^label_where_putting' => qa_lang('qea_lang/q4_label_where_putting'),
+                    '^ph_where_putting'  => qa_lang('qea_lang/q4_ph_where_putting'),
+                    '^temp'              => qa_lang('qea_lang/q4_temp'),
+                    '^label_temp'        => qa_lang('qea_lang/q4_label_temp'),
+                    '^ph_temp'           => qa_lang('qea_lang/q4_ph_temp'),
+                    '^sun'               => qa_lang('qea_lang/q4_sun'),
+                    '^label_sun'         => qa_lang('qea_lang/q4_label_sun'),
+                    '^ph_sun'            => qa_lang('qea_lang/q4_ph_sun'),
+                    '^water'             => qa_lang('qea_lang/q4_water'),
+                    '^label_water'       => qa_lang('qea_lang/q4_label_water'),
+                    '^ph_water'          => qa_lang('qea_lang/q4_ph_water'),
+                    '^fertilizer'        => qa_lang('qea_lang/q4_fertilizer'),
+                    '^label_fertilizer'  => qa_lang('qea_lang/q4_label_fertilizer'),
+                    '^ph_fertilizer'     => qa_lang('qea_lang/q4_ph_fertilizer'),
+                    '^when_bloom'        => qa_lang('qea_lang/q4_when_bloom'),
+                    '^option_1'          => qa_lang('qea_lang/q4_option_1'),
+                    '^option_2'          => qa_lang('qea_lang/q4_option_2'),
+                    '^option_3'          => qa_lang('qea_lang/q4_option_3'),
+                    '^option_4'          => qa_lang('qea_lang/q4_option_4'),
+                    '^option_5'          => qa_lang('qea_lang/q4_option_5'),
+                    '^option_6'          => qa_lang('qea_lang/q4_option_6'),
+                    '^option_7'          => qa_lang('qea_lang/q4_option_7'),
+                    '^plan'              => qa_lang('qea_lang/q4_plan'),
+                    '^label_plan'        => qa_lang('qea_lang/q4_label_plan'),
+                    '^image'             => qa_lang('qea_lang/q4_image'),
+                    '^sub_image'         => qa_lang('qea_lang/q4_sub_image'),
                 );
                 break;
             default:
