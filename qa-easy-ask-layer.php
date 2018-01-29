@@ -43,6 +43,13 @@ EOS;
 var easyask = window.easyask = window.easyask ? window.easyask : {};
 easyask.code = '{$this->content["security_code"]}';
 easyask.lang = {$js_lang_json};
+
+var formatDate = function(date, format) {
+    format = format.replace(/yyyy/g, date.getFullYear());
+    format = format.replace(/M/g, (date.getMonth() + 1));
+    format = format.replace(/d/g, (date.getDate()));
+    return format;
+};
 </script>
 EOS2;
             $this->output($jsvar);
@@ -235,6 +242,7 @@ EOS2;
             'error_msg'        => qa_lang('qea_lang/error_msg'),
             'comment'          => qa_lang('qea_lang/comment'),
             'question_footer'  => qa_lang_sub('qea_lang/question_footer', $url),
+            'date_format'  => qa_lang('qea_lang/date_format'),
         );
         $form_lang = array();
         $handle = qa_get_logged_in_handle();
@@ -252,14 +260,9 @@ EOS2;
                 );
                 break;
             case '2':
-                $today = date(qa_lang('qea_lang/q2_date_format'));
-                $param = array(
-                    '^1' => $handle,
-                    '^2' => $today
-                );
-                $title_tmpl = qa_lang('qea_lang/q2_title');
+                $title = qa_lang_sub('qea_lang/q2_title', $handle);
                 $form_lang = array(
-                    'title' => strtr($title_tmpl, $param),
+                    'title' => $title,
                     'content_head' => qa_lang_sub('qea_lang/q2_content_head', $handle),
                     'experience' => qa_lang('qea_lang/q2_experience'),
                     'hive_type' => qa_lang('qea_lang/q2_hive_type'),
@@ -292,7 +295,6 @@ EOS2;
                     'collect'      => qa_lang('qea_lang/q3_collect'),
                     'inner_image'  => qa_lang('qea_lang/q3_inner_image_caption'),
                     'image'        => qa_lang('qea_lang/q3_image'),
-                    'date_format'  => qa_lang('qea_lang/date_format'),
                 );
                 break;
             default:

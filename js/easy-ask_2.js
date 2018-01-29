@@ -48,7 +48,8 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
                 if (comment) {
                     comment = comment.replace(/\r?\n/g,"");
                 }
-                var title = easyask.lang.title+' '+comment;
+                var today = new Date();
+                var title = easyask.lang.title+' '+formatDate(today, easyask.lang.date_format)+' '+comment;
                 params.title = title.substr(0, 50);
                 params.content = content;
                 params.category_id = 38;

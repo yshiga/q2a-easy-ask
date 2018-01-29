@@ -290,10 +290,3 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
     };
     $(window).on('beforeunload', onBeforeunloadHandler);
 });
-
-var formatDate = function(date, format) {
-    format = format.replace(/yyyy/g, date.getFullYear());
-    format = format.replace(/M/g, (date.getMonth() + 1));
-    format = format.replace(/d/g, (date.getDate()));
-    return format;
-};
