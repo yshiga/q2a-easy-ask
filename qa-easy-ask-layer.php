@@ -334,6 +334,22 @@ EOS2;
                     'image'        => qa_lang('qea_lang/q3_image'),
                 );
                 break;
+            case '4':
+                $form_lang = array(
+                    'title' => qa_lang('qea_lang/q4_title'),
+                    'content_head' => qa_lang_sub('qea_lang/q4_content_head', $handl),
+                    'place'        => qa_lang('qea_lang/q4_place'),
+                    'petals'       => qa_lang('qea_lang/q4_petals'),
+                    'where_putting' => qa_lang('qea_lang/q4_where_putting'),
+                    'temp'         => qa_lang('qea_lang/q4_temp'),
+                    'sun'          => qa_lang('qea_lang/q4_sun'),
+                    'water'        => qa_lang('qea_lang/q4_water'),
+                    'fertilizer'   => qa_lang('qea_lang/q4_fertilizer'),
+                    'when_bloom'   => qa_lang('qea_lang/q4_when_bloom'),
+                    'plan'         => qa_lang('qea_lang/q4_plan'),
+                    'image'        => qa_lang('qea_lang/q4_image'),
+                );
+                break;
             default:
                 $form_lang = array();
         }

@@ -43,23 +43,23 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
             .cancel(easyask.lang.label_cancel);
 
             $mdDialog.show(confirm).then(function() {
-                console.log($scope.question);
                 $scope.warnOnLeave = false;
                 var content = getContent($scope.question);
 
-                console.log(content);
                 var params = {};
-                var comment = $scope.question.comment;
-                if (comment) {
-                    comment = comment.replace(/\r?\n/g,"");
+                var place = $scope.question.place;
+                if (place) {
+                    place = place.replace(/\r?\n/g,"");
                 }
-                var title = easyask.lang.title+' '+comment;
+                var plan = $scope.question.plan;
+                if (plan) {
+                    plan = plan.replace(/\r?\n/g,"");
+                }
+                var title = easyask.lang.title+' '+place+' '+plan;
                 params.title = title.substr(0, 50);
                 params.content = content;
                 params.category_id = 38;
                 params.code = easyask.code;
-                console.log(params);
-                return;
                 $http({
                     method: 'POST',
                     url: '/easy-ask-post-question',
@@ -81,114 +81,46 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
                 });
             });
         } else {
-            if ($scope.questionForm.inspect_date.$error.required) {
-                $scope.scrollToAnchor('inspect_date');
+            if ($scope.questionForm.place.$error.required) {
+                $scope.scrollToAnchor('place');
                 return;
             }
-            if ($scope.questionForm.inspect_time.$error.required) {
-                $scope.scrollToAnchor('inspect_time');
+            if ($scope.questionForm.petals.$error.required) {
+                $scope.scrollToAnchor('petals');
                 return;
             }
-            if ($scope.questionForm.temp_weather.$error.required) {
-                $scope.scrollToAnchor('temp_weather');
+            if ($scope.questionForm.where_putting.$error.required) {
+                $scope.scrollToAnchor('where_putting');
                 return;
             }
-            if ($scope.questionForm.when_breed.$error.required
-             || $scope.questionForm.when_breed.$error.minlength
-             || $scope.questionForm.when_breed.$error['md-maxlength']) {
-                $scope.scrollToAnchor('when_breed');
+            if ($scope.questionForm.temp.$error.required) {
+                $scope.scrollToAnchor('temp');
                 return;
             }
-            if ($scope.questionForm.enter_exit.$error.required) {
-                $scope.scrollToAnchor('enter_exit');
+            if ($scope.questionForm.sun.$error.required) {
+                $scope.scrollToAnchor('sun');
                 return;
             }
-            if ($scope.questionForm.pollen.$error.required) {
-                $scope.scrollToAnchor('pollen');
+            if ($scope.questionForm.water.$error.required) {
+                $scope.scrollToAnchor('water');
                 return;
             }
-            if ($scope.questionForm.hive_size.$error.required) {
-                $scope.scrollToAnchor('hive_size');
+            if ($scope.questionForm.fertilizer.$error.required) {
+                $scope.scrollToAnchor('fertilizer');
                 return;
             }
-            if ($scope.questionForm.growing.$error.required) {
-                $scope.scrollToAnchor('growing');
+            if ($scope.questionForm.when_bloom.$error.required) {
+                $scope.scrollToAnchor('when_bloom');
                 return;
             }
-            if ($scope.questionForm.scrap.$error.required) {
-                $scope.scrollToAnchor('scrap');
-                return;
-            }
-            if ($scope.questionForm.sumushi.$error.required) {
-                $scope.scrollToAnchor('sumushi');
-                return;
-            }
-            if ($scope.questionForm.discard.$error.required) {
-                $scope.scrollToAnchor('discard');
-                return;
-            }
-            if ($scope.questionForm.drone.$error.required) {
-                $scope.scrollToAnchor('drone');
-                return;
-            }
-            if ($scope.questionForm.overflow.$error.required) {
-                $scope.scrollToAnchor('overflow');
-                return;
-            }
-            if ($scope.questionForm.wander.$error.required) {
-                $scope.scrollToAnchor('wander');
-                return;
-            }
-            if ($scope.questionForm.menthol.$error.required) {
-                $scope.scrollToAnchor('menthol');
-                return;
-            }
-            if ($scope.questionForm.collect.$error.required) {
-                $scope.scrollToAnchor('collect');
-                return;
-            }
-            if ($scope.questionForm.comment.$error.required
-             || $scope.questionForm.comment.$error.minlength
-             || $scope.questionForm.comment.$error['md-maxlength']) {
-                $scope.scrollToAnchor('comment');
+            if ($scope.questionForm.plan.$error.required
+             || $scope.questionForm.plan.$error.minlength
+             || $scope.questionForm.plan.$error['md-maxlength']) {
+                $scope.scrollToAnchor('plan');
                 return;
             }
         }
     };
-
-    $scope.uploadInnerFile = function(file, errFiles) {
-        $scope.f = file;
-        $scope.errInnerFile = errFiles && errFiles[0];
-        $scope.progressInner = false;
-        $scope.question.inner_image = null;
-        if (file) {
-            file.upload = Upload.upload({
-                url: '/easy-ask-file-upload',
-                data: {file: file}
-            });
-
-            file.upload.then(function (response) {
-                $timeout(function() {
-                    var res = response.data.files[0];
-                    if (res.name == 'error') {
-                        $scope.uploadInnerError = res.error;
-                    } else {
-                        $scope.question.inner_image = res.url;
-                        $scope.warnOnLeave = true;
-                    }
-                    $scope.progressInner = false;
-                });
-            }, function (response) {
-                if (response.status > 0) {
-                    $scope.uploadInnerError = response.status + ': ' + response.data.files[0].error;
-                    $scope.question.inner_image = null;
-                }
-                $scope.progressInner = false;
-            }, function (evt) {
-                $scope.progressInner = true;
-            });
-        }
-    }
 
     $scope.uploadFiles = function(file, idx, errFiles) {
         $scope.f = file;
@@ -227,37 +159,22 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
     var getContent = function(question) {
 
         var content = '';
-        var inspect_date = formatDate($scope.question.inspect_date, 'M月d日');
         content += '<p>'+easyask.lang.content_head+'</p>'
-        content += '<p> &#8226; '+easyask.lang.inspect_date+': '+inspect_date+'</p>';
-        content += '<p> &#8226; '+easyask.lang.inspect_time+': '+question.inspect_time+'</p>';
-        content += '<p> &#8226; '+easyask.lang.temp_weather+': '+question.temp_weather+'</p>';
-        content += '<p> &#8226; '+easyask.lang.when_breed+': '+question.when_breed+'</p>';
-        content += '<p> &#8226; '+easyask.lang.enter_exit+': '+question.enter_exit+'</p>';
-        content += '<p> &#8226; '+easyask.lang.pollen+': '+question.pollen+'</p>';
-        content += '<p> &#8226; '+easyask.lang.hive_size+': '+question.hive_size+'</p>';
-        content += '<p> &#8226; '+easyask.lang.growing+': '+question.growing+'</p>';
-        content += '<p> &#8226; '+easyask.lang.scrap+': '+question.scrap+'</p>';
-        content += '<p> &#8226; '+easyask.lang.sumushi+': '+question.sumushi+'</p>';
-        content += '<p> &#8226; '+easyask.lang.discard+': '+question.discard+'</p>';
-        content += '<p> &#8226; '+easyask.lang.drone+': '+question.drone+'</p>';
-        content += '<p> &#8226; '+easyask.lang.overflow+': '+question.overflow+'</p>';
-        content += '<p> &#8226; '+easyask.lang.wander+': '+question.wander+'</p>';
-        content += '<p> &#8226; '+easyask.lang.menthol+': '+question.menthol+'</p>';
-        content += '<p> &#8226; '+easyask.lang.collect+': '+question.collect+'</p>';
-        if (question.comment) {
+        content += '<p> &#8226; '+easyask.lang.place+': '+question.place+'</p>';
+        content += '<p> &#8226; '+easyask.lang.petals+': '+question.petals+'</p>';
+        content += '<p> &#8226; '+easyask.lang.where_putting+': '+question.where_putting+'</p>';
+        content += '<p> &#8226; '+easyask.lang.temp+': '+question.temp+'</p>';
+        content += '<p> &#8226; '+easyask.lang.sun+': '+question.sun+'</p>';
+        content += '<p> &#8226; '+easyask.lang.water+': '+question.water+'</p>';
+        content += '<p> &#8226; '+easyask.lang.fertilizer+': '+question.fertilizer+'</p>';
+        content += '<p> &#8226; '+easyask.lang.when_bloom+': '+question.when_bloom+'</p>';
+        if (question.plan) {
             content += '<p style="word-wrap: break-word">';
-            content += easyask.lang.comment+':<br>';
-            content += question.comment;
+            content += easyask.lang.plan+':<br>';
+            content += question.plan;
             content += '</p>';
         }
-        if (question.inner_image) {
-            content += '<p>'+easyask.lang.inner_image+'</p>';
-            content += '<div class="medium-insert-images">';
-            content += '<div class="image-url">[image="'+question.inner_image+'"]</div>';
-            content += '</div>';
-        }
-        if (question.image[0] || question.image[1]) {
+        if (question.image[0] || question.image[1] || question.image[2]) {
             content += '<p>'+easyask.lang.image+'</p>';
         }
         if (question.image[0]) {
@@ -270,17 +187,37 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
             content += '  <div class="image-url">[image="'+question.image[1]+'"]</div>';
             content += '</div>';
         }
+        if (question.image[2]) {
+            content += '<div class="medium-insert-images">';
+            content += '  <div class="image-url">[image="'+question.image[2]+'"]</div>';
+            content += '</div>';
+        }
         content += '<p></p><p>'+easyask.lang.question_footer+'</p>';
         return content;
     }
 
-    $('textarea[name="place"]').keypress(function() {
+    $('input[name="place"]').keypress(function() {
         $scope.warnOnLeave = true;
     });
-    $('md-radio-button').click(function() {
+    $('input[name="where_putting"]').keypress(function() {
         $scope.warnOnLeave = true;
     });
-    $('textarea[name="comment"]').keypress(function() {
+    $('input[name="temp"]').keypress(function() {
+        $scope.warnOnLeave = true;
+    });
+    $('input[name="sun"]').keypress(function() {
+        $scope.warnOnLeave = true;
+    });
+    $('input[name="water"]').keypress(function() {
+        $scope.warnOnLeave = true;
+    });
+    $('input[name="fertilizer"]').keypress(function() {
+        $scope.warnOnLeave = true;
+    });
+    $('md-select').click(function() {
+        $scope.warnOnLeave = true;
+    });
+    $('textarea[name="plan"]').keypress(function() {
         $scope.warnOnLeave = true;
     });
     // 画面遷移時のイベント
