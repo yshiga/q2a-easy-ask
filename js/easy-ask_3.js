@@ -1,12 +1,18 @@
 angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
-.config(function ($mdThemingProvider) {
+.config(function ($mdThemingProvider, $mdDateLocaleProvider) {
     $mdThemingProvider.theme('default')
     .primaryPalette('deep-orange')
     .accentPalette('orange');
+    $mdDateLocaleProvider.formatDate = function(date) {
+        return formatDate(date, easyask.lang.date_format);
+    };
 })
+
 .controller('AppCtrl', function($scope, Upload, $timeout, $http, $mdDialog, $anchorScroll) {
     $scope.question = {
+        'inner_image': null,
         'image': [],
+        'inspect_date': new Date()
     };
     $scope.uploadfiles = null;
     $scope.showForm = true;
@@ -29,7 +35,6 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
 
     $scope.postQuestion = function(ev) {
         if ($scope.questionForm.$valid) {
-
             var confirm = $mdDialog.confirm()
             .parent(angular.element(document.body))
             .title(easyask.lang.confirm_title)
@@ -48,8 +53,8 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
                 if (comment) {
                     comment = comment.replace(/\r?\n/g,"");
                 }
-                var today = new Date();
-                var title = easyask.lang.title+' '+formatDate(today, easyask.lang.date_format)+' '+comment;
+                var inspect_date = formatDate($scope.question.inspect_date, easyask.lang.date_format);
+                var title = easyask.lang.title+' '+inspect_date+' '+comment;
                 params.title = title.substr(0, 50);
                 params.content = content;
                 params.category_id = 38;
@@ -75,32 +80,70 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
                 });
             });
         } else {
-            if ($scope.questionForm.experience.$error.required) {
-                $scope.scrollToAnchor('experience');
+            if ($scope.questionForm.inspect_date.$error.required) {
+                $scope.scrollToAnchor('inspect_date');
                 return;
             }
-            if ($scope.questionForm.hive_type.$error.required) {
-                $scope.scrollToAnchor('hive_type');
+            if ($scope.questionForm.inspect_time.$error.required) {
+                $scope.scrollToAnchor('inspect_time');
                 return;
             }
-            if ($scope.questionForm.hive_num.$error.required) {
-                $scope.scrollToAnchor('hive_num');
+            if ($scope.questionForm.temp_weather.$error.required) {
+                $scope.scrollToAnchor('temp_weather');
                 return;
             }
-            if ($scope.questionForm.hive_place.$error.required) {
-                $scope.scrollToAnchor('hive_place');
+            if ($scope.questionForm.when_breed.$error.required
+             || $scope.questionForm.when_breed.$error.minlength
+             || $scope.questionForm.when_breed.$error['md-maxlength']) {
+                $scope.scrollToAnchor('when_breed');
                 return;
             }
-            if ($scope.questionForm.beeswax.$error.required) {
-                $scope.scrollToAnchor('beeswax');
+            if ($scope.questionForm.enter_exit.$error.required) {
+                $scope.scrollToAnchor('enter_exit');
                 return;
             }
-            if ($scope.questionForm.use_lure.$error.required) {
-                $scope.scrollToAnchor('use_lure');
+            if ($scope.questionForm.pollen.$error.required) {
+                $scope.scrollToAnchor('pollen');
                 return;
             }
-            if ($scope.questionForm.kinryohen.$error.required) {
-                $scope.scrollToAnchor('kinryohen');
+            if ($scope.questionForm.hive_size.$error.required) {
+                $scope.scrollToAnchor('hive_size');
+                return;
+            }
+            if ($scope.questionForm.growing.$error.required) {
+                $scope.scrollToAnchor('growing');
+                return;
+            }
+            if ($scope.questionForm.scrap.$error.required) {
+                $scope.scrollToAnchor('scrap');
+                return;
+            }
+            if ($scope.questionForm.sumushi.$error.required) {
+                $scope.scrollToAnchor('sumushi');
+                return;
+            }
+            if ($scope.questionForm.discard.$error.required) {
+                $scope.scrollToAnchor('discard');
+                return;
+            }
+            if ($scope.questionForm.drone.$error.required) {
+                $scope.scrollToAnchor('drone');
+                return;
+            }
+            if ($scope.questionForm.overflow.$error.required) {
+                $scope.scrollToAnchor('overflow');
+                return;
+            }
+            if ($scope.questionForm.wander.$error.required) {
+                $scope.scrollToAnchor('wander');
+                return;
+            }
+            if ($scope.questionForm.menthol.$error.required) {
+                $scope.scrollToAnchor('menthol');
+                return;
+            }
+            if ($scope.questionForm.collect.$error.required) {
+                $scope.scrollToAnchor('collect');
                 return;
             }
             if ($scope.questionForm.comment.$error.required
@@ -111,6 +154,40 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
             }
         }
     };
+
+    $scope.uploadInnerFile = function(file, errFiles) {
+        $scope.f = file;
+        $scope.errInnerFile = errFiles && errFiles[0];
+        $scope.progressInner = false;
+        $scope.question.inner_image = null;
+        if (file) {
+            file.upload = Upload.upload({
+                url: '/easy-ask-file-upload',
+                data: {file: file}
+            });
+
+            file.upload.then(function (response) {
+                $timeout(function() {
+                    var res = response.data.files[0];
+                    if (res.name == 'error') {
+                        $scope.uploadInnerError = res.error;
+                    } else {
+                        $scope.question.inner_image = res.url;
+                        $scope.warnOnLeave = true;
+                    }
+                    $scope.progressInner = false;
+                });
+            }, function (response) {
+                if (response.status > 0) {
+                    $scope.uploadInnerError = response.status + ': ' + response.data.files[0].error;
+                    $scope.question.inner_image = null;
+                }
+                $scope.progressInner = false;
+            }, function (evt) {
+                $scope.progressInner = true;
+            });
+        }
+    }
 
     $scope.uploadFiles = function(file, idx, errFiles) {
         $scope.f = file;
@@ -149,19 +226,38 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
     var getContent = function(question) {
 
         var content = '';
+        var inspect_date = formatDate($scope.question.inspect_date, 'M月d日');
         content += '<p>'+easyask.lang.content_head+'</p>'
-        content += '<p> &#8226; '+easyask.lang.experience+': '+question.experience+'</p>';
-        content += '<p> &#8226; '+easyask.lang.hive_type+': '+question.hive_type+'</p>';
-        content += '<p> &#8226; '+easyask.lang.hive_num+': '+question.hive_num+'</p>';
-        content += '<p> &#8226; '+easyask.lang.hive_place+': '+question.hive_place+'</p>';
-        content += '<p> &#8226; '+easyask.lang.beeswax+': '+question.beeswax+'</p>';
-        content += '<p> &#8226; '+easyask.lang.use_lure+': '+question.use_lure+'</p>';
-        content += '<p> &#8226; '+easyask.lang.kinryohen+': '+question.kinryohen+'</p>';
+        content += '<p> &#8226; '+easyask.lang.inspect_date+': '+inspect_date+'</p>';
+        content += '<p> &#8226; '+easyask.lang.inspect_time+': '+question.inspect_time+'</p>';
+        content += '<p> &#8226; '+easyask.lang.temp_weather+': '+question.temp_weather+'</p>';
+        content += '<p> &#8226; '+easyask.lang.when_breed+': '+question.when_breed+'</p>';
+        content += '<p> &#8226; '+easyask.lang.enter_exit+': '+question.enter_exit+'</p>';
+        content += '<p> &#8226; '+easyask.lang.pollen+': '+question.pollen+'</p>';
+        content += '<p> &#8226; '+easyask.lang.hive_size+': '+question.hive_size+'</p>';
+        content += '<p> &#8226; '+easyask.lang.growing+': '+question.growing+'</p>';
+        content += '<p> &#8226; '+easyask.lang.scrap+': '+question.scrap+'</p>';
+        content += '<p> &#8226; '+easyask.lang.sumushi+': '+question.sumushi+'</p>';
+        content += '<p> &#8226; '+easyask.lang.discard+': '+question.discard+'</p>';
+        content += '<p> &#8226; '+easyask.lang.drone+': '+question.drone+'</p>';
+        content += '<p> &#8226; '+easyask.lang.overflow+': '+question.overflow+'</p>';
+        content += '<p> &#8226; '+easyask.lang.wander+': '+question.wander+'</p>';
+        content += '<p> &#8226; '+easyask.lang.menthol+': '+question.menthol+'</p>';
+        content += '<p> &#8226; '+easyask.lang.collect+': '+question.collect+'</p>';
         if (question.comment) {
             content += '<p style="word-wrap: break-word">';
             content += easyask.lang.comment+':<br>';
             content += question.comment;
             content += '</p>';
+        }
+        if (question.inner_image) {
+            content += '<p>'+easyask.lang.inner_image+'</p>';
+            content += '<div class="medium-insert-images">';
+            content += '<div class="image-url">[image="'+question.inner_image+'"]</div>';
+            content += '</div>';
+        }
+        if (question.image[0] || question.image[1]) {
+            content += '<p>'+easyask.lang.image+'</p>';
         }
         if (question.image[0]) {
             content += '<div class="medium-insert-images">';
@@ -171,11 +267,6 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
         if (question.image[1]) {
             content += '<div class="medium-insert-images">';
             content += '  <div class="image-url">[image="'+question.image[1]+'"]</div>';
-            content += '</div>';
-        }
-        if (question.image[2]) {
-            content += '<div class="medium-insert-images">';
-            content += '  <div class="image-url">[image="'+question.image[2]+'"]</div>';
             content += '</div>';
         }
         content += '<p></p><p>'+easyask.lang.question_footer+'</p>';

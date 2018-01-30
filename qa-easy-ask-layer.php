@@ -28,7 +28,7 @@ EOS;
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
-
+    <script src="https://code.angularjs.org/1.5.5/i18n/angular-locale_ja-jp.js"></script>
     <!-- Angular Material Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.5/angular-material.min.js"></script>
 
@@ -43,6 +43,13 @@ EOS;
 var easyask = window.easyask = window.easyask ? window.easyask : {};
 easyask.code = '{$this->content["security_code"]}';
 easyask.lang = {$js_lang_json};
+
+var formatDate = function(date, format) {
+    format = format.replace(/yyyy/g, date.getFullYear());
+    format = format.replace(/M/g, (date.getMonth() + 1));
+    format = format.replace(/d/g, (date.getDate()));
+    return format;
+};
 </script>
 EOS2;
             $this->output($jsvar);
@@ -168,6 +175,43 @@ EOS2;
                     '^option_6'          => qa_lang('qea_lang/q2_option_6'),
                 );
                 break;
+            case 3:
+                $form_params = array(
+                    '^head'              => qa_lang('qea_lang/q3_form_head'),
+                    '^message'           => qa_lang('qea_lang/q3_form_message'),
+                    '^inspect_date'      => qa_lang('qea_lang/q3_inspect_date'),
+                    '^inspect_time'      => qa_lang('qea_lang/q3_inspect_time'),
+                    '^label_inspect_time' => qa_lang('qea_lang/q3_label_inspect_time'),
+                    '^temp_weather'      => qa_lang('qea_lang/q3_temp_weather'),
+                    '^label_temp_weather' => qa_lang('qea_lang/q3_label_temp_weather'),
+                    '^when_breed' => qa_lang('qea_lang/q3_when_breed'),
+                    '^label_when_breed' => qa_lang('qea_lang/q3_label_when_breed'),
+                    '^ph_when_breed' => qa_lang('qea_lang/q3_ph_when_breed'),
+                    '^enter_exit'       => qa_lang('qea_lang/q3_enter_exit'),
+                    '^pollen'       => qa_lang('qea_lang/q3_pollen'),
+                    '^hive_size'       => qa_lang('qea_lang/q3_hive_size'),
+                    '^label_hive_size'       => qa_lang('qea_lang/q3_label_hive_size'),
+                    '^ph_hive_size'       => qa_lang('qea_lang/q3_ph_hive_size'),
+                    '^growing'       => qa_lang('qea_lang/q3_growing'),
+                    '^label_growing'       => qa_lang('qea_lang/q3_label_growing'),
+                    '^ph_growing'       => qa_lang('qea_lang/q3_ph_growing'),
+                    '^label_select'       => qa_lang('qea_lang/label_select'),
+                    '^scrap'       => qa_lang('qea_lang/q3_scrap'),
+                    '^sumushi'       => qa_lang('qea_lang/q3_sumushi'),
+                    '^discard'       => qa_lang('qea_lang/q3_discard'),
+                    '^drone'       => qa_lang('qea_lang/q3_drone'),
+                    '^overflow'       => qa_lang('qea_lang/q3_overflow'),
+                    '^wander'       => qa_lang('qea_lang/q3_wander'),
+                    '^menthol'       => qa_lang('qea_lang/q3_menthol'),
+                    '^collect'       => qa_lang('qea_lang/q3_collect'),
+                    '^ph_comment'       => qa_lang('qea_lang/q3_ph_comment'),
+                    '^inner_image'       => qa_lang('qea_lang/q3_inner_image'),
+                    '^image'       => qa_lang('qea_lang/q3_image'),
+                    '^sub_image'       => qa_lang('qea_lang/q3_sub_image'),
+                    '^unknown'       => qa_lang('qea_lang/unknown'),
+                    '^other'       => qa_lang('qea_lang/other'),
+                );
+                break;
             default:
                 $form_params = array();
         }
@@ -198,8 +242,10 @@ EOS2;
             'error_msg'        => qa_lang('qea_lang/error_msg'),
             'comment'          => qa_lang('qea_lang/comment'),
             'question_footer'  => qa_lang_sub('qea_lang/question_footer', $url),
+            'date_format'  => qa_lang('qea_lang/date_format'),
         );
         $form_lang = array();
+        $handle = qa_get_logged_in_handle();
         
         switch ($form_id) {
             case '1':
@@ -214,15 +260,9 @@ EOS2;
                 );
                 break;
             case '2':
-                $today = date(qa_lang('qea_lang/q2_format'));
-                $handle = qa_get_logged_in_handle();
-                $param = array(
-                    '^1' => $handle,
-                    '^2' => $today
-                );
-                $title_tmpl = qa_lang('qea_lang/q2_title');
+                $title = qa_lang_sub('qea_lang/q2_title', $handle);
                 $form_lang = array(
-                    'title' => strtr($title_tmpl, $param),
+                    'title' => $title,
                     'content_head' => qa_lang_sub('qea_lang/q2_content_head', $handle),
                     'experience' => qa_lang('qea_lang/q2_experience'),
                     'hive_type' => qa_lang('qea_lang/q2_hive_type'),
@@ -231,6 +271,30 @@ EOS2;
                     'beeswax' => qa_lang('qea_lang/q2_beeswax'),
                     'use_lure' => qa_lang('qea_lang/q2_use_lure'),
                     'kinryohen' => qa_lang('qea_lang/q2_kinryohen'),
+                );
+                break;
+            case '3':
+                $form_lang = array(
+                    'title' => qa_lang('qea_lang/q3_title'),
+                    'content_head' => qa_lang_sub('qea_lang/q3_content_head', $handl),
+                    'inspect_date' => qa_lang('qea_lang/q3_inspect_date'),
+                    'inspect_time' => qa_lang('qea_lang/q3_inspect_time'),
+                    'temp_weather' => qa_lang('qea_lang/q3_temp_weather'),
+                    'when_breed'   => qa_lang('qea_lang/q3_when_breed'),
+                    'enter_exit'   => qa_lang('qea_lang/q3_enter_exit'),
+                    'pollen'       => qa_lang('qea_lang/q3_pollen'),
+                    'hive_size'    => qa_lang('qea_lang/q3_hive_size'),
+                    'growing'      => qa_lang('qea_lang/q3_growing'),
+                    'scrap'        => qa_lang('qea_lang/q3_scrap'),
+                    'sumushi'      => qa_lang('qea_lang/q3_sumushi'),
+                    'discard'      => qa_lang('qea_lang/q3_discard'),
+                    'drone'        => qa_lang('qea_lang/q3_drone'),
+                    'overflow'     => qa_lang('qea_lang/q3_overflow'),
+                    'wander'       => qa_lang('qea_lang/q3_wander'),
+                    'menthol'      => qa_lang('qea_lang/q3_menthol'),
+                    'collect'      => qa_lang('qea_lang/q3_collect'),
+                    'inner_image'  => qa_lang('qea_lang/q3_inner_image_caption'),
+                    'image'        => qa_lang('qea_lang/q3_image'),
                 );
                 break;
             default:
