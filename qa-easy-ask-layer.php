@@ -59,14 +59,13 @@ EOS2;
 
     public function main_parts($content)
     {
-        require_once QA_THEME_DIR . qa_opt('site_theme') . '/qa-theme-utils.php';
 
         if($this->template === 'easy-ask') {
             if (!qa_is_logged_in()) {
                 $this->no_login_message();
             } else {
                 $userid = qa_get_logged_in_userid();
-                $prev_question = qa_theme_utils::get_prev_question($userid);
+                $prev_question = $this->get_prev_question($userid);
                 if (!empty($prev_question)) {
                     $this->output_prev_question($prev_question);
                     return;
@@ -362,5 +361,16 @@ EOS2;
     {
         $path = QEA_DIR.'/html/prev_question.html';
         include $path;
+    }
+
+    private function get_prev_question($userid, $min = 30)
+    {
+        $sql = "SELECT postid, title, ";
+        $sql .= " TIME_FORMAT(TIMEDIFF(DATE_ADD(created, INTERVAL # MINUTE), NOW()), '%i') AS remains";
+        $sql .= " FROM ^posts";
+        $sql .= " WHERE TYPE = 'Q'";
+        $sql .= " AND userid = $";
+        $sql .= " AND created > DATE_SUB(NOW(), INTERVAL # MINUTE)";
+        return qa_db_read_one_assoc(qa_db_query_sub($sql, $min, $userid, $min), true);
     }
 }
