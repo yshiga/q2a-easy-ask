@@ -161,7 +161,7 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
             content += '  <div class="image-url">[image="'+question.image[2]+'"]</div>';
             content += '</div>';
         }
-        content += '<p style="word-wrap: break-word">'+easyask.lang.q1_place+': <br>';
+        content += '<p class="wrap-break-word">'+easyask.lang.q1_place+': <br>';
         content += question.place;
         content += '</p>';
         content += '<p>'+easyask.lang.q1_owned+': '+question.owned+'</p>';

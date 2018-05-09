@@ -158,7 +158,7 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
         content += '<p> &#8226; '+easyask.lang.use_lure+': '+question.use_lure+'</p>';
         content += '<p> &#8226; '+easyask.lang.kinryohen+': '+question.kinryohen+'</p>';
         if (question.comment) {
-            content += '<p style="word-wrap: break-word">';
+            content += '<p class="wrap-break-word">';
             content += easyask.lang.comment+':<br>';
             content += question.comment;
             content += '</p>';
