@@ -169,7 +169,7 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
         content += '<p> &#8226; '+easyask.lang.fertilizer+': '+question.fertilizer+'</p>';
         content += '<p> &#8226; '+easyask.lang.when_bloom+': '+question.when_bloom+'</p>';
         if (question.plan) {
-            content += '<p style="word-wrap: break-word">';
+            content += '<p class="wrap-break-word">';
             content += easyask.lang.plan+':<br>';
             content += question.plan;
             content += '</p>';

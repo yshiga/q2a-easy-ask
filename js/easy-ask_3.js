@@ -245,7 +245,7 @@ angular.module('myApp', ['ngMaterial', 'ngMessages', 'ngFileUpload'])
         content += '<p> &#8226; '+easyask.lang.menthol+': '+question.menthol+'</p>';
         content += '<p> &#8226; '+easyask.lang.collect+': '+question.collect+'</p>';
         if (question.comment) {
-            content += '<p style="word-wrap: break-word">';
+            content += '<p class="wrap-break-word">';
             content += easyask.lang.comment+':<br>';
             content += question.comment;
             content += '</p>';
